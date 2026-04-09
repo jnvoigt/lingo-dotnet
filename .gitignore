@@ -1,0 +1,9 @@
+# IDEs
+.idea/
+
+# ai
+.local_agent/
+
+#dotnet
+[Bb]in/
+[Oo]bj/
