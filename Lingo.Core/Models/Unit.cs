@@ -8,7 +8,7 @@ public class Unit
     // The current value of this unit in this document.
     // For target documents this is the translation.
     // For source-only documents this is the source text.
-    public string Value { get; set; } = null!;
+    public string Target { get; set; } = null!;
 
     // The original source text. Null for simple key/value formats
     // that have no concept of a separate source language reference.

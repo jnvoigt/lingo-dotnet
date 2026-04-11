@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2"
+       xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="sample.txt">
+        <body>
+            <trans-unit id="sample.text.that-has-not-changed">
+                <source>This is text A</source>
+            </trans-unit>
+            <trans-unit id="sample.text.new">
+                <source>This is new text</source>
+            </trans-unit>
+            <trans-unit id="sample.text.changed">
+                <source>This is text C with changed content</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

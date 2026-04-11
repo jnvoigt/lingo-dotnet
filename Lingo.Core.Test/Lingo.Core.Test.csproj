@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AwesomeAssertions" Version="9.4.0" />
+        <PackageReference Include="AwesomeAssertions" Version="9.4.0"/>
         <PackageReference Include="coverlet.collector" Version="6.0.4"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0"/>
         <PackageReference Include="NUnit" Version="4.3.2"/>
@@ -21,4 +21,11 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Lingo.Core\Lingo.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="**\*.xlf"/>
+    </ItemGroup>
 </Project>
