@@ -6,11 +6,11 @@ using System.Xml.Serialization;
 
 namespace Lingo.Core.Formats.Xliff;
 
-public class XliffDocumentFactory : ILingoDocumentFactory
+public class XliffDocumentFactory : ILingoDocumentFactory<IXliffDocument>
 {
     private readonly string _xliff20NameSpace = "urn:oasis:names:tc:xliff:document:2.0";
 
-    public ILingoDocument Create(Stream source)
+    public IXliffDocument Create(Stream source)
     {
         // Try to detect version from version attribute
         using var reader = XmlReader.Create(source);
@@ -32,13 +32,13 @@ public class XliffDocumentFactory : ILingoDocumentFactory
         }
     }
 
-    public ILingoDocument Create(string source)
+    public IXliffDocument Create(string source)
     {
         using var stream = new MemoryStream(Encoding.UTF8.GetBytes(source));
         return Create(stream);
     }
 
-    public ILingoDocument Create(string formatId, IEnumerable<Unit> units)
+    public IXliffDocument Create(string formatId, IEnumerable<Unit> units)
     {
         if (formatId == "xliff-2.0")
         {
