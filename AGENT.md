@@ -7,3 +7,4 @@
 #### Standards
 - Always write reproduction tests for bugs.
 - Mirrored test data should be kept in sync across supported XLIFF versions (e.g., 1.2 and 2.0).
+- Prefer running tests for the entire project/solution instead of file by file.
