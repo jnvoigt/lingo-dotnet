@@ -1,5 +1,6 @@
 ﻿using Lingo.Cli.Commands;
 using System.CommandLine;
+using System.Threading.Tasks;
 
 namespace Lingo.Cli;
 
