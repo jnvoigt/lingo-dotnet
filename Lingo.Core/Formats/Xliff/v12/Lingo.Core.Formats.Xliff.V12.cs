@@ -11,8 +11,8 @@
 // xscgen -v --ca -n Lingo.Core.Formats.Xliff.V12 -o Lingo.Core/Formats/Xliff/v12 Lingo.Core/Formats/Xliff/v12/xliff-core-1.2-transitional.xsd
 namespace Lingo.Core.Formats.Xliff.V12
 {
-    
-    
+
+
     /// <summary>
     /// <para>Values for the attribute 'context-type'.</para>
     /// </summary>
@@ -22,28 +22,28 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("context-typeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum ContextTypeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates a database content.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a database content.")]
         [System.Xml.Serialization.XmlEnumAttribute("database")]
         Database,
-        
+
         /// <summary>
         /// <para>Indicates the content of an element within an XML document.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the content of an element within an XML document.")]
         [System.Xml.Serialization.XmlEnumAttribute("element")]
         Element,
-        
+
         /// <summary>
         /// <para>Indicates the name of an element within an XML document.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the name of an element within an XML document.")]
         [System.Xml.Serialization.XmlEnumAttribute("elementtitle")]
         Elementtitle,
-        
+
         /// <summary>
         /// <para>Indicates the line number from the sourcefile (see context-type="sourcefile") where the &lt;source&gt; is found.</para>
         /// </summary>
@@ -51,35 +51,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "re the &lt;source&gt; is found."))]
         [System.Xml.Serialization.XmlEnumAttribute("linenumber")]
         Linenumber,
-        
+
         /// <summary>
         /// <para>Indicates a the number of parameters contained within the &lt;source&gt;.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a the number of parameters contained within the &lt;source&gt;.")]
         [System.Xml.Serialization.XmlEnumAttribute("numparams")]
         Numparams,
-        
+
         /// <summary>
         /// <para>Indicates notes pertaining to the parameters in the &lt;source&gt;.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates notes pertaining to the parameters in the &lt;source&gt;.")]
         [System.Xml.Serialization.XmlEnumAttribute("paramnotes")]
         Paramnotes,
-        
+
         /// <summary>
         /// <para>Indicates the content of a record within a database.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the content of a record within a database.")]
         [System.Xml.Serialization.XmlEnumAttribute("record")]
         Record,
-        
+
         /// <summary>
         /// <para>Indicates the name of a record within a database.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the name of a record within a database.")]
         [System.Xml.Serialization.XmlEnumAttribute("recordtitle")]
         Recordtitle,
-        
+
         /// <summary>
         /// <para>Indicates the original source file in the case that multiple files are merged to form the original file from which the XLIFF file is created. This differs from the original &lt;file&gt; attribute in that this sourcefile is one of many that make up that file.</para>
         /// </summary>
@@ -87,7 +87,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("sourcefile")]
         Sourcefile,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'count-type'.</para>
     /// </summary>
@@ -97,7 +97,7 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("count-typeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum CountTypeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates the count units are items that are used X times in a certain context; example: this is a reusable text unit which is used 42 times in other texts.</para>
         /// </summary>
@@ -105,7 +105,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "xample: this is a reusable text unit which is used 42 times in other texts."))]
         [System.Xml.Serialization.XmlEnumAttribute("num-usages")]
         NumUsages,
-        
+
         /// <summary>
         /// <para>Indicates the count units are translation units existing already in the same document.</para>
         /// </summary>
@@ -113,7 +113,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ment."))]
         [System.Xml.Serialization.XmlEnumAttribute("repetition")]
         Repetition,
-        
+
         /// <summary>
         /// <para>Indicates a total count.</para>
         /// </summary>
@@ -121,7 +121,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("total")]
         Total,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'ctype' when used other elements than &lt;ph&gt; or &lt;x&gt;.</para>
     /// </summary>
@@ -132,28 +132,28 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("InlineDelimitersValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum InlineDelimitersValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates a run of bolded text.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a run of bolded text.")]
         [System.Xml.Serialization.XmlEnumAttribute("bold")]
         Bold,
-        
+
         /// <summary>
         /// <para>Indicates a run of text in italics.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a run of text in italics.")]
         [System.Xml.Serialization.XmlEnumAttribute("italic")]
         Italic,
-        
+
         /// <summary>
         /// <para>Indicates a run of underlined text.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a run of underlined text.")]
         [System.Xml.Serialization.XmlEnumAttribute("underlined")]
         Underlined,
-        
+
         /// <summary>
         /// <para>Indicates a run of hyper-text.</para>
         /// </summary>
@@ -161,7 +161,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("link")]
         Link,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'ctype' when used with &lt;ph&gt; or &lt;x&gt;.</para>
     /// </summary>
@@ -171,21 +171,21 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("InlinePlaceholdersValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum InlinePlaceholdersValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates a inline image.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a inline image.")]
         [System.Xml.Serialization.XmlEnumAttribute("image")]
         Image,
-        
+
         /// <summary>
         /// <para>Indicates a page break.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a page break.")]
         [System.Xml.Serialization.XmlEnumAttribute("pb")]
         Pb,
-        
+
         /// <summary>
         /// <para>Indicates a line break.</para>
         /// </summary>
@@ -193,7 +193,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("lb")]
         Lb,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'datatype'.</para>
     /// </summary>
@@ -203,84 +203,84 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("datatypeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum DatatypeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates Active Server Page data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Active Server Page data.")]
         [System.Xml.Serialization.XmlEnumAttribute("asp")]
         Asp,
-        
+
         /// <summary>
         /// <para>Indicates C source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates C source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("c")]
         C,
-        
+
         /// <summary>
         /// <para>Indicates Channel Definition Format (CDF) data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Channel Definition Format (CDF) data.")]
         [System.Xml.Serialization.XmlEnumAttribute("cdf")]
         Cdf,
-        
+
         /// <summary>
         /// <para>Indicates ColdFusion data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates ColdFusion data.")]
         [System.Xml.Serialization.XmlEnumAttribute("cfm")]
         Cfm,
-        
+
         /// <summary>
         /// <para>Indicates C++ source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates C++ source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("cpp")]
         Cpp,
-        
+
         /// <summary>
         /// <para>Indicates C-Sharp data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates C-Sharp data.")]
         [System.Xml.Serialization.XmlEnumAttribute("csharp")]
         Csharp,
-        
+
         /// <summary>
         /// <para>Indicates strings from C, ASM, and driver files data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates strings from C, ASM, and driver files data.")]
         [System.Xml.Serialization.XmlEnumAttribute("cstring")]
         Cstring,
-        
+
         /// <summary>
         /// <para>Indicates comma-separated values data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates comma-separated values data.")]
         [System.Xml.Serialization.XmlEnumAttribute("csv")]
         Csv,
-        
+
         /// <summary>
         /// <para>Indicates database data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates database data.")]
         [System.Xml.Serialization.XmlEnumAttribute("database")]
         Database,
-        
+
         /// <summary>
         /// <para>Indicates portions of document that follows data and contains metadata.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates portions of document that follows data and contains metadata.")]
         [System.Xml.Serialization.XmlEnumAttribute("documentfooter")]
         Documentfooter,
-        
+
         /// <summary>
         /// <para>Indicates portions of document that precedes data and contains metadata.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates portions of document that precedes data and contains metadata.")]
         [System.Xml.Serialization.XmlEnumAttribute("documentheader")]
         Documentheader,
-        
+
         /// <summary>
         /// <para>Indicates data from standard UI file operations dialogs (e.g., Open, Save, Save As, Export, Import).</para>
         /// </summary>
@@ -288,119 +288,119 @@ namespace Lingo.Core.Formats.Xliff.V12
             "s, Export, Import)."))]
         [System.Xml.Serialization.XmlEnumAttribute("filedialog")]
         Filedialog,
-        
+
         /// <summary>
         /// <para>Indicates standard user input screen data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates standard user input screen data.")]
         [System.Xml.Serialization.XmlEnumAttribute("form")]
         Form,
-        
+
         /// <summary>
         /// <para>Indicates HyperText Markup Language (HTML) data - document instance.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates HyperText Markup Language (HTML) data - document instance.")]
         [System.Xml.Serialization.XmlEnumAttribute("html")]
         Html,
-        
+
         /// <summary>
         /// <para>Indicates content within an HTML document’s &lt;body&gt; element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates content within an HTML document’s &lt;body&gt; element.")]
         [System.Xml.Serialization.XmlEnumAttribute("htmlbody")]
         Htmlbody,
-        
+
         /// <summary>
         /// <para>Indicates Windows INI file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Windows INI file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("ini")]
         Ini,
-        
+
         /// <summary>
         /// <para>Indicates Interleaf data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Interleaf data.")]
         [System.Xml.Serialization.XmlEnumAttribute("interleaf")]
         Interleaf,
-        
+
         /// <summary>
         /// <para>Indicates Java source file data (extension '.java').</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Java source file data (extension \'.java\').")]
         [System.Xml.Serialization.XmlEnumAttribute("javaclass")]
         Javaclass,
-        
+
         /// <summary>
         /// <para>Indicates Java property resource bundle data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Java property resource bundle data.")]
         [System.Xml.Serialization.XmlEnumAttribute("javapropertyresourcebundle")]
         Javapropertyresourcebundle,
-        
+
         /// <summary>
         /// <para>Indicates Java list resource bundle data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Java list resource bundle data.")]
         [System.Xml.Serialization.XmlEnumAttribute("javalistresourcebundle")]
         Javalistresourcebundle,
-        
+
         /// <summary>
         /// <para>Indicates JavaScript source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates JavaScript source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("javascript")]
         Javascript,
-        
+
         /// <summary>
         /// <para>Indicates JScript source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates JScript source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("jscript")]
         Jscript,
-        
+
         /// <summary>
         /// <para>Indicates information relating to formatting.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates information relating to formatting.")]
         [System.Xml.Serialization.XmlEnumAttribute("layout")]
         Layout,
-        
+
         /// <summary>
         /// <para>Indicates LISP source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates LISP source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("lisp")]
         Lisp,
-        
+
         /// <summary>
         /// <para>Indicates information relating to margin formats.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates information relating to margin formats.")]
         [System.Xml.Serialization.XmlEnumAttribute("margin")]
         Margin,
-        
+
         /// <summary>
         /// <para>Indicates a file containing menu.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a file containing menu.")]
         [System.Xml.Serialization.XmlEnumAttribute("menufile")]
         Menufile,
-        
+
         /// <summary>
         /// <para>Indicates numerically identified string table.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates numerically identified string table.")]
         [System.Xml.Serialization.XmlEnumAttribute("messagefile")]
         Messagefile,
-        
+
         /// <summary>
         /// <para>Indicates Maker Interchange Format (MIF) data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Maker Interchange Format (MIF) data.")]
         [System.Xml.Serialization.XmlEnumAttribute("mif")]
         Mif,
-        
+
         /// <summary>
         /// <para>Indicates that the datatype attribute value is a MIME Type value and is defined in the mime-type attribute.</para>
         /// </summary>
@@ -408,35 +408,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "n the mime-type attribute."))]
         [System.Xml.Serialization.XmlEnumAttribute("mimetype")]
         Mimetype,
-        
+
         /// <summary>
         /// <para>Indicates GNU Machine Object data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates GNU Machine Object data.")]
         [System.Xml.Serialization.XmlEnumAttribute("mo")]
         Mo,
-        
+
         /// <summary>
         /// <para>Indicates Message Librarian strings created by Novell's Message Librarian Tool.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Message Librarian strings created by Novell\'s Message Librarian Tool.")]
         [System.Xml.Serialization.XmlEnumAttribute("msglib")]
         Msglib,
-        
+
         /// <summary>
         /// <para>Indicates information to be displayed at the bottom of each page of a document.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates information to be displayed at the bottom of each page of a document.")]
         [System.Xml.Serialization.XmlEnumAttribute("pagefooter")]
         Pagefooter,
-        
+
         /// <summary>
         /// <para>Indicates information to be displayed at the top of each page of a document.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates information to be displayed at the top of each page of a document.")]
         [System.Xml.Serialization.XmlEnumAttribute("pageheader")]
         Pageheader,
-        
+
         /// <summary>
         /// <para>Indicates a list of property values (e.g., settings within INI files or preferences dialog).</para>
         /// </summary>
@@ -444,35 +444,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "es dialog)."))]
         [System.Xml.Serialization.XmlEnumAttribute("parameters")]
         Parameters,
-        
+
         /// <summary>
         /// <para>Indicates Pascal source file data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Pascal source file data.")]
         [System.Xml.Serialization.XmlEnumAttribute("pascal")]
         Pascal,
-        
+
         /// <summary>
         /// <para>Indicates Hypertext Preprocessor data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Hypertext Preprocessor data.")]
         [System.Xml.Serialization.XmlEnumAttribute("php")]
         Php,
-        
+
         /// <summary>
         /// <para>Indicates plain text file (no formatting other than, possibly, wrapping).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates plain text file (no formatting other than, possibly, wrapping).")]
         [System.Xml.Serialization.XmlEnumAttribute("plaintext")]
         Plaintext,
-        
+
         /// <summary>
         /// <para>Indicates GNU Portable Object file.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates GNU Portable Object file.")]
         [System.Xml.Serialization.XmlEnumAttribute("po")]
         Po,
-        
+
         /// <summary>
         /// <para>Indicates dynamically generated user defined document. e.g. Oracle Report, Crystal Report, etc.</para>
         /// </summary>
@@ -480,35 +480,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "l Report, etc."))]
         [System.Xml.Serialization.XmlEnumAttribute("report")]
         Report,
-        
+
         /// <summary>
         /// <para>Indicates Windows .NET binary resources.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Windows .NET binary resources.")]
         [System.Xml.Serialization.XmlEnumAttribute("resources")]
         Resources,
-        
+
         /// <summary>
         /// <para>Indicates Windows .NET Resources.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Windows .NET Resources.")]
         [System.Xml.Serialization.XmlEnumAttribute("resx")]
         Resx,
-        
+
         /// <summary>
         /// <para>Indicates Rich Text Format (RTF) data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Rich Text Format (RTF) data.")]
         [System.Xml.Serialization.XmlEnumAttribute("rtf")]
         Rtf,
-        
+
         /// <summary>
         /// <para>Indicates Standard Generalized Markup Language (SGML) data - document instance.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Standard Generalized Markup Language (SGML) data - document instance.")]
         [System.Xml.Serialization.XmlEnumAttribute("sgml")]
         Sgml,
-        
+
         /// <summary>
         /// <para>Indicates Standard Generalized Markup Language (SGML) data - Document Type Definition (DTD).</para>
         /// </summary>
@@ -516,28 +516,28 @@ namespace Lingo.Core.Formats.Xliff.V12
             "tion (DTD)."))]
         [System.Xml.Serialization.XmlEnumAttribute("sgmldtd")]
         Sgmldtd,
-        
+
         /// <summary>
         /// <para>Indicates Scalable Vector Graphic (SVG) data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Scalable Vector Graphic (SVG) data.")]
         [System.Xml.Serialization.XmlEnumAttribute("svg")]
         Svg,
-        
+
         /// <summary>
         /// <para>Indicates VisualBasic Script source file.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates VisualBasic Script source file.")]
         [System.Xml.Serialization.XmlEnumAttribute("vbscript")]
         Vbscript,
-        
+
         /// <summary>
         /// <para>Indicates warning message.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates warning message.")]
         [System.Xml.Serialization.XmlEnumAttribute("warning")]
         Warning,
-        
+
         /// <summary>
         /// <para>Indicates Windows (Win32) resources (i.e. resources extracted from an RC script, a message file, or a compiled file).</para>
         /// </summary>
@@ -545,35 +545,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "a message file, or a compiled file)."))]
         [System.Xml.Serialization.XmlEnumAttribute("winres")]
         Winres,
-        
+
         /// <summary>
         /// <para>Indicates Extensible HyperText Markup Language (XHTML) data - document instance.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Extensible HyperText Markup Language (XHTML) data - document instance.")]
         [System.Xml.Serialization.XmlEnumAttribute("xhtml")]
         Xhtml,
-        
+
         /// <summary>
         /// <para>Indicates Extensible Markup Language (XML) data - document instance.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Extensible Markup Language (XML) data - document instance.")]
         [System.Xml.Serialization.XmlEnumAttribute("xml")]
         Xml,
-        
+
         /// <summary>
         /// <para>Indicates Extensible Markup Language (XML) data - Document Type Definition (DTD).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Extensible Markup Language (XML) data - Document Type Definition (DTD).")]
         [System.Xml.Serialization.XmlEnumAttribute("xmldtd")]
         Xmldtd,
-        
+
         /// <summary>
         /// <para>Indicates Extensible Stylesheet Language (XSL) data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates Extensible Stylesheet Language (XSL) data.")]
         [System.Xml.Serialization.XmlEnumAttribute("xsl")]
         Xsl,
-        
+
         /// <summary>
         /// <para>Indicates XUL elements.</para>
         /// </summary>
@@ -581,7 +581,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("xul")]
         Xul,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'mtype'.</para>
     /// </summary>
@@ -591,14 +591,14 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("mtypeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum MtypeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates the marked text is an abbreviation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text is an abbreviation.")]
         [System.Xml.Serialization.XmlEnumAttribute("abbrev")]
         Abbrev,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8: A term resulting from the omission of any part of the full term while designating the same concept.</para>
         /// </summary>
@@ -606,7 +606,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "while designating the same concept."))]
         [System.Xml.Serialization.XmlEnumAttribute("abbreviated-form")]
         AbbreviatedForm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8.1: An abbreviated form of a simple term resulting from the omission of some of its letters (e.g. 'adj.' for 'adjective').</para>
         /// </summary>
@@ -614,7 +614,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "on of some of its letters (e.g. \'adj.\' for \'adjective\')."))]
         [System.Xml.Serialization.XmlEnumAttribute("abbreviation")]
         Abbreviation,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8.4: An abbreviated form of a term made up of letters from the full form of a multiword term strung together into a sequence pronounced only syllabically (e.g. 'radar' for 'radio detecting and ranging').</para>
         /// </summary>
@@ -623,7 +623,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ically (e.g. \'radar\' for \'radio detecting and ranging\')."))]
         [System.Xml.Serialization.XmlEnumAttribute("acronym")]
         Acronym,
-        
+
         /// <summary>
         /// <para>ISO-12620: A proper-name term, such as the name of an agency or other proper entity.</para>
         /// </summary>
@@ -631,14 +631,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ty."))]
         [System.Xml.Serialization.XmlEnumAttribute("appellation")]
         Appellation,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.18.1: A recurrent word combination characterized by cohesion in that the components of the collocation must co-occur within an utterance or series of utterances, even though they do not necessarily have to maintain immediate proximity to one another.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(@"ISO-12620 2.1.18.1: A recurrent word combination characterized by cohesion in that the components of the collocation must co-occur within an utterance or series of utterances, even though they do not necessarily have to maintain immediate proximity to one another.")]
         [System.Xml.Serialization.XmlEnumAttribute("collocation")]
         Collocation,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.5: A synonym for an international scientific term that is used in general discourse in a given language.</para>
         /// </summary>
@@ -646,14 +646,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "eneral discourse in a given language."))]
         [System.Xml.Serialization.XmlEnumAttribute("common-name")]
         CommonName,
-        
+
         /// <summary>
         /// <para>Indicates the marked text is a date and/or time.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text is a date and/or time.")]
         [System.Xml.Serialization.XmlEnumAttribute("datetime")]
         Datetime,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.15: An expression used to represent a concept based on a statement that two mathematical expressions are, for instance, equal as identified by the equal sign (=), or assigned to one another by a similar sign.</para>
         /// </summary>
@@ -662,7 +662,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "equal sign (=), or assigned to one another by a similar sign."))]
         [System.Xml.Serialization.XmlEnumAttribute("equation")]
         Equation,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.7: The complete representation of a term for which there is an abbreviated form.</para>
         /// </summary>
@@ -670,7 +670,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "eviated form."))]
         [System.Xml.Serialization.XmlEnumAttribute("expanded-form")]
         ExpandedForm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.14: Figures, symbols or the like used to express a concept briefly, such as a mathematical or chemical formula.</para>
         /// </summary>
@@ -678,7 +678,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             " such as a mathematical or chemical formula."))]
         [System.Xml.Serialization.XmlEnumAttribute("formula")]
         Formula,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.1: The concept designation that has been chosen to head a terminological record.</para>
         /// </summary>
@@ -686,14 +686,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "gical record."))]
         [System.Xml.Serialization.XmlEnumAttribute("head-term")]
         HeadTerm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8.3: An abbreviated form of a term consisting of some of the initial letters of the words making up a multiword term or the term elements making up a compound term when these letters are pronounced individually (e.g. 'BSE' for 'bovine spongiform encephalopathy').</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(@"ISO-12620 2.1.8.3: An abbreviated form of a term consisting of some of the initial letters of the words making up a multiword term or the term elements making up a compound term when these letters are pronounced individually (e.g. 'BSE' for 'bovine spongiform encephalopathy').")]
         [System.Xml.Serialization.XmlEnumAttribute("initialism")]
         Initialism,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.4: A term that is part of an international scientific nomenclature as adopted by an appropriate scientific body.</para>
         /// </summary>
@@ -701,7 +701,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "as adopted by an appropriate scientific body."))]
         [System.Xml.Serialization.XmlEnumAttribute("international-scientific-term")]
         InternationalScientificTerm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.6: A term that has the same or nearly identical orthographic or phonemic form in many languages.</para>
         /// </summary>
@@ -709,7 +709,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "nemic form in many languages."))]
         [System.Xml.Serialization.XmlEnumAttribute("internationalism")]
         Internationalism,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.16: An expression used to represent a concept based on mathematical or logical relations, such as statements of inequality, set relationships, Boolean operations, and the like.</para>
         /// </summary>
@@ -718,21 +718,21 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ean operations, and the like."))]
         [System.Xml.Serialization.XmlEnumAttribute("logical-expression")]
         LogicalExpression,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.17: A unit to track object.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("ISO-12620 2.1.17: A unit to track object.")]
         [System.Xml.Serialization.XmlEnumAttribute("materials-management-unit")]
         MaterialsManagementUnit,
-        
+
         /// <summary>
         /// <para>Indicates the marked text is a name.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text is a name.")]
         [System.Xml.Serialization.XmlEnumAttribute("name")]
         Name,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.3: A term that represents the same or a very similar concept as another term in the same language, but for which interchangeability is limited to some contexts and inapplicable in others.</para>
         /// </summary>
@@ -741,7 +741,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ome contexts and inapplicable in others."))]
         [System.Xml.Serialization.XmlEnumAttribute("near-synonym")]
         NearSynonym,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.17.2: A unique alphanumeric designation assigned to an object in a manufacturing system.</para>
         /// </summary>
@@ -749,14 +749,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "manufacturing system."))]
         [System.Xml.Serialization.XmlEnumAttribute("part-number")]
         PartNumber,
-        
+
         /// <summary>
         /// <para>Indicates the marked text is a phrase.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text is a phrase.")]
         [System.Xml.Serialization.XmlEnumAttribute("phrase")]
         Phrase,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.18: Any group of two or more words that form a unit, the meaning of which frequently cannot be deduced based on the combined sense of the words making up the phrase.</para>
         /// </summary>
@@ -765,14 +765,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ing up the phrase."))]
         [System.Xml.Serialization.XmlEnumAttribute("phraseological-unit")]
         PhraseologicalUnit,
-        
+
         /// <summary>
         /// <para>Indicates the marked text should not be translated.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text should not be translated.")]
         [System.Xml.Serialization.XmlEnumAttribute("protected")]
         Protected,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.12: A form of a term resulting from an operation whereby non-Latin writing systems are converted to the Latin alphabet.</para>
         /// </summary>
@@ -780,21 +780,21 @@ namespace Lingo.Core.Formats.Xliff.V12
             "writing systems are converted to the Latin alphabet."))]
         [System.Xml.Serialization.XmlEnumAttribute("romanized-form")]
         RomanizedForm,
-        
+
         /// <summary>
         /// <para>Indicates that the marked text represents a segment.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the marked text represents a segment.")]
         [System.Xml.Serialization.XmlEnumAttribute("seg")]
         Seg,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.18.2: A fixed, lexicalized phrase.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("ISO-12620 2.1.18.2: A fixed, lexicalized phrase.")]
         [System.Xml.Serialization.XmlEnumAttribute("set-phrase")]
         SetPhrase,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8.2: A variant of a multiword term that includes fewer words than the full form of the term (e.g. 'Group of Twenty-four' for 'Intergovernmental Group of Twenty-four on International Monetary Affairs').</para>
         /// </summary>
@@ -803,7 +803,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "up of Twenty-four on International Monetary Affairs\')."))]
         [System.Xml.Serialization.XmlEnumAttribute("short-form")]
         ShortForm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.17.1: Stock keeping unit, an inventory item identified by a unique alphanumeric designation assigned to an object in an inventory control system.</para>
         /// </summary>
@@ -811,14 +811,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "alphanumeric designation assigned to an object in an inventory control system."))]
         [System.Xml.Serialization.XmlEnumAttribute("sku")]
         Sku,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.19: A fixed chunk of recurring text.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("ISO-12620 2.1.19: A fixed chunk of recurring text.")]
         [System.Xml.Serialization.XmlEnumAttribute("standard-text")]
         StandardText,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.13: A designation of a concept by letters, numerals, pictograms or any combination thereof.</para>
         /// </summary>
@@ -826,7 +826,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "any combination thereof."))]
         [System.Xml.Serialization.XmlEnumAttribute("symbol")]
         Symbol,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.2: Any term that represents the same or a very similar concept as the main entry term in a term entry.</para>
         /// </summary>
@@ -834,7 +834,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "he main entry term in a term entry."))]
         [System.Xml.Serialization.XmlEnumAttribute("synonym")]
         Synonym,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.18.3: Phraseological unit in a language that expresses the same semantic content as another phrase in that same language.</para>
         /// </summary>
@@ -842,14 +842,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             "antic content as another phrase in that same language."))]
         [System.Xml.Serialization.XmlEnumAttribute("synonymous-phrase")]
         SynonymousPhrase,
-        
+
         /// <summary>
         /// <para>Indicates the marked text is a term.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the marked text is a term.")]
         [System.Xml.Serialization.XmlEnumAttribute("term")]
         Term,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.11: A form of a term resulting from an operation whereby the characters of one writing system are represented by characters from another writing system, taking into account the pronunciation of the characters converted.</para>
         /// </summary>
@@ -858,7 +858,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "stem, taking into account the pronunciation of the characters converted."))]
         [System.Xml.Serialization.XmlEnumAttribute("transcribed-form")]
         TranscribedForm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.10: A form of a term resulting from an operation whereby the characters of an alphabetic writing system are represented by characters from another alphabetic writing system.</para>
         /// </summary>
@@ -867,7 +867,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "alphabetic writing system."))]
         [System.Xml.Serialization.XmlEnumAttribute("transliterated-form")]
         TransliteratedForm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.8.5: An abbreviated form of a term resulting from the omission of one or more term elements or syllables (e.g. 'flu' for 'influenza').</para>
         /// </summary>
@@ -875,7 +875,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ne or more term elements or syllables (e.g. \'flu\' for \'influenza\')."))]
         [System.Xml.Serialization.XmlEnumAttribute("truncated-term")]
         TruncatedTerm,
-        
+
         /// <summary>
         /// <para>ISO-12620 2.1.9: One of the alternate forms of a term.</para>
         /// </summary>
@@ -883,7 +883,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("variant")]
         Variant,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'restype'.</para>
     /// </summary>
@@ -893,56 +893,56 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("restypeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum RestypeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC AUTO3STATE control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC AUTO3STATE control.")]
         [System.Xml.Serialization.XmlEnumAttribute("auto3state")]
         Auto3State,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC AUTOCHECKBOX control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC AUTOCHECKBOX control.")]
         [System.Xml.Serialization.XmlEnumAttribute("autocheckbox")]
         Autocheckbox,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC AUTORADIOBUTTON control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC AUTORADIOBUTTON control.")]
         [System.Xml.Serialization.XmlEnumAttribute("autoradiobutton")]
         Autoradiobutton,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC BEDIT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC BEDIT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("bedit")]
         Bedit,
-        
+
         /// <summary>
         /// <para>Indicates a bitmap, for example a BITMAP resource in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a bitmap, for example a BITMAP resource in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("bitmap")]
         Bitmap,
-        
+
         /// <summary>
         /// <para>Indicates a button object, for example a BUTTON control Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a button object, for example a BUTTON control Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("button")]
         Button,
-        
+
         /// <summary>
         /// <para>Indicates a caption, such as the caption of a dialog box.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a caption, such as the caption of a dialog box.")]
         [System.Xml.Serialization.XmlEnumAttribute("caption")]
         Caption,
-        
+
         /// <summary>
         /// <para>Indicates the cell in a table, for example the content of the &lt;td&gt; element in HTML.</para>
         /// </summary>
@@ -950,35 +950,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "in HTML."))]
         [System.Xml.Serialization.XmlEnumAttribute("cell")]
         Cell,
-        
+
         /// <summary>
         /// <para>Indicates check box object, for example a CHECKBOX control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates check box object, for example a CHECKBOX control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("checkbox")]
         Checkbox,
-        
+
         /// <summary>
         /// <para>Indicates a menu item with an associated checkbox.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a menu item with an associated checkbox.")]
         [System.Xml.Serialization.XmlEnumAttribute("checkboxmenuitem")]
         Checkboxmenuitem,
-        
+
         /// <summary>
         /// <para>Indicates a list box, but with a check-box for each item.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a list box, but with a check-box for each item.")]
         [System.Xml.Serialization.XmlEnumAttribute("checkedlistbox")]
         Checkedlistbox,
-        
+
         /// <summary>
         /// <para>Indicates a color selection dialog.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a color selection dialog.")]
         [System.Xml.Serialization.XmlEnumAttribute("colorchooser")]
         Colorchooser,
-        
+
         /// <summary>
         /// <para>Indicates a combination of edit box and listbox object, for example a COMBOBOX control in Windows.</para>
         /// </summary>
@@ -986,7 +986,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "ntrol in Windows."))]
         [System.Xml.Serialization.XmlEnumAttribute("combobox")]
         Combobox,
-        
+
         /// <summary>
         /// <para>Indicates an initialization entry of an extended combobox DLGINIT resource block. (code 0x1234).</para>
         /// </summary>
@@ -994,7 +994,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             " (code 0x1234)."))]
         [System.Xml.Serialization.XmlEnumAttribute("comboboxexitem")]
         Comboboxexitem,
-        
+
         /// <summary>
         /// <para>Indicates an initialization entry of a combobox DLGINIT resource block (code 0x0403).</para>
         /// </summary>
@@ -1002,7 +1002,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "03)."))]
         [System.Xml.Serialization.XmlEnumAttribute("comboboxitem")]
         Comboboxitem,
-        
+
         /// <summary>
         /// <para>Indicates a UI base class element that cannot be represented by any other element.</para>
         /// </summary>
@@ -1010,126 +1010,126 @@ namespace Lingo.Core.Formats.Xliff.V12
             "."))]
         [System.Xml.Serialization.XmlEnumAttribute("component")]
         Component,
-        
+
         /// <summary>
         /// <para>Indicates a context menu.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a context menu.")]
         [System.Xml.Serialization.XmlEnumAttribute("contextmenu")]
         Contextmenu,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC CTEXT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC CTEXT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("ctext")]
         Ctext,
-        
+
         /// <summary>
         /// <para>Indicates a cursor, for example a CURSOR resource in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a cursor, for example a CURSOR resource in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("cursor")]
         Cursor,
-        
+
         /// <summary>
         /// <para>Indicates a date/time picker.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a date/time picker.")]
         [System.Xml.Serialization.XmlEnumAttribute("datetimepicker")]
         Datetimepicker,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC DEFPUSHBUTTON control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC DEFPUSHBUTTON control.")]
         [System.Xml.Serialization.XmlEnumAttribute("defpushbutton")]
         Defpushbutton,
-        
+
         /// <summary>
         /// <para>Indicates a dialog box.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a dialog box.")]
         [System.Xml.Serialization.XmlEnumAttribute("dialog")]
         Dialog,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC DLGINIT resource block.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC DLGINIT resource block.")]
         [System.Xml.Serialization.XmlEnumAttribute("dlginit")]
         Dlginit,
-        
+
         /// <summary>
         /// <para>Indicates an edit box object, for example an EDIT control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates an edit box object, for example an EDIT control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("edit")]
         Edit,
-        
+
         /// <summary>
         /// <para>Indicates a filename.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a filename.")]
         [System.Xml.Serialization.XmlEnumAttribute("file")]
         File,
-        
+
         /// <summary>
         /// <para>Indicates a file dialog.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a file dialog.")]
         [System.Xml.Serialization.XmlEnumAttribute("filechooser")]
         Filechooser,
-        
+
         /// <summary>
         /// <para>Indicates a footnote.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a footnote.")]
         [System.Xml.Serialization.XmlEnumAttribute("fn")]
         Fn,
-        
+
         /// <summary>
         /// <para>Indicates a font name.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a font name.")]
         [System.Xml.Serialization.XmlEnumAttribute("font")]
         Font,
-        
+
         /// <summary>
         /// <para>Indicates a footer.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a footer.")]
         [System.Xml.Serialization.XmlEnumAttribute("footer")]
         Footer,
-        
+
         /// <summary>
         /// <para>Indicates a frame object.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a frame object.")]
         [System.Xml.Serialization.XmlEnumAttribute("frame")]
         Frame,
-        
+
         /// <summary>
         /// <para>Indicates a XUL grid element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a XUL grid element.")]
         [System.Xml.Serialization.XmlEnumAttribute("grid")]
         Grid,
-        
+
         /// <summary>
         /// <para>Indicates a groupbox object, for example a GROUPBOX control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a groupbox object, for example a GROUPBOX control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("groupbox")]
         Groupbox,
-        
+
         /// <summary>
         /// <para>Indicates a header item.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a header item.")]
         [System.Xml.Serialization.XmlEnumAttribute("header")]
         Header,
-        
+
         /// <summary>
         /// <para>Indicates a heading, such has the content of &lt;h1&gt;, &lt;h2&gt;, etc. in HTML.</para>
         /// </summary>
@@ -1137,35 +1137,35 @@ namespace Lingo.Core.Formats.Xliff.V12
             "."))]
         [System.Xml.Serialization.XmlEnumAttribute("heading")]
         Heading,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC HEDIT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC HEDIT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("hedit")]
         Hedit,
-        
+
         /// <summary>
         /// <para>Indicates a horizontal scrollbar.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a horizontal scrollbar.")]
         [System.Xml.Serialization.XmlEnumAttribute("hscrollbar")]
         Hscrollbar,
-        
+
         /// <summary>
         /// <para>Indicates an icon, for example an ICON resource in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates an icon, for example an ICON resource in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("icon")]
         Icon,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC IEDIT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC IEDIT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("iedit")]
         Iedit,
-        
+
         /// <summary>
         /// <para>Indicates keyword list, such as the content of the Keywords meta-data in HTML, or a K footnote in WinHelp RTF.</para>
         /// </summary>
@@ -1173,21 +1173,21 @@ namespace Lingo.Core.Formats.Xliff.V12
             " a K footnote in WinHelp RTF."))]
         [System.Xml.Serialization.XmlEnumAttribute("keywords")]
         Keywords,
-        
+
         /// <summary>
         /// <para>Indicates a label object.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a label object.")]
         [System.Xml.Serialization.XmlEnumAttribute("label")]
         Label,
-        
+
         /// <summary>
         /// <para>Indicates a label that is also a HTML link (not necessarily a URL).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a label that is also a HTML link (not necessarily a URL).")]
         [System.Xml.Serialization.XmlEnumAttribute("linklabel")]
         Linklabel,
-        
+
         /// <summary>
         /// <para>Indicates a list (a group of list-items, for example an &lt;ol&gt; or &lt;ul&gt; element in HTML).</para>
         /// </summary>
@@ -1195,294 +1195,294 @@ namespace Lingo.Core.Formats.Xliff.V12
             "element in HTML)."))]
         [System.Xml.Serialization.XmlEnumAttribute("list")]
         List,
-        
+
         /// <summary>
         /// <para>Indicates a listbox object, for example an LISTBOX control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a listbox object, for example an LISTBOX control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("listbox")]
         Listbox,
-        
+
         /// <summary>
         /// <para>Indicates an list item (an entry in a list).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates an list item (an entry in a list).")]
         [System.Xml.Serialization.XmlEnumAttribute("listitem")]
         Listitem,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC LTEXT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC LTEXT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("ltext")]
         Ltext,
-        
+
         /// <summary>
         /// <para>Indicates a menu (a group of menu-items).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a menu (a group of menu-items).")]
         [System.Xml.Serialization.XmlEnumAttribute("menu")]
         Menu,
-        
+
         /// <summary>
         /// <para>Indicates a toolbar containing one or more tope level menus.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a toolbar containing one or more tope level menus.")]
         [System.Xml.Serialization.XmlEnumAttribute("menubar")]
         Menubar,
-        
+
         /// <summary>
         /// <para>Indicates a menu item (an entry in a menu).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a menu item (an entry in a menu).")]
         [System.Xml.Serialization.XmlEnumAttribute("menuitem")]
         Menuitem,
-        
+
         /// <summary>
         /// <para>Indicates a XUL menuseparator element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a XUL menuseparator element.")]
         [System.Xml.Serialization.XmlEnumAttribute("menuseparator")]
         Menuseparator,
-        
+
         /// <summary>
         /// <para>Indicates a message, for example an entry in a MESSAGETABLE resource in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a message, for example an entry in a MESSAGETABLE resource in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("message")]
         Message,
-        
+
         /// <summary>
         /// <para>Indicates a calendar control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a calendar control.")]
         [System.Xml.Serialization.XmlEnumAttribute("monthcalendar")]
         Monthcalendar,
-        
+
         /// <summary>
         /// <para>Indicates an edit box beside a spin control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates an edit box beside a spin control.")]
         [System.Xml.Serialization.XmlEnumAttribute("numericupdown")]
         Numericupdown,
-        
+
         /// <summary>
         /// <para>Indicates a catch all for rectangular areas.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a catch all for rectangular areas.")]
         [System.Xml.Serialization.XmlEnumAttribute("panel")]
         Panel,
-        
+
         /// <summary>
         /// <para>Indicates a standalone menu not necessarily associated with a menubar.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a standalone menu not necessarily associated with a menubar.")]
         [System.Xml.Serialization.XmlEnumAttribute("popupmenu")]
         Popupmenu,
-        
+
         /// <summary>
         /// <para>Indicates a pushbox object, for example a PUSHBOX control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a pushbox object, for example a PUSHBOX control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("pushbox")]
         Pushbox,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC PUSHBUTTON control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC PUSHBUTTON control.")]
         [System.Xml.Serialization.XmlEnumAttribute("pushbutton")]
         Pushbutton,
-        
+
         /// <summary>
         /// <para>Indicates a radio button object.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a radio button object.")]
         [System.Xml.Serialization.XmlEnumAttribute("radio")]
         Radio,
-        
+
         /// <summary>
         /// <para>Indicates a menuitem with associated radio button.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a menuitem with associated radio button.")]
         [System.Xml.Serialization.XmlEnumAttribute("radiobuttonmenuitem")]
         Radiobuttonmenuitem,
-        
+
         /// <summary>
         /// <para>Indicates raw data resources for an application.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates raw data resources for an application.")]
         [System.Xml.Serialization.XmlEnumAttribute("rcdata")]
         Rcdata,
-        
+
         /// <summary>
         /// <para>Indicates a row in a table.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a row in a table.")]
         [System.Xml.Serialization.XmlEnumAttribute("row")]
         Row,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC RTEXT control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC RTEXT control.")]
         [System.Xml.Serialization.XmlEnumAttribute("rtext")]
         Rtext,
-        
+
         /// <summary>
         /// <para>Indicates a user navigable container used to show a portion of a document.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a user navigable container used to show a portion of a document.")]
         [System.Xml.Serialization.XmlEnumAttribute("scrollpane")]
         Scrollpane,
-        
+
         /// <summary>
         /// <para>Indicates a generic divider object (e.g. menu group separator).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a generic divider object (e.g. menu group separator).")]
         [System.Xml.Serialization.XmlEnumAttribute("separator")]
         Separator,
-        
+
         /// <summary>
         /// <para>Windows accelerators, shortcuts in resource or property files.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Windows accelerators, shortcuts in resource or property files.")]
         [System.Xml.Serialization.XmlEnumAttribute("shortcut")]
         Shortcut,
-        
+
         /// <summary>
         /// <para>Indicates a UI control to indicate process activity but not progress.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a UI control to indicate process activity but not progress.")]
         [System.Xml.Serialization.XmlEnumAttribute("spinner")]
         Spinner,
-        
+
         /// <summary>
         /// <para>Indicates a splitter bar.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a splitter bar.")]
         [System.Xml.Serialization.XmlEnumAttribute("splitter")]
         Splitter,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC STATE3 control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC STATE3 control.")]
         [System.Xml.Serialization.XmlEnumAttribute("state3")]
         State3,
-        
+
         /// <summary>
         /// <para>Indicates a window for providing feedback to the users, like 'read-only', etc.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a window for providing feedback to the users, like \'read-only\', etc.")]
         [System.Xml.Serialization.XmlEnumAttribute("statusbar")]
         Statusbar,
-        
+
         /// <summary>
         /// <para>Indicates a string, for example an entry in a STRINGTABLE resource in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a string, for example an entry in a STRINGTABLE resource in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("string")]
         String,
-        
+
         /// <summary>
         /// <para>Indicates a layers of controls with a tab to select layers.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a layers of controls with a tab to select layers.")]
         [System.Xml.Serialization.XmlEnumAttribute("tabcontrol")]
         Tabcontrol,
-        
+
         /// <summary>
         /// <para>Indicates a display and edits regular two-dimensional tables of cells.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a display and edits regular two-dimensional tables of cells.")]
         [System.Xml.Serialization.XmlEnumAttribute("table")]
         Table,
-        
+
         /// <summary>
         /// <para>Indicates a XUL textbox element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a XUL textbox element.")]
         [System.Xml.Serialization.XmlEnumAttribute("textbox")]
         Textbox,
-        
+
         /// <summary>
         /// <para>Indicates a UI button that can be toggled to on or off state.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a UI button that can be toggled to on or off state.")]
         [System.Xml.Serialization.XmlEnumAttribute("togglebutton")]
         Togglebutton,
-        
+
         /// <summary>
         /// <para>Indicates an array of controls, usually buttons.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates an array of controls, usually buttons.")]
         [System.Xml.Serialization.XmlEnumAttribute("toolbar")]
         Toolbar,
-        
+
         /// <summary>
         /// <para>Indicates a pop up tool tip text.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a pop up tool tip text.")]
         [System.Xml.Serialization.XmlEnumAttribute("tooltip")]
         Tooltip,
-        
+
         /// <summary>
         /// <para>Indicates a bar with a pointer indicating a position within a certain range.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a bar with a pointer indicating a position within a certain range.")]
         [System.Xml.Serialization.XmlEnumAttribute("trackbar")]
         Trackbar,
-        
+
         /// <summary>
         /// <para>Indicates a control that displays a set of hierarchical data.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a control that displays a set of hierarchical data.")]
         [System.Xml.Serialization.XmlEnumAttribute("tree")]
         Tree,
-        
+
         /// <summary>
         /// <para>Indicates a URI (URN or URL).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a URI (URN or URL).")]
         [System.Xml.Serialization.XmlEnumAttribute("uri")]
         Uri,
-        
+
         /// <summary>
         /// <para>Indicates a Windows RC USERBUTTON control.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a Windows RC USERBUTTON control.")]
         [System.Xml.Serialization.XmlEnumAttribute("userbutton")]
         Userbutton,
-        
+
         /// <summary>
         /// <para>Indicates a user-defined control like CONTROL control in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a user-defined control like CONTROL control in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("usercontrol")]
         Usercontrol,
-        
+
         /// <summary>
         /// <para>Indicates the text of a variable.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the text of a variable.")]
         [System.Xml.Serialization.XmlEnumAttribute("var")]
         Var,
-        
+
         /// <summary>
         /// <para>Indicates version information about a resource like VERSIONINFO in Windows.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates version information about a resource like VERSIONINFO in Windows.")]
         [System.Xml.Serialization.XmlEnumAttribute("versioninfo")]
         Versioninfo,
-        
+
         /// <summary>
         /// <para>Indicates a vertical scrollbar.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a vertical scrollbar.")]
         [System.Xml.Serialization.XmlEnumAttribute("vscrollbar")]
         Vscrollbar,
-        
+
         /// <summary>
         /// <para>Indicates a graphical window.</para>
         /// </summary>
@@ -1490,7 +1490,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("window")]
         Window,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'size-unit'.</para>
     /// </summary>
@@ -1500,56 +1500,56 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("size-unitValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum SizeUnitValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates a size in 8-bit bytes.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in 8-bit bytes.")]
         [System.Xml.Serialization.XmlEnumAttribute("byte")]
         Byte,
-        
+
         /// <summary>
         /// <para>Indicates a size in Unicode characters.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in Unicode characters.")]
         [System.Xml.Serialization.XmlEnumAttribute("char")]
         Char,
-        
+
         /// <summary>
         /// <para>Indicates a size in columns. Used for HTML text area.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in columns. Used for HTML text area.")]
         [System.Xml.Serialization.XmlEnumAttribute("col")]
         Col,
-        
+
         /// <summary>
         /// <para>Indicates a size in centimeters.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in centimeters.")]
         [System.Xml.Serialization.XmlEnumAttribute("cm")]
         Cm,
-        
+
         /// <summary>
         /// <para>Indicates a size in dialog units, as defined in Windows resources.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in dialog units, as defined in Windows resources.")]
         [System.Xml.Serialization.XmlEnumAttribute("dlgunit")]
         Dlgunit,
-        
+
         /// <summary>
         /// <para>Indicates a size in 'font-size' units (as defined in CSS).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in \'font-size\' units (as defined in CSS).")]
         [System.Xml.Serialization.XmlEnumAttribute("em")]
         Em,
-        
+
         /// <summary>
         /// <para>Indicates a size in 'x-height' units (as defined in CSS).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in \'x-height\' units (as defined in CSS).")]
         [System.Xml.Serialization.XmlEnumAttribute("ex")]
         Ex,
-        
+
         /// <summary>
         /// <para>Indicates a size in glyphs. A glyph is considered to be one or more combined Unicode characters that represent a single displayable text character. Sometimes referred to as a 'grapheme cluster'</para>
         /// </summary>
@@ -1558,42 +1558,42 @@ namespace Lingo.Core.Formats.Xliff.V12
             "erred to as a \'grapheme cluster\'"))]
         [System.Xml.Serialization.XmlEnumAttribute("glyph")]
         Glyph,
-        
+
         /// <summary>
         /// <para>Indicates a size in inches.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in inches.")]
         [System.Xml.Serialization.XmlEnumAttribute("in")]
         In,
-        
+
         /// <summary>
         /// <para>Indicates a size in millimeters.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in millimeters.")]
         [System.Xml.Serialization.XmlEnumAttribute("mm")]
         Mm,
-        
+
         /// <summary>
         /// <para>Indicates a size in percentage.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in percentage.")]
         [System.Xml.Serialization.XmlEnumAttribute("percent")]
         Percent,
-        
+
         /// <summary>
         /// <para>Indicates a size in pixels.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in pixels.")]
         [System.Xml.Serialization.XmlEnumAttribute("pixel")]
         Pixel,
-        
+
         /// <summary>
         /// <para>Indicates a size in point.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a size in point.")]
         [System.Xml.Serialization.XmlEnumAttribute("point")]
         Point,
-        
+
         /// <summary>
         /// <para>Indicates a size in rows. Used for HTML text area.</para>
         /// </summary>
@@ -1601,7 +1601,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("row")]
         Row,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'state'.</para>
     /// </summary>
@@ -1611,56 +1611,56 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("stateValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum StateValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates the terminating state.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the terminating state.")]
         [System.Xml.Serialization.XmlEnumAttribute("final")]
         Final,
-        
+
         /// <summary>
         /// <para>Indicates only non-textual information needs adaptation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates only non-textual information needs adaptation.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-adaptation")]
         NeedsAdaptation,
-        
+
         /// <summary>
         /// <para>Indicates both text and non-textual information needs adaptation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates both text and non-textual information needs adaptation.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-l10n")]
         NeedsL10N,
-        
+
         /// <summary>
         /// <para>Indicates only non-textual information needs review.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates only non-textual information needs review.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-review-adaptation")]
         NeedsReviewAdaptation,
-        
+
         /// <summary>
         /// <para>Indicates both text and non-textual information needs review.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates both text and non-textual information needs review.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-review-l10n")]
         NeedsReviewL10N,
-        
+
         /// <summary>
         /// <para>Indicates that only the text of the item needs to be reviewed.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that only the text of the item needs to be reviewed.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-review-translation")]
         NeedsReviewTranslation,
-        
+
         /// <summary>
         /// <para>Indicates that the item needs to be translated.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the item needs to be translated.")]
         [System.Xml.Serialization.XmlEnumAttribute("needs-translation")]
         NeedsTranslation,
-        
+
         /// <summary>
         /// <para>Indicates that the item is new. For example, translation units that were not in a previous version of the document.</para>
         /// </summary>
@@ -1668,14 +1668,14 @@ namespace Lingo.Core.Formats.Xliff.V12
             " previous version of the document."))]
         [System.Xml.Serialization.XmlEnumAttribute("new")]
         New,
-        
+
         /// <summary>
         /// <para>Indicates that changes are reviewed and approved.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that changes are reviewed and approved.")]
         [System.Xml.Serialization.XmlEnumAttribute("signed-off")]
         SignedOff,
-        
+
         /// <summary>
         /// <para>Indicates that the item has been translated.</para>
         /// </summary>
@@ -1683,7 +1683,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("translated")]
         Translated,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'state-qualifier'.</para>
     /// </summary>
@@ -1693,7 +1693,7 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("state-qualifierValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum StateQualifierValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates an exact match. An exact match occurs when a source text of a segment is exactly the same as the source text of a segment that was translated previously.</para>
         /// </summary>
@@ -1702,7 +1702,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "y."))]
         [System.Xml.Serialization.XmlEnumAttribute("exact-match")]
         ExactMatch,
-        
+
         /// <summary>
         /// <para>Indicates a fuzzy match. A fuzzy match occurs when a source text of a segment is very similar to the source text of a segment that was translated previously (e.g. when the difference is casing, a few changed words, white-space discripancy, etc.).</para>
         /// </summary>
@@ -1712,84 +1712,84 @@ namespace Lingo.Core.Formats.Xliff.V12
             "tc.)."))]
         [System.Xml.Serialization.XmlEnumAttribute("fuzzy-match")]
         FuzzyMatch,
-        
+
         /// <summary>
         /// <para>Indicates a match based on matching IDs (in addition to matching text).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a match based on matching IDs (in addition to matching text).")]
         [System.Xml.Serialization.XmlEnumAttribute("id-match")]
         IdMatch,
-        
+
         /// <summary>
         /// <para>Indicates a translation derived from a glossary.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a translation derived from a glossary.")]
         [System.Xml.Serialization.XmlEnumAttribute("leveraged-glossary")]
         LeveragedGlossary,
-        
+
         /// <summary>
         /// <para>Indicates a translation derived from existing translation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a translation derived from existing translation.")]
         [System.Xml.Serialization.XmlEnumAttribute("leveraged-inherited")]
         LeveragedInherited,
-        
+
         /// <summary>
         /// <para>Indicates a translation derived from machine translation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a translation derived from machine translation.")]
         [System.Xml.Serialization.XmlEnumAttribute("leveraged-mt")]
         LeveragedMt,
-        
+
         /// <summary>
         /// <para>Indicates a translation derived from a translation repository.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a translation derived from a translation repository.")]
         [System.Xml.Serialization.XmlEnumAttribute("leveraged-repository")]
         LeveragedRepository,
-        
+
         /// <summary>
         /// <para>Indicates a translation derived from a translation memory.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates a translation derived from a translation memory.")]
         [System.Xml.Serialization.XmlEnumAttribute("leveraged-tm")]
         LeveragedTm,
-        
+
         /// <summary>
         /// <para>Indicates the translation is suggested by machine translation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates the translation is suggested by machine translation.")]
         [System.Xml.Serialization.XmlEnumAttribute("mt-suggestion")]
         MtSuggestion,
-        
+
         /// <summary>
         /// <para>Indicates that the item has been rejected because of incorrect grammar.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the item has been rejected because of incorrect grammar.")]
         [System.Xml.Serialization.XmlEnumAttribute("rejected-grammar")]
         RejectedGrammar,
-        
+
         /// <summary>
         /// <para>Indicates that the item has been rejected because it is incorrect.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the item has been rejected because it is incorrect.")]
         [System.Xml.Serialization.XmlEnumAttribute("rejected-inaccurate")]
         RejectedInaccurate,
-        
+
         /// <summary>
         /// <para>Indicates that the item has been rejected because it is too long or too short.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the item has been rejected because it is too long or too short.")]
         [System.Xml.Serialization.XmlEnumAttribute("rejected-length")]
         RejectedLength,
-        
+
         /// <summary>
         /// <para>Indicates that the item has been rejected because of incorrect spelling.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates that the item has been rejected because of incorrect spelling.")]
         [System.Xml.Serialization.XmlEnumAttribute("rejected-spelling")]
         RejectedSpelling,
-        
+
         /// <summary>
         /// <para>Indicates the translation is suggested by translation memory.</para>
         /// </summary>
@@ -1797,7 +1797,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("tm-suggestion")]
         TmSuggestion,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'unit'.</para>
     /// </summary>
@@ -1807,91 +1807,91 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("unitValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum UnitValueList
     {
-        
+
         /// <summary>
         /// <para>Refers to words.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to words.")]
         [System.Xml.Serialization.XmlEnumAttribute("word")]
         Word,
-        
+
         /// <summary>
         /// <para>Refers to pages.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to pages.")]
         [System.Xml.Serialization.XmlEnumAttribute("page")]
         Page,
-        
+
         /// <summary>
         /// <para>Refers to &lt;trans-unit&gt; elements.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to &lt;trans-unit&gt; elements.")]
         [System.Xml.Serialization.XmlEnumAttribute("trans-unit")]
         TransUnit,
-        
+
         /// <summary>
         /// <para>Refers to &lt;bin-unit&gt; elements.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to &lt;bin-unit&gt; elements.")]
         [System.Xml.Serialization.XmlEnumAttribute("bin-unit")]
         BinUnit,
-        
+
         /// <summary>
         /// <para>Refers to glyphs.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to glyphs.")]
         [System.Xml.Serialization.XmlEnumAttribute("glyph")]
         Glyph,
-        
+
         /// <summary>
         /// <para>Refers to &lt;trans-unit&gt; and/or &lt;bin-unit&gt; elements.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to &lt;trans-unit&gt; and/or &lt;bin-unit&gt; elements.")]
         [System.Xml.Serialization.XmlEnumAttribute("item")]
         Item,
-        
+
         /// <summary>
         /// <para>Refers to the occurrences of instances defined by the count-type value.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to the occurrences of instances defined by the count-type value.")]
         [System.Xml.Serialization.XmlEnumAttribute("instance")]
         Instance,
-        
+
         /// <summary>
         /// <para>Refers to characters.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to characters.")]
         [System.Xml.Serialization.XmlEnumAttribute("character")]
         Character,
-        
+
         /// <summary>
         /// <para>Refers to lines.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to lines.")]
         [System.Xml.Serialization.XmlEnumAttribute("line")]
         Line,
-        
+
         /// <summary>
         /// <para>Refers to sentences.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to sentences.")]
         [System.Xml.Serialization.XmlEnumAttribute("sentence")]
         Sentence,
-        
+
         /// <summary>
         /// <para>Refers to paragraphs.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to paragraphs.")]
         [System.Xml.Serialization.XmlEnumAttribute("paragraph")]
         Paragraph,
-        
+
         /// <summary>
         /// <para>Refers to segments.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Refers to segments.")]
         [System.Xml.Serialization.XmlEnumAttribute("segment")]
         Segment,
-        
+
         /// <summary>
         /// <para>Refers to placeables (inline elements).</para>
         /// </summary>
@@ -1899,7 +1899,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("placeable")]
         Placeable,
     }
-    
+
     /// <summary>
     /// <para>Values for the attribute 'priority'.</para>
     /// </summary>
@@ -1909,70 +1909,70 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("priorityValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum PriorityValueList
     {
-        
+
         /// <summary>
         /// <para>Highest priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Highest priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("1")]
         Item1,
-        
+
         /// <summary>
         /// <para>High priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("2")]
         Item2,
-        
+
         /// <summary>
         /// <para>High priority, but not as important as 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority, but not as important as 2.")]
         [System.Xml.Serialization.XmlEnumAttribute("3")]
         Item3,
-        
+
         /// <summary>
         /// <para>High priority, but not as important as 3.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority, but not as important as 3.")]
         [System.Xml.Serialization.XmlEnumAttribute("4")]
         Item4,
-        
+
         /// <summary>
         /// <para>Medium priority, but more important than 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Medium priority, but more important than 6.")]
         [System.Xml.Serialization.XmlEnumAttribute("5")]
         Item5,
-        
+
         /// <summary>
         /// <para>Medium priority, but less important than 5.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Medium priority, but less important than 5.")]
         [System.Xml.Serialization.XmlEnumAttribute("6")]
         Item6,
-        
+
         /// <summary>
         /// <para>Low priority, but more important than 8.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority, but more important than 8.")]
         [System.Xml.Serialization.XmlEnumAttribute("7")]
         Item7,
-        
+
         /// <summary>
         /// <para>Low priority, but more important than 9.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority, but more important than 9.")]
         [System.Xml.Serialization.XmlEnumAttribute("8")]
         Item8,
-        
+
         /// <summary>
         /// <para>Low priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("9")]
         Item9,
-        
+
         /// <summary>
         /// <para>Lowest priority.</para>
         /// </summary>
@@ -1980,13 +1980,13 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("10")]
         Item10,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("reformatValueYesNo", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum ReformatValueYesNo
     {
-        
+
         /// <summary>
         /// <para>This value indicates that all properties can be reformatted. This value must be used alone.</para>
         /// </summary>
@@ -1994,7 +1994,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "sed alone."))]
         [System.Xml.Serialization.XmlEnumAttribute("yes")]
         Yes,
-        
+
         /// <summary>
         /// <para>This value indicates that no properties should be reformatted. This value must be used alone.</para>
         /// </summary>
@@ -2003,13 +2003,13 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("no")]
         No,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("purposeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum PurposeValueList
     {
-        
+
         /// <summary>
         /// <para>Indicates that the context is informational in nature, specifying for example, how a term should be translated. Thus, should be displayed to anyone editing the XLIFF document.</para>
         /// </summary>
@@ -2018,7 +2018,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "LIFF document."))]
         [System.Xml.Serialization.XmlEnumAttribute("information")]
         Information,
-        
+
         /// <summary>
         /// <para>Indicates that the context-group is used to specify where the term was found in the translatable source. Thus, it is not displayed.</para>
         /// </summary>
@@ -2026,7 +2026,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             "he translatable source. Thus, it is not displayed."))]
         [System.Xml.Serialization.XmlEnumAttribute("location")]
         Location,
-        
+
         /// <summary>
         /// <para>Indicates that the context information should be used during translation memory lookups. Thus, it is not displayed.</para>
         /// </summary>
@@ -2035,34 +2035,34 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("match")]
         Match,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("alttranstypeValueList", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AlttranstypeValueList
     {
-        
+
         /// <summary>
         /// <para>Represents a translation proposal from a translation memory or other resource.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Represents a translation proposal from a translation memory or other resource.")]
         [System.Xml.Serialization.XmlEnumAttribute("proposal")]
         Proposal,
-        
+
         /// <summary>
         /// <para>Represents a previous version of the target element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Represents a previous version of the target element.")]
         [System.Xml.Serialization.XmlEnumAttribute("previous-version")]
         PreviousVersion,
-        
+
         /// <summary>
         /// <para>Represents a rejected version of the target element.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Represents a rejected version of the target element.")]
         [System.Xml.Serialization.XmlEnumAttribute("rejected")]
         Rejected,
-        
+
         /// <summary>
         /// <para>Represents a translation to be used for reference purposes only, for example from a related product or a different language.</para>
         /// </summary>
@@ -2070,7 +2070,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             " a related product or a different language."))]
         [System.Xml.Serialization.XmlEnumAttribute("reference")]
         Reference,
-        
+
         /// <summary>
         /// <para>Represents a proposed translation that was used for the translation of the trans-unit, possibly modified.</para>
         /// </summary>
@@ -2079,7 +2079,7 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("accepted")]
         Accepted,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("ElemType_ExternalReference", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -2087,14 +2087,14 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ElemTypeExternalReference
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("internal-file")]
         public InternalFile InternalFile { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("external-file")]
         public ExternalFile ExternalFile { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("internal-file", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -2103,20 +2103,20 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("internal-file", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class InternalFile
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets the text value.</para>
         /// </summary>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("form")]
         public string Form { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("external-file", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2125,87 +2125,87 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("external-file", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class ExternalFile
     {
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("href")]
         public string Href { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("uid")]
         public string Uid { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_priority", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypePriority
     {
-        
+
         /// <summary>
         /// <para>Highest priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Highest priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("1")]
         Item1,
-        
+
         /// <summary>
         /// <para>High priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("2")]
         Item2,
-        
+
         /// <summary>
         /// <para>High priority, but not as important as 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority, but not as important as 2.")]
         [System.Xml.Serialization.XmlEnumAttribute("3")]
         Item3,
-        
+
         /// <summary>
         /// <para>High priority, but not as important as 3.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("High priority, but not as important as 3.")]
         [System.Xml.Serialization.XmlEnumAttribute("4")]
         Item4,
-        
+
         /// <summary>
         /// <para>Medium priority, but more important than 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Medium priority, but more important than 6.")]
         [System.Xml.Serialization.XmlEnumAttribute("5")]
         Item5,
-        
+
         /// <summary>
         /// <para>Medium priority, but less important than 5.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Medium priority, but less important than 5.")]
         [System.Xml.Serialization.XmlEnumAttribute("6")]
         Item6,
-        
+
         /// <summary>
         /// <para>Low priority, but more important than 8.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority, but more important than 8.")]
         [System.Xml.Serialization.XmlEnumAttribute("7")]
         Item7,
-        
+
         /// <summary>
         /// <para>Low priority, but more important than 9.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority, but more important than 9.")]
         [System.Xml.Serialization.XmlEnumAttribute("8")]
         Item8,
-        
+
         /// <summary>
         /// <para>Low priority.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Low priority.")]
         [System.Xml.Serialization.XmlEnumAttribute("9")]
         Item9,
-        
+
         /// <summary>
         /// <para>Lowest priority.</para>
         /// </summary>
@@ -2213,65 +2213,65 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.Xml.Serialization.XmlEnumAttribute("10")]
         Item10,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_YesNo", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypeYesNo
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("yes")]
         Yes,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("no")]
         No,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_Position", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypePosition
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("open")]
         Open,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("close")]
         Close,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_assoc", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypeAssoc
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("preceding")]
         Preceding,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("following")]
         Following,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("both")]
         Both,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_annotates", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypeAnnotates
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("source")]
         Source,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("target")]
         Target,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("general")]
         General,
     }
-    
+
     /// <summary>
     /// <para>Version values: 1.0 and 1.1 are allowed for backward compatibility.</para>
     /// </summary>
@@ -2281,17 +2281,17 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlTypeAttribute("AttrType_Version", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public enum AttrTypeVersion
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("1.2")]
         Item12,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("1.1")]
         Item11,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("1.0")]
         Item10,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("xliff", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2300,10 +2300,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("xliff", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Xliff
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -2316,7 +2316,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -2328,7 +2328,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Xliff" /> class.</para>
         /// </summary>
@@ -2338,10 +2338,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._file = new System.Collections.ObjectModel.Collection<File>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<File> _file;
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("file")]
         public System.Collections.ObjectModel.Collection<File> File
@@ -2355,17 +2355,17 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _file = value;
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("version")]
         public AttrTypeVersion Version { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -2378,7 +2378,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -2391,7 +2391,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("file", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2400,22 +2400,22 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("file", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class File
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("header")]
         public Header Header { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("body")]
         public Body Body { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("original")]
         public string Original { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("source-language")]
         public string SourceLanguage { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -2423,13 +2423,13 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("datatype")]
         public string Datatype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool-id")]
         public string ToolId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _tool = "manual";
-        
+
         [System.ComponentModel.DefaultValueAttribute("manual")]
         [System.Xml.Serialization.XmlAttributeAttribute("tool")]
         public string Tool
@@ -2443,46 +2443,47 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _tool = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("date", DataType="dateTime")]
         public System.DateTime Date { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Date property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DateSpecified { get; set; }
-        
+
+        [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.Space.Default)]
         [System.Xml.Serialization.XmlAttributeAttribute("space", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public Lingo.Core.Formats.Xliff.V12.Space Space { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Space property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SpaceSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("category")]
         public string Category { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("target-language")]
         public string TargetLanguage { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("product-name")]
         public string ProductName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("product-version")]
         public string ProductVersion { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("build-num")]
         public string BuildNum { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -2495,7 +2496,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -2507,7 +2508,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="File" /> class.</para>
         /// </summary>
@@ -2516,7 +2517,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("header", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2525,13 +2526,13 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("header", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Header
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("skl")]
         public ElemTypeExternalReference Skl { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Phase> _phaseGroup;
-        
+
         [System.Xml.Serialization.XmlArrayAttribute("phase-group")]
         [System.Xml.Serialization.XmlArrayItemAttribute("phase", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
         public System.Collections.ObjectModel.Collection<Phase> PhaseGroup
@@ -2545,7 +2546,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _phaseGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PhaseGroup collection is empty.</para>
         /// </summary>
@@ -2557,7 +2558,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PhaseGroup.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Header" /> class.</para>
         /// </summary>
@@ -2572,10 +2573,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._tool = new System.Collections.ObjectModel.Collection<Tool>();
             this._any = new System.Collections.ObjectModel.Collection<System.Xml.XmlElement>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ElemTypeExternalReference> _glossary;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("glossary")]
         public System.Collections.ObjectModel.Collection<ElemTypeExternalReference> Glossary
         {
@@ -2588,7 +2589,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _glossary = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Glossary collection is empty.</para>
         /// </summary>
@@ -2600,10 +2601,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Glossary.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ElemTypeExternalReference> _reference;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("reference")]
         public System.Collections.ObjectModel.Collection<ElemTypeExternalReference> Reference
         {
@@ -2616,7 +2617,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _reference = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Reference collection is empty.</para>
         /// </summary>
@@ -2628,10 +2629,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Reference.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<CountGroup> _countGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("count-group")]
         public System.Collections.ObjectModel.Collection<CountGroup> CountGroup
         {
@@ -2644,7 +2645,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _countGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the CountGroup collection is empty.</para>
         /// </summary>
@@ -2656,10 +2657,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.CountGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PropGroup> _propGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("prop-group")]
         public System.Collections.ObjectModel.Collection<PropGroup> PropGroup
         {
@@ -2672,7 +2673,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _propGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PropGroup collection is empty.</para>
         /// </summary>
@@ -2684,10 +2685,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PropGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -2700,7 +2701,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -2712,10 +2713,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Tool> _tool;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("tool")]
         public System.Collections.ObjectModel.Collection<Tool> Tool
         {
@@ -2728,7 +2729,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _tool = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Tool collection is empty.</para>
         /// </summary>
@@ -2740,10 +2741,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Tool.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -2756,7 +2757,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -2769,7 +2770,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("phase-group", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2778,10 +2779,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("phase-group", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class PhaseGroup
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Phase> _phase;
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("phase")]
         public System.Collections.ObjectModel.Collection<Phase> Phase
@@ -2795,7 +2796,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _phase = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="PhaseGroup" /> class.</para>
         /// </summary>
@@ -2804,7 +2805,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._phase = new System.Collections.ObjectModel.Collection<Phase>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("phase", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2813,10 +2814,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("phase", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Phase
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -2829,7 +2830,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -2841,7 +2842,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Phase" /> class.</para>
         /// </summary>
@@ -2849,46 +2850,46 @@ namespace Lingo.Core.Formats.Xliff.V12
         {
             this._note = new System.Collections.ObjectModel.Collection<Note>();
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("process-name")]
         public string ProcessName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("company-name")]
         public string CompanyName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool-id")]
         public string ToolId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool")]
         public string Tool { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("date", DataType="dateTime")]
         public System.DateTime Date { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Date property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DateSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("job-id")]
         public string JobId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("contact-name")]
         public string ContactName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("contact-email")]
         public string ContactEmail { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("contact-phone")]
         public string ContactPhone { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("note", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -2897,19 +2898,19 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("note", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Note
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets the text value.</para>
         /// </summary>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypePriority _priority = Lingo.Core.Formats.Xliff.V12.AttrTypePriority.Item1;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypePriority.Item1)]
         [System.Xml.Serialization.XmlAttributeAttribute("priority")]
         public AttrTypePriority Priority
@@ -2923,13 +2924,13 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _priority = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("from")]
         public string From { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeAnnotates _annotates = Lingo.Core.Formats.Xliff.V12.AttrTypeAnnotates.General;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeAnnotates.General)]
         [System.Xml.Serialization.XmlAttributeAttribute("annotates")]
         public AttrTypeAnnotates Annotates
@@ -2944,7 +2945,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("count-group", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -2953,10 +2954,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("count-group", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class CountGroup
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Count> _count;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("count")]
         public System.Collections.ObjectModel.Collection<Count> Count
         {
@@ -2969,7 +2970,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _count = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Count collection is empty.</para>
         /// </summary>
@@ -2981,7 +2982,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Count.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="CountGroup" /> class.</para>
         /// </summary>
@@ -2989,12 +2990,12 @@ namespace Lingo.Core.Formats.Xliff.V12
         {
             this._count = new System.Collections.ObjectModel.Collection<Count>();
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("name")]
         public string Name { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("count", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -3003,26 +3004,26 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("count", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Count
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets the text value.</para>
         /// </summary>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("count-type")]
         public string CountType { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _unit = "word";
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -3041,7 +3042,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("prop-group", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3050,10 +3051,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("prop-group", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class PropGroup
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Prop> _prop;
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("prop")]
         public System.Collections.ObjectModel.Collection<Prop> Prop
@@ -3067,7 +3068,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _prop = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="PropGroup" /> class.</para>
         /// </summary>
@@ -3075,11 +3076,11 @@ namespace Lingo.Core.Formats.Xliff.V12
         {
             this._prop = new System.Collections.ObjectModel.Collection<Prop>();
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("name")]
         public string Name { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("prop", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -3088,21 +3089,21 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("prop", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Prop
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets the text value.</para>
         /// </summary>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("prop-type")]
         public string PropType { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("tool", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3111,10 +3112,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("tool", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Tool
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -3127,7 +3128,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -3139,7 +3140,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Tool" /> class.</para>
         /// </summary>
@@ -3148,24 +3149,24 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._any = new System.Collections.ObjectModel.Collection<System.Xml.XmlElement>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("tool-id")]
         public string ToolId { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("tool-name")]
         public string ToolName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool-version")]
         public string ToolVersion { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool-company")]
         public string ToolCompany { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -3178,7 +3179,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -3190,11 +3191,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("body", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3203,10 +3204,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("body", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Body
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Group> _group;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("group")]
         public System.Collections.ObjectModel.Collection<Group> Group
         {
@@ -3219,7 +3220,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _group = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Group collection is empty.</para>
         /// </summary>
@@ -3231,7 +3232,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Group.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Body" /> class.</para>
         /// </summary>
@@ -3241,10 +3242,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._transUnit = new System.Collections.ObjectModel.Collection<TransUnit>();
             this._binUnit = new System.Collections.ObjectModel.Collection<BinUnit>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransUnit> _transUnit;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("trans-unit")]
         public System.Collections.ObjectModel.Collection<TransUnit> TransUnit
         {
@@ -3257,7 +3258,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _transUnit = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TransUnit collection is empty.</para>
         /// </summary>
@@ -3269,10 +3270,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.TransUnit.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BinUnit> _binUnit;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bin-unit")]
         public System.Collections.ObjectModel.Collection<BinUnit> BinUnit
         {
@@ -3285,7 +3286,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _binUnit = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the BinUnit collection is empty.</para>
         /// </summary>
@@ -3298,7 +3299,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("group", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3307,10 +3308,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("group", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Group
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContextGroup> _contextGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("context-group")]
         public System.Collections.ObjectModel.Collection<ContextGroup> ContextGroup
         {
@@ -3323,7 +3324,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _contextGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the ContextGroup collection is empty.</para>
         /// </summary>
@@ -3335,7 +3336,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.ContextGroup.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Group" /> class.</para>
         /// </summary>
@@ -3351,10 +3352,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._binUnit = new System.Collections.ObjectModel.Collection<BinUnit>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<CountGroup> _countGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("count-group")]
         public System.Collections.ObjectModel.Collection<CountGroup> CountGroup
         {
@@ -3367,7 +3368,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _countGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the CountGroup collection is empty.</para>
         /// </summary>
@@ -3379,10 +3380,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.CountGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PropGroup> _propGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("prop-group")]
         public System.Collections.ObjectModel.Collection<PropGroup> PropGroup
         {
@@ -3395,7 +3396,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _propGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PropGroup collection is empty.</para>
         /// </summary>
@@ -3407,10 +3408,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PropGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -3423,7 +3424,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -3435,10 +3436,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -3451,7 +3452,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -3463,10 +3464,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Group> _groupProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("group")]
         public System.Collections.ObjectModel.Collection<Group> GroupProperty
         {
@@ -3479,7 +3480,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _groupProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GroupProperty collection is empty.</para>
         /// </summary>
@@ -3491,10 +3492,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GroupProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransUnit> _transUnit;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("trans-unit")]
         public System.Collections.ObjectModel.Collection<TransUnit> TransUnit
         {
@@ -3507,7 +3508,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _transUnit = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TransUnit collection is empty.</para>
         /// </summary>
@@ -3519,10 +3520,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.TransUnit.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BinUnit> _binUnit;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bin-unit")]
         public System.Collections.ObjectModel.Collection<BinUnit> BinUnit
         {
@@ -3535,7 +3536,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _binUnit = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the BinUnit collection is empty.</para>
         /// </summary>
@@ -3547,20 +3548,21 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.BinUnit.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("datatype")]
         public string Datatype { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private Lingo.Core.Formats.Xliff.V12.Space _space = Lingo.Core.Formats.Xliff.V12.Space.Default;
-        
+
+        [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.Space.Default)]
         [System.Xml.Serialization.XmlAttributeAttribute("space", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public Lingo.Core.Formats.Xliff.V12.Space Space
         {
@@ -3573,38 +3575,38 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _space = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extradata")]
         public string Extradata { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extype")]
         public string Extype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("help-id")]
         public string HelpId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu")]
         public string Menu { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-option")]
         public string MenuOption { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-name")]
         public string MenuName { get; set; }
-        
+
         /// <summary>
         /// <para>Values for the attribute 'coord'.</para>
         /// <para xml:lang="en">Pattern: (-?\d+|#);(-?\d+|#);(-?\d+|#);(-?\d+|#).</para>
@@ -3612,22 +3614,22 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("(-?\\d+|#);(-?\\d+|#);(-?\\d+|#);(-?\\d+|#)")]
         [System.Xml.Serialization.XmlAttributeAttribute("coord")]
         public string Coord { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("font")]
         public string Font { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("css-style")]
         public string CssStyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("style")]
         public string Style { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("exstyle")]
         public string Exstyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _translate = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("translate")]
         public AttrTypeYesNo Translate
@@ -3641,10 +3643,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _translate = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _reformat = "yes";
-        
+
         [System.ComponentModel.DefaultValueAttribute("yes")]
         [System.Xml.Serialization.XmlAttributeAttribute("reformat")]
         public string Reformat
@@ -3658,10 +3660,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _reformat = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _sizeUnit = "pixel";
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -3679,31 +3681,31 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sizeUnit = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxwidth")]
         public string Maxwidth { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minwidth")]
         public string Minwidth { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxheight")]
         public string Maxheight { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minheight")]
         public string Minheight { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxbytes")]
         public string Maxbytes { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minbytes")]
         public string Minbytes { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("charclass")]
         public string Charclass { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _mergedTrans = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.No;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.No)]
         [System.Xml.Serialization.XmlAttributeAttribute("merged-trans")]
         public AttrTypeYesNo MergedTrans
@@ -3717,10 +3719,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mergedTrans = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -3733,7 +3735,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -3746,7 +3748,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("context-group", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3755,10 +3757,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("context-group", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class ContextGroup
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Context> _context;
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("context")]
         public System.Collections.ObjectModel.Collection<Context> Context
@@ -3772,7 +3774,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _context = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="ContextGroup" /> class.</para>
         /// </summary>
@@ -3781,16 +3783,16 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._context = new System.Collections.ObjectModel.Collection<Context>();
             this._purpose = new System.Collections.ObjectModel.Collection<string>();
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("name")]
         public string Name { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _purpose;
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("purpose")]
         public System.Collections.ObjectModel.Collection<string> Purpose
         {
@@ -3803,7 +3805,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _purpose = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Purpose collection is empty.</para>
         /// </summary>
@@ -3816,7 +3818,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("context", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
@@ -3825,13 +3827,13 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("context", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Context
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets the text value.</para>
         /// </summary>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -3839,10 +3841,10 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("context-type")]
         public string ContextType { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _matchMandatory = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.No;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.No)]
         [System.Xml.Serialization.XmlAttributeAttribute("match-mandatory")]
         public AttrTypeYesNo MatchMandatory
@@ -3856,11 +3858,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _matchMandatory = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("trans-unit", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -3869,20 +3871,20 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("trans-unit", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class TransUnit
     {
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("source")]
         public Source Source { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("seg-source")]
         public SegSource SegSource { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("target")]
         public Target Target { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContextGroup> _contextGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("context-group")]
         public System.Collections.ObjectModel.Collection<ContextGroup> ContextGroup
         {
@@ -3895,7 +3897,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _contextGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the ContextGroup collection is empty.</para>
         /// </summary>
@@ -3907,7 +3909,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.ContextGroup.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="TransUnit" /> class.</para>
         /// </summary>
@@ -3921,10 +3923,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._any = new System.Collections.ObjectModel.Collection<System.Xml.XmlElement>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<CountGroup> _countGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("count-group")]
         public System.Collections.ObjectModel.Collection<CountGroup> CountGroup
         {
@@ -3937,7 +3939,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _countGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the CountGroup collection is empty.</para>
         /// </summary>
@@ -3949,10 +3951,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.CountGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PropGroup> _propGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("prop-group")]
         public System.Collections.ObjectModel.Collection<PropGroup> PropGroup
         {
@@ -3965,7 +3967,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _propGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PropGroup collection is empty.</para>
         /// </summary>
@@ -3977,10 +3979,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PropGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -3993,7 +3995,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -4005,10 +4007,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AltTrans> _altTrans;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("alt-trans")]
         public System.Collections.ObjectModel.Collection<AltTrans> AltTrans
         {
@@ -4021,7 +4023,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _altTrans = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AltTrans collection is empty.</para>
         /// </summary>
@@ -4033,10 +4035,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AltTrans.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -4049,7 +4051,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -4061,23 +4063,23 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("approved")]
         public AttrTypeYesNo Approved { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Approved property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ApprovedSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _translate = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("translate")]
         public AttrTypeYesNo Translate
@@ -4091,10 +4093,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _translate = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _reformat = "yes";
-        
+
         [System.ComponentModel.DefaultValueAttribute("yes")]
         [System.Xml.Serialization.XmlAttributeAttribute("reformat")]
         public string Reformat
@@ -4108,10 +4110,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _reformat = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private Lingo.Core.Formats.Xliff.V12.Space _space = Lingo.Core.Formats.Xliff.V12.Space.Default;
-        
+
+        [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.Space.Default)]
         [System.Xml.Serialization.XmlAttributeAttribute("space", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public Lingo.Core.Formats.Xliff.V12.Space Space
         {
@@ -4124,48 +4127,48 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _space = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("datatype")]
         public string Datatype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extradata")]
         public string Extradata { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extype")]
         public string Extype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("help-id")]
         public string HelpId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu")]
         public string Menu { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-option")]
         public string MenuOption { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-name")]
         public string MenuName { get; set; }
-        
+
         /// <summary>
         /// <para>Values for the attribute 'coord'.</para>
         /// <para xml:lang="en">Pattern: (-?\d+|#);(-?\d+|#);(-?\d+|#);(-?\d+|#).</para>
@@ -4173,22 +4176,22 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("(-?\\d+|#);(-?\\d+|#);(-?\\d+|#);(-?\\d+|#)")]
         [System.Xml.Serialization.XmlAttributeAttribute("coord")]
         public string Coord { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("font")]
         public string Font { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("css-style")]
         public string CssStyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("style")]
         public string Style { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("exstyle")]
         public string Exstyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _sizeUnit = "pixel";
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -4206,31 +4209,31 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sizeUnit = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxwidth")]
         public string Maxwidth { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minwidth")]
         public string Minwidth { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxheight")]
         public string Maxheight { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minheight")]
         public string Minheight { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("maxbytes")]
         public string Maxbytes { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("minbytes")]
         public string Minbytes { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("charclass")]
         public string Charclass { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _mergedTrans = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("merged-trans")]
         public AttrTypeYesNo MergedTrans
@@ -4244,10 +4247,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mergedTrans = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -4260,7 +4263,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -4273,7 +4276,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("source", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -4282,10 +4285,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("source", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Source : IElemGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -4298,7 +4301,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -4310,7 +4313,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Source" /> class.</para>
         /// </summary>
@@ -4327,10 +4330,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -4343,7 +4346,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -4355,10 +4358,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -4371,7 +4374,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -4383,10 +4386,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -4399,7 +4402,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -4411,10 +4414,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -4427,7 +4430,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -4439,10 +4442,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -4455,7 +4458,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -4467,10 +4470,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -4483,7 +4486,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -4495,10 +4498,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -4511,7 +4514,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -4523,10 +4526,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -4539,7 +4542,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -4551,16 +4554,16 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -4573,7 +4576,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -4585,61 +4588,61 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     public partial interface IElemGroupTextContent
     {
-        
+
         System.Collections.ObjectModel.Collection<G> GProperty
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Ept> Ept
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Ph> Ph
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<It> It
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<X> X
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Bx> Bx
         {
             get;
         }
-        
+
         System.Collections.ObjectModel.Collection<Ex> Ex
         {
             get;
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("g", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -4648,10 +4651,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("g", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class G : IElemGroupTextContent, IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -4664,7 +4667,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -4676,7 +4679,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="G" /> class.</para>
         /// </summary>
@@ -4693,10 +4696,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -4709,7 +4712,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -4721,10 +4724,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -4737,7 +4740,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -4749,10 +4752,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -4765,7 +4768,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -4777,10 +4780,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -4793,7 +4796,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -4805,10 +4808,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -4821,7 +4824,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -4833,10 +4836,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -4849,7 +4852,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -4861,10 +4864,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -4877,7 +4880,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -4889,10 +4892,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -4905,7 +4908,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -4917,17 +4920,17 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _clone = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("clone")]
         public AttrTypeYesNo Clone
@@ -4941,23 +4944,23 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _clone = value;
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -4970,7 +4973,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -4982,11 +4985,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("bpt", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -4995,10 +4998,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("bpt", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Bpt : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Sub> _sub;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("sub")]
         public System.Collections.ObjectModel.Collection<Sub> Sub
         {
@@ -5011,7 +5014,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sub = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Sub collection is empty.</para>
         /// </summary>
@@ -5023,7 +5026,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Sub.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Bpt" /> class.</para>
         /// </summary>
@@ -5032,36 +5035,36 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._sub = new System.Collections.ObjectModel.Collection<Sub>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("rid")]
         public string Rid { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -5074,7 +5077,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -5086,11 +5089,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("sub", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -5099,10 +5102,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("sub", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Sub : IElemGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -5115,7 +5118,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -5127,7 +5130,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Sub" /> class.</para>
         /// </summary>
@@ -5143,10 +5146,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._bx = new System.Collections.ObjectModel.Collection<Bx>();
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -5159,7 +5162,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -5171,10 +5174,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -5187,7 +5190,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -5199,10 +5202,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -5215,7 +5218,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -5227,10 +5230,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -5243,7 +5246,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -5255,10 +5258,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -5271,7 +5274,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -5283,10 +5286,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -5299,7 +5302,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -5311,10 +5314,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -5327,7 +5330,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -5339,10 +5342,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -5355,7 +5358,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -5367,28 +5370,28 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("datatype")]
         public string Datatype { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("ept", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -5397,10 +5400,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("ept", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Ept : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Sub> _sub;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("sub")]
         public System.Collections.ObjectModel.Collection<Sub> Sub
         {
@@ -5413,7 +5416,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sub = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Sub collection is empty.</para>
         /// </summary>
@@ -5425,7 +5428,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Sub.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Ept" /> class.</para>
         /// </summary>
@@ -5434,29 +5437,29 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._sub = new System.Collections.ObjectModel.Collection<Sub>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("rid")]
         public string Rid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -5469,7 +5472,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -5481,40 +5484,40 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     public partial interface IAttrGroupTextContent
     {
-        
+
         string Id
         {
             get;
             set;
         }
-        
+
         string Ts
         {
             get;
             set;
         }
-        
+
         string Xid
         {
             get;
             set;
         }
-        
+
         string EquivText
         {
             get;
             set;
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("ph", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -5523,10 +5526,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("ph", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Ph : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Sub> _sub;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("sub")]
         public System.Collections.ObjectModel.Collection<Sub> Sub
         {
@@ -5539,7 +5542,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sub = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Sub collection is empty.</para>
         /// </summary>
@@ -5551,7 +5554,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Sub.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Ph" /> class.</para>
         /// </summary>
@@ -5560,42 +5563,42 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._sub = new System.Collections.ObjectModel.Collection<Sub>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("assoc")]
         public AttrTypeAssoc Assoc { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Assoc property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AssocSpecified { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -5608,7 +5611,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -5620,11 +5623,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("it", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -5633,10 +5636,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("it", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class It : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Sub> _sub;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("sub")]
         public System.Collections.ObjectModel.Collection<Sub> Sub
         {
@@ -5649,7 +5652,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _sub = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Sub collection is empty.</para>
         /// </summary>
@@ -5661,7 +5664,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Sub.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="It" /> class.</para>
         /// </summary>
@@ -5670,40 +5673,40 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._sub = new System.Collections.ObjectModel.Collection<Sub>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("pos")]
         public AttrTypePosition Pos { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("rid")]
         public string Rid { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -5716,7 +5719,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -5728,11 +5731,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("mrk", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -5741,10 +5744,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("mrk", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Mrk : IElemGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -5757,7 +5760,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -5769,7 +5772,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Mrk" /> class.</para>
         /// </summary>
@@ -5786,10 +5789,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -5802,7 +5805,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -5814,10 +5817,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -5830,7 +5833,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -5842,10 +5845,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -5858,7 +5861,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -5870,10 +5873,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -5886,7 +5889,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -5898,10 +5901,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -5914,7 +5917,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -5926,10 +5929,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -5942,7 +5945,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -5954,10 +5957,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -5970,7 +5973,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -5982,10 +5985,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -5998,7 +6001,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -6010,7 +6013,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -6018,19 +6021,19 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("mtype")]
         public string Mtype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("mid")]
         public string Mid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("comment")]
         public string Comment { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6043,7 +6046,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6055,11 +6058,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("x", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6068,17 +6071,17 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("x", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class X : IAttrGroupTextContent
     {
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _clone = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("clone")]
         public AttrTypeYesNo Clone
@@ -6092,23 +6095,23 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _clone = value;
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6121,7 +6124,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6133,7 +6136,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="X" /> class.</para>
         /// </summary>
@@ -6142,7 +6145,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("bx", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6151,20 +6154,20 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("bx", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Bx : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("rid")]
         public string Rid { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("ctype")]
         public string Ctype { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _clone = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("clone")]
         public AttrTypeYesNo Clone
@@ -6178,23 +6181,23 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _clone = value;
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6207,7 +6210,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6219,7 +6222,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Bx" /> class.</para>
         /// </summary>
@@ -6228,7 +6231,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("ex", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6237,26 +6240,26 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("ex", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Ex : IAttrGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("rid")]
         public string Rid { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("xid")]
         public string Xid { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-text")]
         public string EquivText { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6269,7 +6272,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6281,7 +6284,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Ex" /> class.</para>
         /// </summary>
@@ -6290,7 +6293,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("seg-source", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6299,10 +6302,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("seg-source", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class SegSource : IElemGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -6315,7 +6318,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -6327,7 +6330,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="SegSource" /> class.</para>
         /// </summary>
@@ -6344,10 +6347,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -6360,7 +6363,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -6372,10 +6375,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -6388,7 +6391,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -6400,10 +6403,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -6416,7 +6419,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -6428,10 +6431,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -6444,7 +6447,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -6456,10 +6459,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -6472,7 +6475,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -6484,10 +6487,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -6500,7 +6503,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -6512,10 +6515,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -6528,7 +6531,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -6540,10 +6543,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -6556,7 +6559,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -6568,16 +6571,16 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6590,7 +6593,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6602,11 +6605,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("target", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6615,10 +6618,10 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("target", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class Target : IElemGroupTextContent
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<G> _gProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("g")]
         public System.Collections.ObjectModel.Collection<G> GProperty
         {
@@ -6631,7 +6634,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _gProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GProperty collection is empty.</para>
         /// </summary>
@@ -6643,7 +6646,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.GProperty.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="Target" /> class.</para>
         /// </summary>
@@ -6660,10 +6663,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._ex = new System.Collections.ObjectModel.Collection<Ex>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bpt> _bpt;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bpt")]
         public System.Collections.ObjectModel.Collection<Bpt> Bpt
         {
@@ -6676,7 +6679,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bpt = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bpt collection is empty.</para>
         /// </summary>
@@ -6688,10 +6691,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bpt.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ept> _ept;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ept")]
         public System.Collections.ObjectModel.Collection<Ept> Ept
         {
@@ -6704,7 +6707,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ept = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ept collection is empty.</para>
         /// </summary>
@@ -6716,10 +6719,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ept.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ph> _ph;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ph")]
         public System.Collections.ObjectModel.Collection<Ph> Ph
         {
@@ -6732,7 +6735,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ph = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ph collection is empty.</para>
         /// </summary>
@@ -6744,10 +6747,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ph.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<It> _it;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("it")]
         public System.Collections.ObjectModel.Collection<It> It
         {
@@ -6760,7 +6763,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _it = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the It collection is empty.</para>
         /// </summary>
@@ -6772,10 +6775,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.It.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Mrk> _mrkProperty;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("mrk")]
         public System.Collections.ObjectModel.Collection<Mrk> MrkProperty
         {
@@ -6788,7 +6791,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _mrkProperty = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MrkProperty collection is empty.</para>
         /// </summary>
@@ -6800,10 +6803,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.MrkProperty.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<X> _x;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("x")]
         public System.Collections.ObjectModel.Collection<X> X
         {
@@ -6816,7 +6819,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _x = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the X collection is empty.</para>
         /// </summary>
@@ -6828,10 +6831,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.X.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Bx> _bx;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bx")]
         public System.Collections.ObjectModel.Collection<Bx> Bx
         {
@@ -6844,7 +6847,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _bx = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Bx collection is empty.</para>
         /// </summary>
@@ -6856,10 +6859,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Bx.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Ex> _ex;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("ex")]
         public System.Collections.ObjectModel.Collection<Ex> Ex
         {
@@ -6872,7 +6875,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _ex = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Ex collection is empty.</para>
         /// </summary>
@@ -6884,40 +6887,40 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Ex.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("state")]
         public string State { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("state-qualifier")]
         public string StateQualifier { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         /// <summary>
         /// <para>Values for the attribute 'coord'.</para>
         /// <para xml:lang="en">Pattern: (-?\d+|#);(-?\d+|#);(-?\d+|#);(-?\d+|#).</para>
@@ -6925,22 +6928,22 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("(-?\\d+|#);(-?\\d+|#);(-?\\d+|#);(-?\\d+|#)")]
         [System.Xml.Serialization.XmlAttributeAttribute("coord")]
         public string Coord { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("font")]
         public string Font { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("css-style")]
         public string CssStyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("style")]
         public string Style { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("exstyle")]
         public string Exstyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _equivTrans = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("equiv-trans")]
         public AttrTypeYesNo EquivTrans
@@ -6954,10 +6957,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _equivTrans = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -6970,7 +6973,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -6982,11 +6985,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("alt-trans", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -6995,16 +6998,16 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("alt-trans", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class AltTrans
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("source")]
         public Source Source { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("seg-source")]
         public SegSource SegSource { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Target> _target;
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("target")]
         public System.Collections.ObjectModel.Collection<Target> Target
@@ -7018,7 +7021,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _target = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AltTrans" /> class.</para>
         /// </summary>
@@ -7031,10 +7034,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._any = new System.Collections.ObjectModel.Collection<System.Xml.XmlElement>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContextGroup> _contextGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("context-group")]
         public System.Collections.ObjectModel.Collection<ContextGroup> ContextGroup
         {
@@ -7047,7 +7050,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _contextGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the ContextGroup collection is empty.</para>
         /// </summary>
@@ -7059,10 +7062,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.ContextGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PropGroup> _propGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("prop-group")]
         public System.Collections.ObjectModel.Collection<PropGroup> PropGroup
         {
@@ -7075,7 +7078,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _propGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PropGroup collection is empty.</para>
         /// </summary>
@@ -7087,10 +7090,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PropGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -7103,7 +7106,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -7115,10 +7118,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -7131,7 +7134,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -7143,35 +7146,36 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("match-quality")]
         public string MatchQuality { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool-id")]
         public string ToolId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("tool")]
         public string Tool { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("crc")]
         public string Crc { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("lang", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public string Lang { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("origin")]
         public string Origin { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("datatype")]
         public string Datatype { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private Lingo.Core.Formats.Xliff.V12.Space _space = Lingo.Core.Formats.Xliff.V12.Space.Default;
-        
+
+        [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.Space.Default)]
         [System.Xml.Serialization.XmlAttributeAttribute("space", Namespace="http://www.w3.org/XML/1998/namespace", Form=System.Xml.Schema.XmlSchemaForm.Qualified)]
         public Lingo.Core.Formats.Xliff.V12.Space Space
         {
@@ -7184,41 +7188,41 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _space = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extradata")]
         public string Extradata { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("extype")]
         public string Extype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("help-id")]
         public string HelpId { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu")]
         public string Menu { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-option")]
         public string MenuOption { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("menu-name")]
         public string MenuName { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("mid")]
         public string Mid { get; set; }
-        
+
         /// <summary>
         /// <para>Values for the attribute 'coord'.</para>
         /// <para xml:lang="en">Pattern: (-?\d+|#);(-?\d+|#);(-?\d+|#);(-?\d+|#).</para>
@@ -7226,25 +7230,25 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("(-?\\d+|#);(-?\\d+|#);(-?\\d+|#);(-?\\d+|#)")]
         [System.Xml.Serialization.XmlAttributeAttribute("coord")]
         public string Coord { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("font")]
         public string Font { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("css-style")]
         public string CssStyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("style")]
         public string Style { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("exstyle")]
         public string Exstyle { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _alttranstype = "proposal";
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
@@ -7262,10 +7266,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _alttranstype = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -7278,7 +7282,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -7291,7 +7295,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("bin-unit", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -7300,17 +7304,17 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("bin-unit", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class BinUnit
     {
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("bin-source")]
         public BinSource BinSource { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("bin-target")]
         public BinTarget BinTarget { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContextGroup> _contextGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("context-group")]
         public System.Collections.ObjectModel.Collection<ContextGroup> ContextGroup
         {
@@ -7323,7 +7327,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _contextGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the ContextGroup collection is empty.</para>
         /// </summary>
@@ -7335,7 +7339,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.ContextGroup.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="BinUnit" /> class.</para>
         /// </summary>
@@ -7349,10 +7353,10 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._any = new System.Collections.ObjectModel.Collection<System.Xml.XmlElement>();
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<CountGroup> _countGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("count-group")]
         public System.Collections.ObjectModel.Collection<CountGroup> CountGroup
         {
@@ -7365,7 +7369,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _countGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the CountGroup collection is empty.</para>
         /// </summary>
@@ -7377,10 +7381,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.CountGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<PropGroup> _propGroup;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("prop-group")]
         public System.Collections.ObjectModel.Collection<PropGroup> PropGroup
         {
@@ -7393,7 +7397,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _propGroup = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PropGroup collection is empty.</para>
         /// </summary>
@@ -7405,10 +7409,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.PropGroup.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<Note> _note;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("note")]
         public System.Collections.ObjectModel.Collection<Note> Note
         {
@@ -7421,7 +7425,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _note = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Note collection is empty.</para>
         /// </summary>
@@ -7433,10 +7437,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Note.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TransUnit> _transUnit;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("trans-unit")]
         public System.Collections.ObjectModel.Collection<TransUnit> TransUnit
         {
@@ -7449,7 +7453,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _transUnit = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TransUnit collection is empty.</para>
         /// </summary>
@@ -7461,10 +7465,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.TransUnit.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlElement> _any;
-        
+
         [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> Any
         {
@@ -7477,7 +7481,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _any = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Any collection is empty.</para>
         /// </summary>
@@ -7489,11 +7493,11 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.Any.Count != 0);
             }
         }
-        
+
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public string Id { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: (text|multipart|message|application|image|audio|video|model)(/.+)*.</para>
         /// </summary>
@@ -7501,19 +7505,19 @@ namespace Lingo.Core.Formats.Xliff.V12
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("mime-type")]
         public string MimeType { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("approved")]
         public AttrTypeYesNo Approved { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Approved property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ApprovedSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private AttrTypeYesNo _translate = Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes;
-        
+
         [System.ComponentModel.DefaultValueAttribute(Lingo.Core.Formats.Xliff.V12.AttrTypeYesNo.Yes)]
         [System.Xml.Serialization.XmlAttributeAttribute("translate")]
         public AttrTypeYesNo Translate
@@ -7527,10 +7531,10 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _translate = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private string _reformat = "yes";
-        
+
         [System.ComponentModel.DefaultValueAttribute("yes")]
         [System.Xml.Serialization.XmlAttributeAttribute("reformat")]
         public string Reformat
@@ -7544,26 +7548,26 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _reformat = value;
             }
         }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -7576,7 +7580,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -7589,7 +7593,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("bin-source", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -7598,19 +7602,19 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("bin-source", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class BinSource
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("internal-file")]
         public InternalFile InternalFile { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("external-file")]
         public ExternalFile ExternalFile { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -7623,7 +7627,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -7635,7 +7639,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="BinSource" /> class.</para>
         /// </summary>
@@ -7644,7 +7648,7 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("bin-target", Namespace="urn:oasis:names:tc:xliff:document:1.2", AnonymousType=true)]
@@ -7653,53 +7657,53 @@ namespace Lingo.Core.Formats.Xliff.V12
     [System.Xml.Serialization.XmlRootAttribute("bin-target", Namespace="urn:oasis:names:tc:xliff:document:1.2")]
     public partial class BinTarget
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("internal-file")]
         public InternalFile InternalFile { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("external-file")]
         public ExternalFile ExternalFile { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: (text|multipart|message|application|image|audio|video|model)(/.+)*.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("(text|multipart|message|application|image|audio|video|model)(/.+)*")]
         [System.Xml.Serialization.XmlAttributeAttribute("mime-type")]
         public string MimeType { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("ts")]
         public string Ts { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("state")]
         public string State { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("state-qualifier")]
         public string StateQualifier { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("phase-name")]
         public string PhaseName { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Pattern: x-[^\s]+.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("x-[^\\s]+")]
         [System.Xml.Serialization.XmlAttributeAttribute("restype")]
         public string Restype { get; set; }
-        
+
         [System.Xml.Serialization.XmlAttributeAttribute("resname")]
         public string Resname { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> _anyAttribute;
-        
+
         [System.Xml.Serialization.XmlAnyAttributeAttribute()]
         public System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute> AnyAttribute
         {
@@ -7712,7 +7716,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 _anyAttribute = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnyAttribute collection is empty.</para>
         /// </summary>
@@ -7724,7 +7728,7 @@ namespace Lingo.Core.Formats.Xliff.V12
                 return (this.AnyAttribute.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="BinTarget" /> class.</para>
         /// </summary>
@@ -7733,16 +7737,16 @@ namespace Lingo.Core.Formats.Xliff.V12
             this._anyAttribute = new System.Collections.ObjectModel.Collection<System.Xml.XmlAttribute>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1240.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute("space", Namespace="http://www.w3.org/XML/1998/namespace", AnonymousType=true)]
     public enum Space
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("default")]
         Default,
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("preserve")]
         Preserve,
     }
