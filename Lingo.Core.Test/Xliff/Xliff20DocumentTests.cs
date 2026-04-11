@@ -23,7 +23,7 @@ public class Xliff20DocumentTests
     }
 
     [Test]
-    public void SyncUnit_AddingNewUnit_ShouldReturnNewUnitCreated()
+    public void SyncUnit_AddingNewUnit_ShouldThrowNotImplementedException()
     {
         // Arrange
         var originalContent = GetResourceContent("test20.xlf");
@@ -33,16 +33,14 @@ public class Xliff20DocumentTests
         var newUnit = new Unit { Id = "new_unit_id", Target = "New Content", Source = "New Content" };
 
         // Act
-        var result = document.SyncUnit(newUnit);
+        Action act = () => document.SyncUnit(newUnit);
 
         // Assert
-        result.Should().Be(SyncResult.NewUnitCreated);
-        document.GetUnitIds().Should().Contain("new_unit_id");
-        document.GetValue("new_unit_id").Should().Be("New Content");
+        act.Should().Throw<NotImplementedException>();
     }
 
     [Test]
-    public void SyncUnit_OverridingExistingUnitSource_ShouldReturnSourceValueHasChanged()
+    public void SyncUnit_OverridingExistingUnitSource_ShouldThrowNotImplementedException()
     {
         // Arrange
         var originalContent = GetResourceContent("test20.xlf");
@@ -53,10 +51,9 @@ public class Xliff20DocumentTests
         var updatedUnit = new Unit { Id = existingUnitId, Target = "Updated Content", Source = "Updated Content" };
 
         // Act
-        var result = document.SyncUnit(updatedUnit);
+        Action act = () => document.SyncUnit(updatedUnit);
 
         // Assert
-        result.Should().Be(SyncResult.SourceValueHasChanged);
-        document.GetValue(existingUnitId).Should().Be("Updated Content");
+        act.Should().Throw<NotImplementedException>();
     }
 }

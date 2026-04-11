@@ -32,11 +32,11 @@ public class Xliff20ReadOnlyTests
         var unit = new Unit { Id = "test", Target = "test", Source = "test" };
 
         // Act & Assert
-        Assert.Throws<NotImplementedException>(() => document.SetValue("id", "value"));
-        Assert.Throws<NotImplementedException>(() => document.SyncUnit(unit));
-        Assert.Throws<NotImplementedException>(() => document.MergeUnit(unit));
-        Assert.Throws<NotImplementedException>(() => document.ImportUnit(unit));
-        Assert.Throws<NotImplementedException>(() => document.RetainUnitIds(new[] { "id" }));
-        Assert.Throws<NotImplementedException>(() => document.SortByKey());
+        document.Invoking(d => d.SetValue("id", "value")).Should().Throw<NotImplementedException>();
+        document.Invoking(d => d.SyncUnit(unit)).Should().Throw<NotImplementedException>();
+        document.Invoking(d => d.MergeUnit(unit)).Should().Throw<NotImplementedException>();
+        document.Invoking(d => d.ImportUnit(unit)).Should().Throw<NotImplementedException>();
+        document.Invoking(d => d.RetainUnitIds(new[] { "id" })).Should().Throw<NotImplementedException>();
+        document.Invoking(d => d.SortByKey()).Should().Throw<NotImplementedException>();
     }
 }

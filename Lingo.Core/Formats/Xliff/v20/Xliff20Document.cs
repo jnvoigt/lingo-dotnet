@@ -37,7 +37,17 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
     {
         var unit = FindUnit(unitId);
         var segment = unit?.Segment.FirstOrDefault();
-        return segment != null ? MapState(segment.State) : TranslationState.None;
+        if (segment == null)
+        {
+            return TranslationState.None;
+        }
+
+        if (segment.SubState == "x-needs-adaptation")
+        {
+            return TranslationState.NeedsAdaptation;
+        }
+
+        return MapState(segment.State);
     }
 
     public string FormatId => "xliff-2.0";
@@ -102,7 +112,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
                         segment?.Target != null ? FlattenInline(segment.Target) :
                         segment?.Source != null ? FlattenInline(segment.Source) : "",
                     Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
-                    State = segment != null ? MapState(segment.State) : TranslationState.None
+                    State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
                 };
             }
         }
