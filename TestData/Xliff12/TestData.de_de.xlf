@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2"
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.2"
        xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="target-language" datatype="plaintext" original="sample.txt">
+    <file original="sample.txt" source-language="en" target-language="de-de" datatype="plaintext">
         <body>
             <trans-unit id="sample.text.that-has-not-changed">
                 <source>This is text A</source>
@@ -18,3 +18,4 @@
         </body>
     </file>
 </xliff>
+

@@ -4,7 +4,7 @@
     "sync test data xliff 1.2": {
       "commandName": "Project",
       "launchBrowser": false,
-      "workingDirectory": "../../TestData/Xliff12",
+      "workingDirectory": "../TestData/Xliff12",
       "commandLineArgs": "sync --source TestData.xlf --target TestData.de_de.xlf"
     }
   }
