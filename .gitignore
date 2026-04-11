@@ -1,6 +1,7 @@
 # IDEs
 .idea/
 .vscode/
+.vs/
 
 # User-specific files
 *.suo
@@ -11,6 +12,9 @@
 # ai
 .local_agent/
 
-#dotnet
-[Bb]in/
-[Oo]bj/
+# dotnet
+bin/
+obj/
+artifacts/
+*.nupkg
+*.snupkg
