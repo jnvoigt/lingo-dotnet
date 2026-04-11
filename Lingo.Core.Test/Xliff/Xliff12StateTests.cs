@@ -2,7 +2,8 @@ using AwesomeAssertions;
 using Lingo.Core.Documents;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Models;
-using System.Text;
+using System.IO;
+using System.Linq;
 
 namespace Lingo.Core.Test.Xliff;
 
@@ -11,7 +12,7 @@ public class Xliff12StateTests
     private string GetResourceContent(string resourceName)
     {
         var assembly = typeof(Xliff12StateTests).Assembly;
-        var fullResourceName = $"Lingo.Core.Test.{resourceName}";
+        var fullResourceName = $"Lingo.Core.Test.Xliff.TestData.{resourceName}";
         using var stream = assembly.GetManifestResourceStream(fullResourceName);
         if (stream == null)
         {

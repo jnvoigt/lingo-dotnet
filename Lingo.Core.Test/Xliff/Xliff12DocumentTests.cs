@@ -1,6 +1,8 @@
 using AwesomeAssertions;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Models;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Lingo.Core.Test.Xliff;
@@ -10,7 +12,7 @@ public class Xliff12DocumentTests
     private string GetResourceContent(string resourceName)
     {
         var assembly = typeof(Xliff12DocumentTests).Assembly;
-        var fullResourceName = $"Lingo.Core.Test.{resourceName}";
+        var fullResourceName = $"Lingo.Core.Test.Xliff.TestData.{resourceName}";
         using var stream = assembly.GetManifestResourceStream(fullResourceName);
         if (stream == null)
         {
@@ -30,15 +32,17 @@ public class Xliff12DocumentTests
         var factory = new XliffDocumentFactory();
         using var stream = new MemoryStream(Encoding.UTF8.GetBytes(originalContent));
         var document = factory.Create(stream);
-        var newUnit = new Unit { Id = "new_unit_id", Target = "New Content", Source = "New Content" };
-        
+        var newUnit = new Unit { Id = "new_unit_id", Source = "New Content" };
+
         // Act
         var result = document.SyncUnit(newUnit);
 
         // Assert
         result.Should().Be(SyncResult.NewUnitCreated);
-        document.GetUnitIds().Should().Contain("new_unit_id");
-        document.GetValue("new_unit_id").Should().Be("New Content");
+        var u1 = document.GetUnit("new_unit_id");
+        u1.State.Should().Be(TranslationState.NeedsTranslation);
+        u1.Target.Should().BeNull();
+        u1.Source.Should().Be("New Content");
     }
 
     [Test]
@@ -58,5 +62,24 @@ public class Xliff12DocumentTests
         // Assert
         result.Should().Be(SyncResult.SourceValueHasChanged);
         document.GetValue(existingUnitId).Should().Be("Updated Content");
+    }
+
+    [Test]
+    public void GetUnit_ShouldReturnCorrectUnit()
+    {
+        // Arrange
+        var content = GetResourceContent("test12.xlf");
+        var factory = new XliffDocumentFactory();
+        var document = factory.Create(content);
+        var unitId = "sample.textA";
+
+        // Act
+        var unit = document.GetUnit(unitId);
+
+        // Assert
+        unit.Should().NotBeNull();
+        unit!.Id.Should().Be(unitId);
+        unit.Source.Should().Be("This is text A");
+        unit.Target.Should().BeNull();
     }
 }

@@ -2,6 +2,8 @@ using AwesomeAssertions;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Formats.Xliff.v12;
 using Lingo.Core.Models;
+using System.IO;
+using System.Linq;
 
 namespace Lingo.Core.Test.Xliff;
 
@@ -10,7 +12,7 @@ public class XliffSyncDataSetTests
     private string GetResourceContent(string resourceName)
     {
         var assembly = typeof(XliffSyncDataSetTests).Assembly;
-        var fullResourceName = $"Lingo.Core.Test.{resourceName}";
+        var fullResourceName = $"Lingo.Core.Test.Xliff.TestData.{resourceName}";
         using var stream = assembly.GetManifestResourceStream(fullResourceName);
         if (stream == null)
         {
@@ -26,8 +28,8 @@ public class XliffSyncDataSetTests
     public void Sync_Xliff12_ComplexSync()
     {
         // Arrange
-        var sourceContent = GetResourceContent("data12.xlf");
-        var targetContent = GetResourceContent("data12_de_de.xlf");
+        var sourceContent = GetResourceContent("SyncTest.data12.xlf");
+        var targetContent = GetResourceContent("SyncTest.data12_de_de.xlf");
         var factory = new XliffDocumentFactory();
 
         var sourceDoc = factory.Create(sourceContent);
@@ -75,7 +77,7 @@ public class XliffSyncDataSetTests
     public void Read_Xliff20_DataSet()
     {
         // Arrange
-        var content = GetResourceContent("data20_de_de.xlf");
+        var content = GetResourceContent("SyncTest.data20_de_de.xlf");
         var factory = new XliffDocumentFactory();
 
         // Act

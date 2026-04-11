@@ -2,6 +2,8 @@ using AwesomeAssertions;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Formats.Xliff.v12;
 using Lingo.Core.Formats.Xliff.V12;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using File = Lingo.Core.Formats.Xliff.V12.File;

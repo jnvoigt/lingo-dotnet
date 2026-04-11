@@ -6,6 +6,7 @@ public interface ILingoDocument
     string FormatId { get; }
 
     HashSet<string> GetUnitIds();
+    Unit? GetUnit(string unitId);
     string? GetValue(string unitId);
     void SetValue(string unitId, string value);
     void SortByKey();

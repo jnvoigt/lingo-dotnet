@@ -62,6 +62,23 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return ids;
     }
 
+    public Unit? GetUnit(string unitId)
+    {
+        var tu = FindTransUnit(unitId);
+        if (tu == null)
+        {
+            return null;
+        }
+
+        return new Unit
+        {
+            Id = tu.Id,
+            Target = tu.Target != null ? FlattenInline(tu.Target) : null,
+            Source = tu.Source != null ? FlattenInline(tu.Source) : null,
+            State = MapState(tu.Target?.State)
+        };
+    }
+
     public string? GetValue(string unitId)
     {
         var tu = FindTransUnit(unitId);
@@ -164,8 +181,8 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             }
 
             var tu = new TransUnit { Id = unit.Id };
-            tu.Source = new Source { Text = [unit.Source ?? unit.Target] };
-            tu.Target = new Target { State = "needs-translation", Text = [unit.Target] };
+            tu.Source = new Source { Text = [unit.Source] };
+            tu.Target = new Target { State = "needs-translation", Text = null };
             file.Body.TransUnit.Add(tu);
             return SyncResult.NewUnitCreated;
         }
@@ -258,9 +275,9 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return null;
     }
 
-    private string FlattenInline(IElemGroupTextContent inline)
+    private string? FlattenInline(IElemGroupTextContent inline)
     {
-        return XlfTranslationParser.InnerXml(inline) ?? "";
+        return XlfTranslationParser.InnerXml(inline);
     }
 
     private TranslationState MapState(string? state)

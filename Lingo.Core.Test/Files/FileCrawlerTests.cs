@@ -1,6 +1,11 @@
 using AwesomeAssertions;
 using Lingo.Core.Files;
 using Lingo.Core.Formats;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Lingo.Core.Test.Files;
 

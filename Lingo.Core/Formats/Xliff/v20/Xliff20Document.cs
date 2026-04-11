@@ -1,6 +1,5 @@
 using Lingo.Core.Formats.Xliff.V20;
 using Lingo.Core.Parser;
-using File = Lingo.Core.Formats.Xliff.V20.File;
 using Unit = Lingo.Core.Models.Unit;
 
 namespace Lingo.Core.Formats.Xliff.v20;
@@ -69,6 +68,26 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return ids;
     }
 
+    public Unit? GetUnit(string unitId)
+    {
+        var unit = FindUnit(unitId);
+        if (unit == null)
+        {
+            return null;
+        }
+
+        var segment = unit.Segment.FirstOrDefault();
+        return new Unit
+        {
+            Id = unit.Id,
+            Target =
+                segment?.Target != null ? FlattenInline(segment.Target) :
+                segment?.Source != null ? FlattenInline(segment.Source) : "",
+            Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
+            State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
+        };
+    }
+
     public string? GetValue(string unitId)
     {
         var unit = FindUnit(unitId);
@@ -108,9 +127,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
                 yield return new Unit
                 {
                     Id = unit.Id,
-                    Target =
-                        segment?.Target != null ? FlattenInline(segment.Target) :
-                        segment?.Source != null ? FlattenInline(segment.Source) : "",
+                    Target = segment?.Target != null ? FlattenInline(segment.Target) : null,
                     Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
                     State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
                 };
@@ -152,9 +169,9 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return null;
     }
 
-    private string FlattenInline(IInline inline)
+    private string? FlattenInline(IInline inline)
     {
-        return XlfTranslationParser.ExtractText(inline) ?? "";
+        return XlfTranslationParser.ExtractText(inline);
     }
 
     private TranslationState MapState(StateType state)

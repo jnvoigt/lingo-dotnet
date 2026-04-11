@@ -1,6 +1,9 @@
 using AwesomeAssertions;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Models;
+using System;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Lingo.Core.Test.Xliff;
@@ -10,7 +13,7 @@ public class Xliff20DocumentTests
     private string GetResourceContent(string resourceName)
     {
         var assembly = typeof(Xliff20DocumentTests).Assembly;
-        var fullResourceName = $"Lingo.Core.Test.{resourceName}";
+        var fullResourceName = $"Lingo.Core.Test.Xliff.TestData.{resourceName}";
         using var stream = assembly.GetManifestResourceStream(fullResourceName);
         if (stream == null)
         {
@@ -55,5 +58,24 @@ public class Xliff20DocumentTests
 
         // Assert
         act.Should().Throw<NotImplementedException>();
+    }
+
+    [Test]
+    public void GetUnit_ShouldReturnCorrectUnit()
+    {
+        // Arrange
+        var content = GetResourceContent("test20.xlf");
+        var factory = new XliffDocumentFactory();
+        var document = factory.Create(content);
+        var unitId = "sample.textA";
+
+        // Act
+        var unit = document.GetUnit(unitId);
+
+        // Assert
+        unit.Should().NotBeNull();
+        unit!.Id.Should().Be(unitId);
+        unit.Source.Should().Be("This is text A");
+        unit.Target.Should().Be("This is text A");
     }
 }

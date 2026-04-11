@@ -1,6 +1,7 @@
 using AwesomeAssertions;
 using Lingo.Core.Files;
 using Lingo.Core.Formats;
+using System.Collections.Generic;
 
 namespace Lingo.Core.Test.Files;
 
@@ -47,7 +48,8 @@ public class LingoFileInfoTests
     [Test]
     public void FromPath_WithExpectedFormat_ReturnsNullIfExtensionDoesNotMatch()
     {
-        var result = LingoFileInfo.FromPath("translations.xlf", new LingoFormat("json", new HashSet<string> { "json" }));
+        var result =
+            LingoFileInfo.FromPath("translations.xlf", new LingoFormat("json", new HashSet<string> { "json" }));
 
         result.Should().BeNull();
     }
