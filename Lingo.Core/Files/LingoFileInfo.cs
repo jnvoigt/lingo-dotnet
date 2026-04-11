@@ -5,7 +5,7 @@ namespace Lingo.Core.Files;
 
 public record LingoFileInfo(FileInfo File, string Stub, CultureInfo? Culture, LingoFormat? Format)
 {
-    private static readonly Regex CultureRegex = new(@"\b([a-z]{2}(-[A-Z]{2})?)\b", RegexOptions.Compiled);
+    private static readonly Regex CultureRegex = new(@"\b([a-z]{2,3}([-_][a-zA-Z]{2,4})?)\b", RegexOptions.Compiled);
 
     public static LingoFileInfo? FromPath(string path, LingoFormat? expectedFormat = null)
     {

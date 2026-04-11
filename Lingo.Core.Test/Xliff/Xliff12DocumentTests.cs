@@ -54,6 +54,10 @@ public class Xliff12DocumentTests
         using var stream = new MemoryStream(Encoding.UTF8.GetBytes(originalContent));
         var document = factory.Create(stream);
         var existingUnitId = document.GetUnitIds().First();
+
+        var existingUnit = document.GetUnit(existingUnitId);
+        var existingTargetValue = existingUnit.Target;
+
         var updatedUnit = new Unit { Id = existingUnitId, Target = "Updated Content", Source = "Updated Content" };
 
         // Act
@@ -61,7 +65,9 @@ public class Xliff12DocumentTests
 
         // Assert
         result.Should().Be(SyncResult.SourceValueHasChanged);
-        document.GetValue(existingUnitId).Should().Be("Updated Content");
+        var unit = document.GetUnit(existingUnitId);
+        unit.Source.Should().Be("Updated Content");
+        unit.Target.Should().Be(existingTargetValue);
     }
 
     [Test]

@@ -182,7 +182,15 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
             var tu = new TransUnit { Id = unit.Id };
             tu.Source = new Source { Text = [unit.Source] };
-            tu.Target = new Target { State = "needs-translation", Text = null };
+            if (!string.IsNullOrEmpty(unit.Target))
+            {
+                tu.Target = new Target { State = "translated", Text = [unit.Target] };
+            }
+            else
+            {
+                tu.Target = new Target { State = "needs-translation", Text = null };
+            }
+
             file.Body.TransUnit.Add(tu);
             return SyncResult.NewUnitCreated;
         }
@@ -200,9 +208,24 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             }
 
             existing.Target.State = "needs-adaptation";
-            existing.Target.Text = [unit.Target];
 
             changed = true;
+        }
+        else
+        {
+            var newTargetValue = unit.Target;
+            var oldTargetValue = existing.Target != null ? FlattenInline(existing.Target) : null;
+
+            if (newTargetValue != null && oldTargetValue != newTargetValue)
+            {
+                if (existing.Target == null)
+                {
+                    existing.Target = new Target();
+                }
+
+                existing.Target.Text = [newTargetValue];
+                changed = true;
+            }
         }
 
         return changed ? SyncResult.SourceValueHasChanged : SyncResult.Nothing;

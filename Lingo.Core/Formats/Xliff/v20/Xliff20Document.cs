@@ -80,9 +80,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return new Unit
         {
             Id = unit.Id,
-            Target =
-                segment?.Target != null ? FlattenInline(segment.Target) :
-                segment?.Source != null ? FlattenInline(segment.Source) : "",
+            Target = segment?.Target != null ? FlattenInline(segment.Target) : null,
             Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
             State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
         };
@@ -109,12 +107,39 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
     public void SetValue(string unitId, string value)
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        var unit = FindUnit(unitId);
+        if (unit == null)
+        {
+            return;
+        }
+
+        var segment = unit.Segment.FirstOrDefault();
+        if (segment == null)
+        {
+            segment = new Segment();
+            unit.Segment.Add(segment);
+        }
+
+        if (segment.Target == null)
+        {
+            segment.Target = new Target();
+        }
+
+        segment.Target.Text = new[] { value };
+        segment.State = StateType.Translated;
     }
 
     public void SortByKey()
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        foreach (var file in InternalXliff.File)
+        {
+            var sorted = file.Unit.OrderBy(u => u.Id).ToList();
+            file.Unit.Clear();
+            foreach (var unit in sorted)
+            {
+                file.Unit.Add(unit);
+            }
+        }
     }
 
     public IEnumerable<Unit> GetAllUnits()
@@ -137,22 +162,119 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
     public SyncResult SyncUnit(Unit unit)
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        var existing = FindUnit(unit.Id);
+        if (existing == null)
+        {
+            var file = InternalXliff.File.FirstOrDefault();
+            if (file == null)
+            {
+                file = new V20.File();
+                InternalXliff.File.Add(file);
+            }
+
+            var u = new V20.Unit { Id = unit.Id };
+            var segment = new Segment();
+            segment.Source = new Source { Text = [unit.Source] };
+
+            if (!string.IsNullOrEmpty(unit.Target))
+            {
+                segment.Target = new Target { Text = [unit.Target] };
+                segment.State = StateType.Translated;
+            }
+            else
+            {
+                segment.State = StateType.Initial;
+            }
+
+            u.Segment.Add(segment);
+            file.Unit.Add(u);
+            return SyncResult.NewUnitCreated;
+        }
+
+        var changed = false;
+        var segmentToSync = existing.Segment.FirstOrDefault();
+        if (segmentToSync == null)
+        {
+            segmentToSync = new Segment();
+            existing.Segment.Add(segmentToSync);
+        }
+
+        var newSource = unit.Source ?? unit.Target;
+        var oldSource = segmentToSync.Source != null ? FlattenInline(segmentToSync.Source) : null;
+
+        if (oldSource != newSource)
+        {
+            segmentToSync.Source = new Source { Text = [newSource] };
+            segmentToSync.State = StateType.Translated;
+            segmentToSync.SubState = "x-needs-adaptation";
+            changed = true;
+        }
+        else
+        {
+            var newTargetValue = unit.Target;
+            var oldTargetValue = segmentToSync.Target != null ? FlattenInline(segmentToSync.Target) : null;
+
+            if (newTargetValue != null && oldTargetValue != newTargetValue)
+            {
+                if (segmentToSync.Target == null)
+                {
+                    segmentToSync.Target = new Target();
+                }
+
+                segmentToSync.Target.Text = [newTargetValue];
+                changed = true;
+            }
+        }
+
+        return changed ? SyncResult.SourceValueHasChanged : SyncResult.Nothing;
     }
 
     public MergeResult MergeUnit(Unit unit)
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        var existing = FindUnit(unit.Id);
+        if (existing != null)
+        {
+            return MergeResult.Conflict;
+        }
+
+        SyncUnit(unit);
+        return MergeResult.Merged;
     }
 
     public ImportResult ImportUnit(Unit unit)
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        var existing = FindUnit(unit.Id);
+        if (existing == null)
+        {
+            return ImportResult.Ignored;
+        }
+
+        var segment = existing.Segment.FirstOrDefault();
+        var currentValue = segment?.Target != null ? FlattenInline(segment.Target) : null;
+        if (currentValue == unit.Target)
+        {
+            return ImportResult.AlreadyUpToDate;
+        }
+
+        SetValue(unit.Id, unit.Target);
+        return ImportResult.Imported;
     }
 
     public IEnumerable<string> RetainUnitIds(IEnumerable<string> ids)
     {
-        throw new NotImplementedException("XLIFF 2.0 driver is read-only.");
+        var idSet = ids.ToHashSet();
+        var removed = new List<string>();
+        foreach (var file in InternalXliff.File)
+        {
+            var toRemove = file.Unit.Where(u => !idSet.Contains(u.Id)).ToList();
+            foreach (var u in toRemove)
+            {
+                file.Unit.Remove(u);
+                removed.Add(u.Id);
+            }
+        }
+
+        return removed;
     }
 
     private V20.Unit? FindUnit(string unitId)

@@ -26,7 +26,7 @@ public class Xliff20DocumentTests
     }
 
     [Test]
-    public void SyncUnit_AddingNewUnit_ShouldThrowNotImplementedException()
+    public void SyncUnit_AddingNewUnit_ShouldReturnNewUnitCreated()
     {
         // Arrange
         var originalContent = GetResourceContent("test20.xlf");
@@ -36,14 +36,18 @@ public class Xliff20DocumentTests
         var newUnit = new Unit { Id = "new_unit_id", Target = "New Content", Source = "New Content" };
 
         // Act
-        Action act = () => document.SyncUnit(newUnit);
+        var result = document.SyncUnit(newUnit);
 
         // Assert
-        act.Should().Throw<NotImplementedException>();
+        result.Should().Be(SyncResult.NewUnitCreated);
+        var u1 = document.GetUnit("new_unit_id");
+        u1.State.Should().Be(TranslationState.Translated);
+        u1.Target.Should().Be("New Content");
+        u1.Source.Should().Be("New Content");
     }
 
     [Test]
-    public void SyncUnit_OverridingExistingUnitSource_ShouldThrowNotImplementedException()
+    public void SyncUnit_OverridingExistingUnitSource_ShouldReturnSourceValueHasChanged()
     {
         // Arrange
         var originalContent = GetResourceContent("test20.xlf");
@@ -51,13 +55,20 @@ public class Xliff20DocumentTests
         using var stream = new MemoryStream(Encoding.UTF8.GetBytes(originalContent));
         var document = factory.Create(stream);
         var existingUnitId = document.GetUnitIds().First();
+
+        var existingUnit = document.GetUnit(existingUnitId);
+        var existingTargetValue = existingUnit.Target;
+
         var updatedUnit = new Unit { Id = existingUnitId, Target = "Updated Content", Source = "Updated Content" };
 
         // Act
-        Action act = () => document.SyncUnit(updatedUnit);
+        var result = document.SyncUnit(updatedUnit);
 
         // Assert
-        act.Should().Throw<NotImplementedException>();
+        result.Should().Be(SyncResult.SourceValueHasChanged);
+        var unit = document.GetUnit(existingUnitId);
+        unit.Source.Should().Be("Updated Content");
+        unit.Target.Should().Be(existingTargetValue);
     }
 
     [Test]
@@ -76,6 +87,6 @@ public class Xliff20DocumentTests
         unit.Should().NotBeNull();
         unit!.Id.Should().Be(unitId);
         unit.Source.Should().Be("This is text A");
-        unit.Target.Should().Be("This is text A");
+        unit.Target.Should().BeNull();
     }
 }
