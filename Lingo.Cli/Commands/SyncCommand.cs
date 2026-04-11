@@ -76,6 +76,7 @@ public static class SyncCommand
             Environment.Exit(1);
         }
 
+        // TODO: to not use xliff factory, find the correct factory based on target file
         var factory = new XliffDocumentFactory();
         var synchronizer = new DocumentSynchronizer();
         var writer = new XliffDocumentWriter();
