@@ -1,5 +1,12 @@
 # IDEs
 .idea/
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
 # ai
 .local_agent/
