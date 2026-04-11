@@ -25,6 +25,32 @@ public class Xliff12DocumentTests
     }
 
     [Test]
+    public void SyncUnit_SyncingUnitWithIdenticalSource_ShouldNotChangeAnything()
+    {
+        // Arrange
+        var originalContent = GetResourceContent("test12.xlf");
+        var factory = new XliffDocumentFactory();
+        using var stream = new MemoryStream(Encoding.UTF8.GetBytes(originalContent));
+        var document = factory.Create(stream);
+        var existingUnitId = document.GetUnitIds().First();
+
+        var existingUnit = document.GetUnit(existingUnitId);
+        var existingTargetValue = existingUnit.Target;
+        var existingSourceValue = existingUnit.Source;
+
+        var updatedUnit = new Unit { Id = existingUnitId, Source = existingSourceValue };
+
+        // Act
+        var result = document.SyncUnit(updatedUnit);
+
+        // Assert
+        result.Should().Be(SyncResult.Nothing);
+        var unit = document.GetUnit(existingUnitId);
+        unit.Source.Should().Be(existingSourceValue);
+        unit.Target.Should().Be(existingTargetValue);
+    }
+
+    [Test]
     public void SyncUnit_AddingNewUnit_ShouldReturnNewUnitCreated()
     {
         // Arrange

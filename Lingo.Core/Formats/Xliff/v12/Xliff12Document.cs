@@ -1,5 +1,4 @@
 using Lingo.Core.Formats.Xliff.V12;
-using Lingo.Core.Parser;
 using File = Lingo.Core.Formats.Xliff.V12.File;
 
 namespace Lingo.Core.Formats.Xliff.v12;
@@ -30,7 +29,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
     public string? GetSourceValue(string unitId)
     {
         var tu = FindTransUnit(unitId);
-        return tu?.Source != null ? FlattenInline(tu.Source) : null;
+        return tu?.Source.FlattenInline();
     }
 
     public TranslationState GetTargetState(string unitId)
@@ -70,13 +69,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             return null;
         }
 
-        return new Unit
-        {
-            Id = tu.Id,
-            Target = tu.Target != null ? FlattenInline(tu.Target) : null,
-            Source = tu.Source != null ? FlattenInline(tu.Source) : null,
-            State = MapState(tu.Target?.State)
-        };
+        return ConvertToUnit(tu);
     }
 
     public string? GetValue(string unitId)
@@ -89,10 +82,10 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
         if (tu.Target != null)
         {
-            return FlattenInline(tu.Target);
+            return tu.Target.FlattenInline();
         }
 
-        return tu.Source != null ? FlattenInline(tu.Source) : null;
+        return tu.Source.FlattenInline();
     }
 
     public void SetValue(string unitId, string value)
@@ -147,14 +140,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             {
                 foreach (var tu in file.Body.TransUnit)
                 {
-                    yield return new Unit
-                    {
-                        Id = tu.Id,
-                        Target = tu.Target != null ? FlattenInline(tu.Target) :
-                            tu.Source != null ? FlattenInline(tu.Source) : "",
-                        Source = tu.Source != null ? FlattenInline(tu.Source) : null,
-                        State = MapState(tu.Target?.State)
-                    };
+                    yield return ConvertToUnit(tu);
                 }
             }
         }
@@ -196,8 +182,8 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         }
 
         var changed = false;
-        var newSource = unit.Source ?? unit.Target;
-        var oldSource = existing.Source != null ? FlattenInline(existing.Source) : null;
+        var newSource = unit.Source?.Trim();
+        var oldSource = existing.Source.FlattenInline();
 
         if (oldSource != newSource)
         {
@@ -214,7 +200,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         else
         {
             var newTargetValue = unit.Target;
-            var oldTargetValue = existing.Target != null ? FlattenInline(existing.Target) : null;
+            var oldTargetValue = existing.Target.FlattenInline();
 
             if (newTargetValue != null && oldTargetValue != newTargetValue)
             {
@@ -251,7 +237,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             return ImportResult.Ignored;
         }
 
-        var currentValue = existing.Target != null ? FlattenInline(existing.Target) : null;
+        var currentValue = existing.Target.FlattenInline();
         if (currentValue == unit.Target)
         {
             return ImportResult.AlreadyUpToDate;
@@ -298,11 +284,6 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return null;
     }
 
-    private string? FlattenInline(IElemGroupTextContent inline)
-    {
-        return XlfTranslationParser.InnerXml(inline);
-    }
-
     private TranslationState MapState(string? state)
     {
         if (string.IsNullOrEmpty(state))
@@ -318,6 +299,17 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             "final" => TranslationState.Translated,
             "signed-off" => TranslationState.Translated,
             _ => TranslationState.None
+        };
+    }
+
+    private Unit ConvertToUnit(TransUnit tu)
+    {
+        return new Unit
+        {
+            Id = tu.Id,
+            Target = tu.Target.FlattenInline(),
+            Source = tu.Source.FlattenInline(),
+            State = MapState(tu.Target?.State)
         };
     }
 }

@@ -1,5 +1,5 @@
 using Lingo.Core.Formats.Xliff.V20;
-using Lingo.Core.Parser;
+using File = Lingo.Core.Formats.Xliff.V20.File;
 using Unit = Lingo.Core.Models.Unit;
 
 namespace Lingo.Core.Formats.Xliff.v20;
@@ -29,7 +29,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
     {
         var unit = FindUnit(unitId);
         var segment = unit?.Segment.FirstOrDefault();
-        return segment?.Source != null ? FlattenInline(segment.Source) : null;
+        return segment?.Source.FlattenInline();
     }
 
     public TranslationState GetTargetState(string unitId)
@@ -77,13 +77,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         }
 
         var segment = unit.Segment.FirstOrDefault();
-        return new Unit
-        {
-            Id = unit.Id,
-            Target = segment?.Target != null ? FlattenInline(segment.Target) : null,
-            Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
-            State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
-        };
+        return ConvertToUnit(unit, segment);
     }
 
     public string? GetValue(string unitId)
@@ -98,11 +92,11 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         var segment = unit.Segment.FirstOrDefault();
         if (segment?.Target != null)
         {
-            return FlattenInline(segment.Target);
+            return segment.Target.FlattenInline();
         }
 
         // Fallback to source if target is missing? Usually GetValue on a document returns the "value" which is target for XLIFF
-        return segment?.Source != null ? FlattenInline(segment.Source) : null;
+        return segment?.Source.FlattenInline();
     }
 
     public void SetValue(string unitId, string value)
@@ -149,13 +143,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             foreach (var unit in file.Unit)
             {
                 var segment = unit.Segment.FirstOrDefault();
-                yield return new Unit
-                {
-                    Id = unit.Id,
-                    Target = segment?.Target != null ? FlattenInline(segment.Target) : null,
-                    Source = segment?.Source != null ? FlattenInline(segment.Source) : null,
-                    State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
-                };
+                yield return ConvertToUnit(unit, segment);
             }
         }
     }
@@ -168,7 +156,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             var file = InternalXliff.File.FirstOrDefault();
             if (file == null)
             {
-                file = new V20.File();
+                file = new File();
                 InternalXliff.File.Add(file);
             }
 
@@ -200,7 +188,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         }
 
         var newSource = unit.Source ?? unit.Target;
-        var oldSource = segmentToSync.Source != null ? FlattenInline(segmentToSync.Source) : null;
+        var oldSource = segmentToSync.Source.FlattenInline();
 
         if (oldSource != newSource)
         {
@@ -212,7 +200,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         else
         {
             var newTargetValue = unit.Target;
-            var oldTargetValue = segmentToSync.Target != null ? FlattenInline(segmentToSync.Target) : null;
+            var oldTargetValue = segmentToSync.Target.FlattenInline();
 
             if (newTargetValue != null && oldTargetValue != newTargetValue)
             {
@@ -250,7 +238,7 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         }
 
         var segment = existing.Segment.FirstOrDefault();
-        var currentValue = segment?.Target != null ? FlattenInline(segment.Target) : null;
+        var currentValue = segment?.Target.FlattenInline();
         if (currentValue == unit.Target)
         {
             return ImportResult.AlreadyUpToDate;
@@ -291,11 +279,6 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         return null;
     }
 
-    private string? FlattenInline(IInline inline)
-    {
-        return XlfTranslationParser.ExtractText(inline);
-    }
-
     private TranslationState MapState(StateType state)
     {
         return state switch
@@ -305,6 +288,17 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
             StateType.Reviewed => TranslationState.Translated,
             StateType.Final => TranslationState.Translated,
             _ => TranslationState.None
+        };
+    }
+
+    private Unit ConvertToUnit(V20.Unit unit, Segment? segment)
+    {
+        return new Unit
+        {
+            Id = unit.Id,
+            Target = segment?.Target.FlattenInline(),
+            Source = segment?.Source.FlattenInline(),
+            State = segment != null ? GetTargetState(unit.Id) : TranslationState.None
         };
     }
 }

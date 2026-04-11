@@ -2,6 +2,7 @@ using AwesomeAssertions;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Formats.Xliff.v12;
 using Lingo.Core.Models;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -50,6 +51,7 @@ public class XliffSyncDataSetTests
 
             if (result == SyncResult.SourceValueHasChanged)
             {
+                Console.WriteLine($"Changed: {unit.Id}");
                 changedUnits++;
             }
         }
@@ -61,10 +63,11 @@ public class XliffSyncDataSetTests
         changedUnits.Should().Be(1); // sample.text.changed
         removed.Should().Contain("sample.text.removed");
 
-        targetDoc.GetUnitIds().Should().NotContain("sample.text.removed");
-        targetDoc.GetUnitIds().Should().Contain("sample.text.new");
-        targetDoc.GetUnitIds().Should().Contain("sample.text.changed");
-        targetDoc.GetUnitIds().Should().Contain("sample.text.that-has-not-changed");
+        var unitIds = targetDoc.GetUnitIds();
+        unitIds.Should().NotContain("sample.text.removed");
+        unitIds.Should().Contain("sample.text.new");
+        unitIds.Should().Contain("sample.text.changed");
+        unitIds.Should().Contain("sample.text.that-has-not-changed");
 
         targetDoc.GetTargetState("sample.text.changed").Should()
             .Be(TranslationState.NeedsAdaptation);
