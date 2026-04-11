@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2"
+       xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="target-language" datatype="plaintext" original="sample.txt">
+        <body>
+            <trans-unit id="sample.text.that-has-not-changed">
+                <source>This is text A</source>
+                <target>Dies is Text A</target>
+            </trans-unit>
+            <trans-unit id="sample.text.removed">
+                <source>This is text B which is removed from source</source>
+                <target>Dies ist Text B, der aus der Quelle entfernt wurde</target>
+            </trans-unit>
+            <trans-unit id="sample.text.changed">
+                <source>This is text C with old content</source>
+                <target>Dies ist Text C mit altem Inhalt</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
