@@ -19,6 +19,20 @@ public class FileCrawler
         return CrawlInternal(root, culture, format);
     }
 
+    public IEnumerable<LingoFileInfo> GetSiblings(LingoFileInfo source)
+    {
+        var directory = source.File.Directory;
+        if (directory == null || !directory.Exists)
+        {
+            return Enumerable.Empty<LingoFileInfo>();
+        }
+
+        return directory.GetFiles()
+            .Select(f => LingoFileInfo.FromFile(f, source.Format))
+            .Where(f => f != null && f.File.FullName != source.File.FullName && f.Stub == source.Stub)
+            .Cast<LingoFileInfo>();
+    }
+
     private IEnumerable<LingoFileInfo> CrawlInternal(DirectoryInfo current, CultureInfo? targetCulture,
         LingoFormat? targetFormat)
     {

@@ -78,4 +78,40 @@ public class FileCrawlerTests
             Directory.Delete(tempDir, true);
         }
     }
+
+    [Test]
+    public void GetSiblings_FindsFilesWithSameStubButDifferentCultures()
+    {
+        // Arrange
+        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempDir);
+        try
+        {
+            var sourcePath = Path.Combine(tempDir, "translations.xlf");
+            var dePath = Path.Combine(tempDir, "translations.de-DE.xlf");
+            var frPath = Path.Combine(tempDir, "translations.fr.xlf");
+            var otherPath = Path.Combine(tempDir, "other.xlf");
+
+            File.WriteAllText(sourcePath, "");
+            File.WriteAllText(dePath, "");
+            File.WriteAllText(frPath, "");
+            File.WriteAllText(otherPath, "");
+
+            var crawler = new FileCrawler();
+            var source = LingoFileInfo.FromPath(sourcePath);
+
+            // Act
+            var siblings = crawler.GetSiblings(source!).ToList();
+
+            // Assert
+            siblings.Should().HaveCount(2);
+            siblings.Any(s => s.File.Name == "translations.de-DE.xlf").Should().BeTrue();
+            siblings.Any(s => s.File.Name == "translations.fr.xlf").Should().BeTrue();
+            siblings.Any(s => s.File.Name == "other.xlf").Should().BeFalse();
+        }
+        finally
+        {
+            Directory.Delete(tempDir, true);
+        }
+    }
 }

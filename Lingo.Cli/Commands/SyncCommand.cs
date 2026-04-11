@@ -1,3 +1,4 @@
+using Lingo.Core.Files;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Sync;
 using System.CommandLine;
@@ -44,26 +45,25 @@ public static class SyncCommand
         }
         else
         {
-            var directory = sourceFile.Directory;
-            if (directory == null)
+            var lingoSource = LingoFileInfo.FromFile(sourceFile);
+            if (lingoSource == null)
             {
-                Console.Error.WriteLine($"Could not determine directory for source file: {sourceFile.FullName}");
+                Console.Error.WriteLine($"Could not determine Lingo format for source file: {sourceFile.FullName}");
                 Environment.Exit(1);
             }
 
-            var siblingFiles = directory.GetFiles("*.xlf")
-                .Where(f => f.FullName != sourceFile.FullName)
-                .ToList();
+            var crawler = new FileCrawler();
+            var siblingFiles = crawler.GetSiblings(lingoSource).ToList();
 
             if (siblingFiles.Count == 0)
             {
-                Console.WriteLine("No sibling .xlf files found to synchronize.");
+                Console.WriteLine("No sibling localization files found to synchronize.");
                 return;
             }
 
             foreach (var sibling in siblingFiles)
             {
-                SyncFiles(sourceFile, sibling);
+                SyncFiles(sourceFile, sibling.File);
             }
         }
     }
