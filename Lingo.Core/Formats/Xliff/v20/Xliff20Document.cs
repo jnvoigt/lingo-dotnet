@@ -4,7 +4,7 @@ using Unit = Lingo.Core.Models.Unit;
 
 namespace Lingo.Core.Formats.Xliff.v20;
 
-public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationState, IHasCultureInfo
+public class Xliff20Document : IXliffDocument, IHasSourceValue, IHasTranslationState, IHasCultureInfo
 {
     public Xliff20Document(V20.Xliff xliff)
     {
@@ -48,6 +48,9 @@ public class Xliff20Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
         return MapState(segment.State);
     }
+
+    object IXliffDocument.InternalXliff => InternalXliff;
+    public Type XliffType => typeof(V20.Xliff);
 
     public string FormatId => "xliff-2.0";
 

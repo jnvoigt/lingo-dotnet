@@ -3,7 +3,7 @@ using File = Lingo.Core.Formats.Xliff.V12.File;
 
 namespace Lingo.Core.Formats.Xliff.v12;
 
-public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationState, IHasCultureInfo
+public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationState, IHasCultureInfo
 {
     public Xliff12Document(V12.Xliff xliff)
     {
@@ -37,6 +37,9 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         var tu = FindTransUnit(unitId);
         return tu?.Target != null ? MapState(tu.Target.State) : TranslationState.None;
     }
+
+    object IXliffDocument.InternalXliff => InternalXliff;
+    public Type XliffType => typeof(V12.Xliff);
 
 
     public string FormatId => "xliff-1.2";
