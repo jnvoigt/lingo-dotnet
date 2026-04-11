@@ -165,6 +165,7 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
 
             var tu = new TransUnit { Id = unit.Id };
             tu.Source = new Source { Text = [unit.Source ?? unit.Target] };
+            tu.Target = new Target { State = "needs-translation" };
             file.Body.TransUnit.Add(tu);
             return SyncResult.NewUnitCreated;
         }
@@ -176,7 +177,12 @@ public class Xliff12Document : ILingoDocument, IHasSourceValue, IHasTranslationS
         if (oldSource != newSource)
         {
             existing.Source = new Source { Text = [newSource] };
-            existing.Target?.State = "needs-translation";
+            if (existing.Target == null)
+            {
+                existing.Target = new Target();
+            }
+
+            existing.Target.State = "needs-adaptation";
 
             changed = true;
         }
