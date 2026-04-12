@@ -14,5 +14,10 @@ public interface ILingoDocument
     SyncResult SyncUnit(Unit unit);
     MergeResult MergeUnit(Unit unit);
     ImportResult ImportUnit(Unit unit);
+    /// <summary>
+    /// Retains only the given unit ids.
+    /// </summary>
+    /// <param name="ids"></param>
+    /// <returns>list of removed unit ids</returns>
     IEnumerable<string> RetainUnitIds(IEnumerable<string> ids);
 }
