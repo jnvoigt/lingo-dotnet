@@ -13,14 +13,10 @@ public static class SyncCommand
     public static Command GetCommand()
     {
         var sourceOption = new Option<FileInfo>(
-            "--source",
-            "The source localization file.") { IsRequired = true };
-        sourceOption.AddAlias("-s");
+            "--source", "-s") { Required = true, Description = "The source localization file." };
 
         var targetOption = new Option<FileInfo>(
-            "--target",
-            "The target localization file.") { IsRequired = false };
-        targetOption.AddAlias("-t");
+            "--target", "-t") { Required = false, Description = "The target localization file." };
 
         var command =
             new Command("sync",
@@ -29,7 +25,13 @@ public static class SyncCommand
                 sourceOption, targetOption
             };
 
-        command.SetHandler(HandleSync, sourceOption, targetOption);
+        command.SetAction(result =>
+        {
+            var sourceFile = result.GetRequiredValue<FileInfo>(sourceOption.Name);
+            var targetFile = result.GetValue<FileInfo>(targetOption.Name);
+
+            HandleSync(sourceFile, targetFile);
+        });
 
         return command;
     }
