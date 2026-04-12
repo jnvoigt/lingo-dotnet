@@ -1,5 +1,5 @@
 using Lingo.Core.Files;
-using Lingo.Core.Formats.Xliff;
+using Lingo.Core.Formats;
 using Lingo.Core.Sync;
 using System.CommandLine;
 
@@ -76,10 +76,30 @@ public static class SyncCommand
             Environment.Exit(1);
         }
 
-        // TODO: to not use xliff factory, find the correct factory based on target file
-        var factory = new XliffDocumentFactory();
+        var sourceInfo = LingoFileInfo.FromFile(sourceFile);
+        var targetInfo = LingoFileInfo.FromFile(targetFile);
+
+        if (sourceInfo?.Format == null)
+        {
+            Console.Error.WriteLine($"Could not determine Lingo format for source file: {sourceFile.FullName}");
+            Environment.Exit(1);
+        }
+
+        if (targetInfo?.Format == null)
+        {
+            Console.Error.WriteLine($"Could not determine Lingo format for target file: {targetFile.FullName}");
+            Environment.Exit(1);
+        }
+
+        if (sourceInfo.Format != targetInfo.Format)
+        {
+            Console.Error.WriteLine($"Source and target file formats do not match: {sourceInfo.Format.Id} vs {targetInfo.Format.Id}");
+            Environment.Exit(1);
+        }
+
+        var factory = LingoFormatProvider.GetFactory(sourceInfo.Format);
+        var writer = LingoFormatProvider.GetWriter(targetInfo.Format);
         var synchronizer = new DocumentSynchronizer();
-        var writer = new XliffDocumentWriter();
 
         using (var sourceStream = sourceFile.OpenRead())
         using (var targetStream = targetFile.OpenRead())
