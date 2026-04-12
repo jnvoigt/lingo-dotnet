@@ -1,7 +1,10 @@
 using Lingo.Core.Files;
 using Lingo.Core.Formats;
 using Lingo.Core.Sync;
+using System;
 using System.CommandLine;
+using System.IO;
+using System.Linq;
 
 namespace Lingo.Cli.Commands;
 
@@ -93,7 +96,8 @@ public static class SyncCommand
 
         if (sourceInfo.Format != targetInfo.Format)
         {
-            Console.Error.WriteLine($"Source and target file formats do not match: {sourceInfo.Format.Id} vs {targetInfo.Format.Id}");
+            Console.Error.WriteLine(
+                $"Source and target file formats do not match: {sourceInfo.Format.Id} vs {targetInfo.Format.Id}");
             Environment.Exit(1);
         }
 
