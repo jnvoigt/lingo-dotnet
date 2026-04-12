@@ -1,9 +1,20 @@
 # IDEs
 .idea/
+.vscode/
+.vs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
 # ai
 .local_agent/
 
-#dotnet
-[Bb]in/
-[Oo]bj/
+# dotnet
+bin/
+obj/
+artifacts/
+*.nupkg
+*.snupkg

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="de-DE">
+  <file id="f1">
+    <unit id="sample.text.that-has-not-changed">
+      <segment>
+        <source>This is text A</source>
+        <target>Dies is Text A</target>
+      </segment>
+    </unit>
+    <unit id="sample.text.removed">
+      <segment>
+        <source>This is text B which is removed from source</source>
+        <target>Dies ist Text B, der aus der Quelle entfernt wurde</target>
+      </segment>
+    </unit>
+    <unit id="sample.text.changed">
+      <segment>
+        <source>This is text C with old content</source>
+        <target>Dies ist Text C mit altem Inhalt</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
