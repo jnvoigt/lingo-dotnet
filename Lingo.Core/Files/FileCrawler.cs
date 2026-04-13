@@ -9,6 +9,13 @@ public class FileCrawler
         "bin", "obj", "node_modules"
     };
 
+    /// <summary>
+    /// Crawls the directory tree to find all files matching the specified format.
+    /// </summary>
+    /// <param name="root">The root directory to start crawling from.</param>
+    /// <param name="culture">The target culture for file content, if applicable.</param>
+    /// <param name="format">The file format to filter by, if specified.</param>
+    /// <returns>An enumerable of LingoFileInfo objects representing matching files.</returns>
     public IEnumerable<LingoFileInfo> Crawl(DirectoryInfo root, CultureInfo? culture = null, LingoFormat? format = null)
     {
         if (!root.Exists)
@@ -33,12 +40,13 @@ public class FileCrawler
             .Cast<LingoFileInfo>();
     }
 
-    private IEnumerable<LingoFileInfo> CrawlInternal(DirectoryInfo current, CultureInfo? targetCulture,
+    private List<LingoFileInfo> CrawlInternal(DirectoryInfo current, CultureInfo? targetCulture,
         LingoFormat? targetFormat)
     {
+        var results = new List<LingoFileInfo>();
         if (!AcceptDirectory(current))
         {
-            yield break;
+            return results;
         }
 
         foreach (var file in current.GetFiles())
@@ -49,28 +57,17 @@ public class FileCrawler
                 // Filter by culture if requested
                 if (targetCulture == null || (lingoFile.Culture != null && Equals(lingoFile.Culture, targetCulture)))
                 {
-                    yield return lingoFile;
-                }
-                // Special case for source-only files (null culture) when searching for a specific culture?
-                // The plan says: "en-US" culture: returns source-only files AND files explicitly tagged "en-US".
-                // We'll handle this in the business logic layer usually, but let's see.
-                // If lingoFile.Culture is null, it's likely a source file.
-                else if (lingoFile.Culture == null && targetCulture != null)
-                {
-                    // For now, let's keep it simple: if culture is requested, only return those.
-                    // But if it's the source culture, we might want to return files without culture tag too.
-                    // This depends on the project structure.
+                    results.Add(lingoFile);
                 }
             }
         }
 
         foreach (var dir in current.GetDirectories())
         {
-            foreach (var result in CrawlInternal(dir, targetCulture, targetFormat))
-            {
-                yield return result;
-            }
+            results.AddRange(CrawlInternal(dir, targetCulture, targetFormat));
         }
+
+        return results;
     }
 
     private static bool AcceptDirectory(DirectoryInfo current)
