@@ -2,10 +2,8 @@ namespace Lingo.Core.Formats;
 
 public record LingoFormat(string Id, IReadOnlySet<string> Extensions)
 {
-    public static readonly LingoFormat Xliff = new("xliff", new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-    {
-        "xlf", "xliff"
-    });
+    public static readonly LingoFormat Xliff = new("xliff",
+        new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "xlf", "xliff" });
 
     public bool IsMatch(string extension)
     {

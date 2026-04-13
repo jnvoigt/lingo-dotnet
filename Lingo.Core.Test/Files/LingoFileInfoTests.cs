@@ -10,6 +10,7 @@ public class LingoFileInfoTests
     [TestCase("translations.de-DE.xlf", "translations", "de-DE", "xliff")]
     [TestCase("translations.de.xlf", "translations", "de", "xliff")]
     [TestCase("app.en-US.xliff", "app", "en-US", "xliff")]
+    [TestCase("translations.de-DE.lingo", "translations", "de-DE", "lingo")]
     public void FromPath_ExtractsCultureFromFilename(string filename, string expectedStub, string expectedCulture,
         string expectedFormatId)
     {
@@ -62,5 +63,40 @@ public class LingoFileInfoTests
 
         result.Should().NotBeNull();
         result!.Format.Should().Be(format);
+    }
+
+    [Test]
+    public void IsSibling_ReturnsTrue_WhenFilesAreInSameDirectoryAndHaveSameStub()
+    {
+        var fileA = LingoFileInfo.FromPath("i18n/translations.en-US.xlf", LingoFormat.Xliff);
+        var fileB = LingoFileInfo.FromPath("i18n/translations.de-DE.xlf", LingoFormat.Xliff);
+
+        fileA!.IsSibling(fileB!).Should().BeTrue();
+    }
+
+    [Test]
+    public void IsSibling_ReturnsFalse_WhenFilesAreInDifferentDirectories()
+    {
+        var fileA = LingoFileInfo.FromPath("i18n/translations.en-US.xlf", LingoFormat.Xliff);
+        var fileB = LingoFileInfo.FromPath("other/translations.de-DE.xlf", LingoFormat.Xliff);
+
+        fileA!.IsSibling(fileB!).Should().BeFalse();
+    }
+
+    [Test]
+    public void IsSibling_ReturnsFalse_WhenFilesHaveDifferentStubs()
+    {
+        var fileA = LingoFileInfo.FromPath("i18n/app.en-US.xlf", LingoFormat.Xliff);
+        var fileB = LingoFileInfo.FromPath("i18n/translations.en-US.xlf", LingoFormat.Xliff);
+
+        fileA!.IsSibling(fileB!).Should().BeFalse();
+    }
+
+    [Test]
+    public void IsSibling_ReturnsFalse_WhenSameFile()
+    {
+        var fileA = LingoFileInfo.FromPath("i18n/translations.en-US.xlf", LingoFormat.Xliff);
+
+        fileA!.IsSibling(fileA).Should().BeFalse();
     }
 }

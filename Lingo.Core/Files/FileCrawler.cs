@@ -29,7 +29,7 @@ public class FileCrawler
 
         return directory.GetFiles()
             .Select(f => LingoFileInfo.FromFile(f, source.Format))
-            .Where(f => f != null && f.File.FullName != source.File.FullName && f.Stub == source.Stub)
+            .Where(f => f != null && source.IsSibling(f))
             .Cast<LingoFileInfo>();
     }
 

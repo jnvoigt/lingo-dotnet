@@ -51,6 +51,12 @@ public record LingoFileInfo(FileInfo File, string Stub, CultureInfo? Culture, Li
         return new LingoFileInfo(fileInfo, fileName, null, format);
     }
 
+    public bool IsSibling(LingoFileInfo other)
+    {
+        return File.FullName != other.File.FullName && Stub == other.Stub &&
+               File.DirectoryName == other.File.DirectoryName;
+    }
+
     private static bool TryParseCulture(string input, out CultureInfo? culture)
     {
         try
