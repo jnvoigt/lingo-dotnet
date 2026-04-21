@@ -114,6 +114,7 @@ public static class SyncCommand
             var targetDoc = factory.Create(targetStream);
 
             synchronizer.PushSync(sourceDoc, targetDoc);
+            targetDoc.SortByKey();
 
             // Re-open target for writing
             targetStream.Close();
