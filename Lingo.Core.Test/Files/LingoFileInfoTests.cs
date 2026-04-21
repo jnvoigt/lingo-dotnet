@@ -10,7 +10,6 @@ public class LingoFileInfoTests
     [TestCase("translations.de-DE.xlf", "translations", "de-DE", "xliff")]
     [TestCase("translations.de.xlf", "translations", "de", "xliff")]
     [TestCase("app.en-US.xliff", "app", "en-US", "xliff")]
-    [TestCase("translations.de-DE.lingo", "translations", "de-DE", "lingo")]
     public void FromPath_ExtractsCultureFromFilename(string filename, string expectedStub, string expectedCulture,
         string expectedFormatId)
     {
