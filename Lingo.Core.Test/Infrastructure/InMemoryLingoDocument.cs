@@ -31,7 +31,12 @@ public class InMemoryLingoDocument : ILingoDocument
 
     public void SortByKey()
     {
-        // For in-memory, we don't strictly need to sort the dictionary, but we can if we want to mimic file behavior.
+        var sorted = _units.OrderBy(u => u.Key).ToList();
+        _units.Clear();
+        foreach (var pair in sorted)
+        {
+            _units.Add(pair.Key, pair.Value);
+        }
     }
 
     public IEnumerable<Unit> GetAllUnits() => _units.Values;

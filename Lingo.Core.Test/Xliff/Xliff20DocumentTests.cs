@@ -89,4 +89,24 @@ public class Xliff20DocumentTests
         unit.Source.Should().Be("This is text A");
         unit.Target.Should().BeNull();
     }
+
+    [Test]
+    public void SortByKey_ShouldSortAlphabetically()
+    {
+        // Arrange
+        var factory = new XliffDocumentFactory();
+        var doc = factory.Create("xliff-2.0", new[]
+        {
+            new Unit { Id = "z", Source = "z" },
+            new Unit { Id = "a", Source = "a" },
+            new Unit { Id = "m", Source = "m" }
+        });
+
+        // Act
+        doc.SortByKey();
+
+        // Assert
+        var unitIds = doc.GetAllUnits().Select(u => u.Id).ToList();
+        unitIds.Should().ContainInOrder("a", "m", "z");
+    }
 }
