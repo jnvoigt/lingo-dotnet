@@ -2,51 +2,31 @@ using AwesomeAssertions;
 using Lingo.Cli.Commands;
 using Lingo.Core.Formats.Xliff;
 using Lingo.Core.Models;
-using System.IO;
-using System.Linq;
+using Lingo.Testing.Core;
 using System.CommandLine;
-using System.CommandLine.Parsing;
 
 namespace Lingo.Cli.Test;
 
 public class SyncCommandTests
 {
-    private string _tempDir;
-
-    [SetUp]
-    public void Setup()
-    {
-        _tempDir = Path.Combine(Path.GetTempPath(), "LingoTests_" + Path.GetRandomFileName());
-        Directory.CreateDirectory(_tempDir);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        if (Directory.Exists(_tempDir))
-        {
-            Directory.Delete(_tempDir, true);
-        }
-    }
-
     [Test]
     public void Sync_ShouldSortTargetDocumentByKeys()
     {
         // Arrange
-        var sourcePath = Path.Combine(_tempDir, "source.xlf");
-        var targetPath = Path.Combine(_tempDir, "target.xlf");
+        using var tempDir = new TestDirectory();
+
+        var sourcePath = Path.Combine(tempDir, "source.xlf");
+        var targetPath = Path.Combine(tempDir, "target.xlf");
 
         var factory = new XliffDocumentFactory();
         var writer = new XliffDocumentWriter();
 
         // Create source with units in some order
-        var sourceDoc = factory.Create("xliff-1.2", new[]
-        {
-            new Unit { Id = "z", Source = "Source Z" },
-            new Unit { Id = "a", Source = "Source A" },
-            new Unit { Id = "m", Source = "Source M" },
-            new Unit { Id = "b", Source = "Source B" }
-        });
+        var sourceDoc = factory.Create("xliff-1.2",
+        [
+            new Unit { Id = "z", Source = "Source Z" }, new Unit { Id = "a", Source = "Source A" },
+            new Unit { Id = "m", Source = "Source M" }, new Unit { Id = "b", Source = "Source B" }
+        ]);
 
         using (var fs = File.Create(sourcePath))
         {
@@ -61,11 +41,10 @@ public class SyncCommandTests
             writer.Write(fs, targetDoc);
         }
 
-        var rootCommand = new RootCommand();
-        rootCommand.Add(SyncCommand.GetCommand());
+        var rootCommand = new RootCommand { SyncCommand.GetCommand() };
 
         // Act
-        rootCommand.Parse(new[] { "sync", "--source", sourcePath, "--target", targetPath }).Invoke();
+        rootCommand.Parse(["sync", "--source", sourcePath, "--target", targetPath]).Invoke();
 
         // Assert
         using (var fs = File.OpenRead(targetPath))
