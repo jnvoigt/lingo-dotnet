@@ -1,21 +1,31 @@
-using System.IO;
-using System;
-
-namespace Lingo.Core.Test.Infrastructure;
+namespace Lingo.Testing.Core;
 
 public sealed class TestDirectory : IDisposable
 {
-    private readonly DirectoryInfo _directory;
-
     public TestDirectory()
     {
         var tempPath = Path.Combine(Path.GetTempPath(), "LingoTests_" + Guid.NewGuid().ToString("N"));
-        _directory = Directory.CreateDirectory(tempPath);
+        Info = Directory.CreateDirectory(tempPath);
     }
 
-    public string FullName => _directory.FullName;
+    public string FullName => Info.FullName;
 
-    public DirectoryInfo Info => _directory;
+    public DirectoryInfo Info { get; }
+
+    public void Dispose()
+    {
+        try
+        {
+            if (Info.Exists)
+            {
+                Info.Delete(true);
+            }
+        }
+        catch
+        {
+            // Best effort cleanup
+        }
+    }
 
     public FileInfo CreateFile(string relativePath, string content = "")
     {
@@ -38,21 +48,13 @@ public sealed class TestDirectory : IDisposable
         return Directory.CreateDirectory(fullPath);
     }
 
-    public void Dispose()
+    public static implicit operator DirectoryInfo(TestDirectory testDir)
     {
-        try
-        {
-            if (_directory.Exists)
-            {
-                _directory.Delete(true);
-            }
-        }
-        catch
-        {
-            // Best effort cleanup
-        }
+        return testDir.Info;
     }
 
-    public static implicit operator DirectoryInfo(TestDirectory testDir) => testDir.Info;
-    public static implicit operator string(TestDirectory testDir) => testDir.FullName;
+    public static implicit operator string(TestDirectory testDir)
+    {
+        return testDir.FullName;
+    }
 }

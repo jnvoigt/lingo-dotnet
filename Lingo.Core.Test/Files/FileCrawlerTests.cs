@@ -1,7 +1,7 @@
 using AwesomeAssertions;
 using Lingo.Core.Files;
 using Lingo.Core.Formats;
-using Lingo.Core.Test.Infrastructure;
+using Lingo.Testing.Core;
 using System.Collections.Generic;
 using System.Linq;
 

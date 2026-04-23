@@ -1,7 +1,6 @@
 using AwesomeAssertions;
-using System.IO;
 
-namespace Lingo.Core.Test.Infrastructure;
+namespace Lingo.Testing.Core.Test;
 
 public class TestDirectoryTests
 {

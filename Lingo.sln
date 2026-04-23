@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lingo.Core.Test", "Lingo.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lingo.Cli.Test", "Lingo.Cli.Test\Lingo.Cli.Test.csproj", "{C6CE7A3E-239D-49A1-9D70-5C68F890DCB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lingo.Testing.Core", "Lingo.Testing.Core\Lingo.Testing.Core.csproj", "{BA4657AA-6446-4361-8AEE-0BAE8D846CE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lingo.Testing.Core.Test", "Lingo.Testing.Core.Test\Lingo.Testing.Core.Test.csproj", "{C2C3CA45-BB44-477E-9718-50F0EB4201E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{C6CE7A3E-239D-49A1-9D70-5C68F890DCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6CE7A3E-239D-49A1-9D70-5C68F890DCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6CE7A3E-239D-49A1-9D70-5C68F890DCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4657AA-6446-4361-8AEE-0BAE8D846CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4657AA-6446-4361-8AEE-0BAE8D846CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4657AA-6446-4361-8AEE-0BAE8D846CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4657AA-6446-4361-8AEE-0BAE8D846CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C3CA45-BB44-477E-9718-50F0EB4201E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C3CA45-BB44-477E-9718-50F0EB4201E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C3CA45-BB44-477E-9718-50F0EB4201E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C3CA45-BB44-477E-9718-50F0EB4201E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
