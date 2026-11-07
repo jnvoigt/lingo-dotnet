@@ -32,6 +32,31 @@ public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         return tu?.Source.FlattenInline();
     }
 
+    public void SetSourceValue(string unitId, string sourceValue)
+    {
+        var tu = FindTransUnit(unitId);
+        if (tu == null)
+        {
+            return;
+        }
+
+        if (tu.Source == null)
+        {
+            tu.Source = new Source();
+        }
+
+        tu.Source.Text = new[] { sourceValue };
+        tu.Source.GProperty.Clear();
+        tu.Source.Bpt.Clear();
+        tu.Source.Ept.Clear();
+        tu.Source.Ph.Clear();
+        tu.Source.It.Clear();
+        tu.Source.MrkProperty.Clear();
+        tu.Source.X.Clear();
+        tu.Source.Bx.Clear();
+        tu.Source.Ex.Clear();
+    }
+
     public TranslationState GetTargetState(string unitId)
     {
         var tu = FindTransUnit(unitId);

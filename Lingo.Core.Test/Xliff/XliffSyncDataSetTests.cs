@@ -94,4 +94,42 @@ public class XliffSyncDataSetTests
             u.Id == "sample.text.removed" && u.Target == "Dies ist Text B, der aus der Quelle entfernt wurde");
         units.Should().Contain(u => u.Id == "sample.text.changed" && u.Target == "Dies ist Text C mit altem Inhalt");
     }
+
+    [Test]
+    public void Read_Xliff12_FrenchDataSet()
+    {
+        // Arrange
+        var content = GetResourceContent("SyncTest.data12_fr_fr.xlf");
+        var factory = new XliffDocumentFactory();
+
+        // Act
+        var doc = factory.Create(content);
+        var units = doc.GetAllUnits().ToList();
+
+        // Assert
+        units.Should().HaveCount(3);
+        units.Should().Contain(u => u.Id == "sample.text.that-has-not-changed" && u.Target == "C'est le texte A");
+        units.Should().Contain(u =>
+            u.Id == "sample.text.removed" && u.Target == "C'est le texte B qui est supprimé de la source");
+        units.Should().Contain(u => u.Id == "sample.text.changed" && u.Target == "C'est le texte C avec l'ancien contenu");
+    }
+
+    [Test]
+    public void Read_Xliff20_FrenchDataSet()
+    {
+        // Arrange
+        var content = GetResourceContent("SyncTest.data20_fr_fr.xlf");
+        var factory = new XliffDocumentFactory();
+
+        // Act
+        var doc = factory.Create(content);
+        var units = doc.GetAllUnits().ToList();
+
+        // Assert
+        units.Should().HaveCount(3);
+        units.Should().Contain(u => u.Id == "sample.text.that-has-not-changed" && u.Target == "C'est le texte A");
+        units.Should().Contain(u =>
+            u.Id == "sample.text.removed" && u.Target == "C'est le texte B qui est supprimé de la source");
+        units.Should().Contain(u => u.Id == "sample.text.changed" && u.Target == "C'est le texte C avec l'ancien contenu");
+    }
 }

@@ -34,10 +34,49 @@ public class FileCrawler
             return Enumerable.Empty<LingoFileInfo>();
         }
 
-        return directory.GetFiles()
+        var results = new List<LingoFileInfo>();
+
+        // 1. Files in the same directory
+        var sameDirSiblings = directory.GetFiles()
             .Select(f => LingoFileInfo.FromFile(f, source.Format))
             .Where(f => f != null && source.IsSibling(f))
             .Cast<LingoFileInfo>();
+        results.AddRange(sameDirSiblings);
+
+        // 2. Files in sibling culture directories under the same parent
+        var parent = directory.Parent;
+        if (parent != null && parent.Exists && source.Culture != null)
+        {
+            foreach (var subDir in parent.GetDirectories())
+            {
+                if (string.Equals(subDir.FullName, directory.FullName, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                var candidate = new FileInfo(Path.Combine(subDir.FullName, source.File.Name));
+                if (candidate.Exists)
+                {
+                    var fileInfo = LingoFileInfo.FromFile(candidate, source.Format);
+                    if (fileInfo != null && source.IsSibling(fileInfo))
+                    {
+                        results.Add(fileInfo);
+                    }
+                }
+            }
+        }
+
+        return results;
+    }
+
+    public IEnumerable<LingoFileInfo> GetSiblingGroup(LingoFileInfo source)
+    {
+        var all = new List<LingoFileInfo> { source };
+        all.AddRange(GetSiblings(source));
+
+        return all
+            .DistinctBy(f => f.File.FullName)
+            .OrderBy(f => f.Culture != null)
+            .ThenBy(f => f.Culture?.Name ?? string.Empty)
+            .ThenBy(f => f.File.Name);
     }
 
     private List<LingoFileInfo> CrawlInternal(DirectoryInfo current, CultureInfo? targetCulture,

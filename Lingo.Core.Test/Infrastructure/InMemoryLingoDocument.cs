@@ -1,3 +1,4 @@
+using System.Globalization;
 using Lingo.Core.Documents;
 using Lingo.Core.Models;
 using System.Collections.Generic;
@@ -5,11 +6,31 @@ using System.Linq;
 
 namespace Lingo.Core.Test.Infrastructure;
 
-public class InMemoryLingoDocument : ILingoDocument
+public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSourceValue
 {
     private readonly Dictionary<string, Unit> _units = new();
 
     public string FormatId { get; set; } = "in-memory";
+    public string? FilePath { get; set; }
+    public CultureInfo SourceCulture { get; set; } = CultureInfo.InvariantCulture;
+    public CultureInfo? TargetCulture { get; set; }
+
+    public CultureInfo GetSourceCulture() => SourceCulture;
+    public CultureInfo? GetTargetCulture() => TargetCulture;
+
+    public string? GetSourceValue(string unitId) => GetUnit(unitId)?.Source;
+
+    public void SetSourceValue(string unitId, string sourceValue)
+    {
+        if (_units.TryGetValue(unitId, out var unit))
+        {
+            unit.Source = sourceValue;
+        }
+        else
+        {
+            _units[unitId] = new Unit { Id = unitId, Source = sourceValue };
+        }
+    }
 
     public HashSet<string> GetUnitIds() => _units.Keys.ToHashSet();
 

@@ -1,0 +1,160 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Lingo.UI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        x:Class="Lingo.UI.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding Title}"
+        Width="1100" Height="750"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <!-- Menu / Top Toolbar -->
+        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,8" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+            <DockPanel LastChildFill="False">
+                <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Left">
+                    <TextBlock Text="🌐 Lingo Editor" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Button Content="📂 Open Translation File..." Command="{Binding OpenFileCommand}" FontWeight="SemiBold" />
+                    <Button Content="💾 Save All Files" Command="{Binding SaveAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                    <Button Content="🔄 Sync All Missing Keys" Command="{Binding KeyEditor.SyncAllMissingKeysCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                    <Button Content="✖ Close" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Right">
+                    <Button Content="🔀 Switch View (Key Tree / File)" Command="{Binding ToggleViewModeCommand}" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Search and Add Key Bar with Criteria Filters -->
+        <Border Grid.Row="1" Background="{DynamicResource SystemChromeLowColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="Auto,8,220,16,*,Auto">
+                <!-- Filter Mode Chips -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                    <Button Content="All" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="All" FontSize="11" Padding="8,4" />
+                    <Button Content="⏳ Untranslated" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Untranslated" FontSize="11" Padding="8,4" />
+                    <Button Content="⚠️ Outdated" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Outdated" FontSize="11" Padding="8,4" />
+                    <Button Content="❌ Missing" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Missing" FontSize="11" Padding="8,4" />
+                </StackPanel>
+
+                <!-- Search Key -->
+                <TextBox Grid.Column="2" PlaceholderText="🔍 Search key/text..." Text="{Binding KeyEditor.SearchFilter}" VerticalAlignment="Center" />
+
+                <!-- Add New Key Inline -->
+                <Grid Grid.Column="4" ColumnDefinitions="*,8,*,8,Auto" VerticalAlignment="Center">
+                    <TextBox Grid.Column="0" PlaceholderText="New Key Path (e.g. A.B.Key)" Text="{Binding KeyEditor.NewKeyPath}" />
+                    <TextBox Grid.Column="2" PlaceholderText="Default Source Text" Text="{Binding KeyEditor.NewKeyDefaultSource}" />
+                    <Button Grid.Column="4" Content="➕ Add &amp; Sync Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Main Workspace -->
+        <Grid Grid.Row="2" ColumnDefinitions="320,4,*">
+            <!-- Left Pane: Hierarchical Key Tree View -->
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,1,0" Background="{DynamicResource SystemChromeLowColor}">
+                <Grid RowDefinitions="Auto,*">
+                    <Border Grid.Row="0" Padding="10,6" Background="{DynamicResource SystemChromeMediumColor}">
+                        <TextBlock Text="📁 Translation Key Hierarchy" FontWeight="SemiBold" FontSize="12"/>
+                    </Border>
+
+                    <TreeView Grid.Row="1" 
+                              ItemsSource="{Binding KeyEditor.RootNodes}" 
+                              SelectedItem="{Binding KeyEditor.SelectedNode}"
+                              SelectionMode="Single"
+                              Margin="4">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}" DataType="vm:KeyTreeNodeViewModel">
+                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="2">
+                                    <TextBlock Text="{Binding Icon}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Border>
+
+            <!-- Grid Splitter -->
+            <GridSplitter Grid.Column="1" Background="{DynamicResource SystemChromeHighColor}" ResizeDirection="Columns" />
+
+            <!-- Right Pane: Key-Centric Translation Workspace -->
+            <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" Margin="12">
+                <!-- Header for Selected Key -->
+                <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4" Padding="12,8" Margin="0,0,0,10">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
+                            <Button Content="⚡ Sync This Key to Missing Languages" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" />
+                            <Button Content="💾 Save Translations" Command="{Binding KeyEditor.SaveAllTranslationsCommand}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Spacing="2">
+                            <TextBlock Text="Selected Translation Key" FontSize="11" Opacity="0.7"/>
+                            <TextBlock Text="{Binding KeyEditor.SelectedKeyFullPath, FallbackValue='(Select a key from the tree)'}" 
+                                       FontWeight="Bold" FontSize="15" />
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- Multi-Locale Translation Editor Cards -->
+                <ScrollViewer Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding KeyEditor.CurrentKeyTranslations}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vm:KeyTranslationEntryViewModel">
+                                <Border Margin="0,0,0,10" Padding="12" CornerRadius="6" 
+                                        Background="{DynamicResource SystemChromeLowColor}"
+                                        BorderBrush="{DynamicResource SystemChromeMediumColor}" 
+                                        BorderThickness="1">
+                                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                        <!-- Header: Language & Document Info -->
+                                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
+                                            <TextBlock Text="{Binding LanguageCode}" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding DocumentName, StringFormat='({0})'}" Opacity="0.6" FontSize="11" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- Status indicator / Missing badge -->
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                                            <Border IsVisible="{Binding IsMissing}" Background="#FFEEBA" CornerRadius="3" Padding="6,2">
+                                                <TextBlock Text="⚠️ Missing in this file" Foreground="#856404" FontSize="11" FontWeight="Bold"/>
+                                            </Border>
+                                            <Border IsVisible="{Binding !IsMissing}" Background="#D4EDDA" CornerRadius="3" Padding="6,2">
+                                                <TextBlock Text="{Binding State, StringFormat='State: {0}'}" Foreground="#155724" FontSize="11"/>
+                                            </Border>
+                                        </StackPanel>
+
+                                        <!-- Source Text input / reference -->
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,6">
+                                            <TextBlock Text="Source (English/Master):" FontSize="11" Opacity="0.7" Margin="0,0,0,2"/>
+                                            <TextBox Text="{Binding SourceText}" TextWrapping="Wrap" />
+                                        </StackPanel>
+
+                                        <!-- Target Text input -->
+                                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                                            <TextBlock Text="Translation (Target):" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,2"/>
+                                            <TextBox Text="{Binding TargetText}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="48" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="3" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,4" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,1,0,0">
+            <DockPanel LastChildFill="False">
+                <TextBlock DockPanel.Dock="Left" Text="{Binding KeyEditor.StatusText}" FontSize="11" Opacity="0.8"/>
+                <TextBlock DockPanel.Dock="Right" Text="{Binding StatusInfo}" FontSize="11" Opacity="0.8"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

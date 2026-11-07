@@ -32,6 +32,29 @@ public class Xliff20Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         return segment?.Source.FlattenInline();
     }
 
+    public void SetSourceValue(string unitId, string sourceValue)
+    {
+        var unit = FindUnit(unitId);
+        if (unit == null)
+        {
+            return;
+        }
+
+        var segment = unit.Segment.FirstOrDefault();
+        if (segment == null)
+        {
+            segment = new Segment();
+            unit.Segment.Add(segment);
+        }
+
+        if (segment.Source == null)
+        {
+            segment.Source = new Source();
+        }
+
+        segment.Source.Text = new[] { sourceValue };
+    }
+
     public TranslationState GetTargetState(string unitId)
     {
         var unit = FindUnit(unitId);

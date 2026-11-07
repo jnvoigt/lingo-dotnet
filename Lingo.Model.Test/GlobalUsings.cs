@@ -1,0 +1,16 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Globalization;
+global using System.IO;
+global using System.Linq;
+global using System.Text;
+global using AwesomeAssertions;
+global using Lingo.Core.Documents;
+global using Lingo.Core.Files;
+global using Lingo.Core.Formats;
+global using Lingo.Core.Models;
+global using Lingo.Model;
+global using Lingo.Model.Formatting;
+global using Lingo.Model.Services;
+global using Lingo.Testing.Core;
+global using NUnit.Framework;
