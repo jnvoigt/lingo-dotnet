@@ -24,6 +24,41 @@ public class TranslationDictionaryTests
     }
 
     [Test]
+    public void Get_ResolvesTextBasedOnThreadCulture()
+    {
+        var originalCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            var dict = new TranslationDictionary();
+            dict.AddTranslation("btn.cancel", "en-US", "Cancel");
+            dict.AddTranslation("btn.cancel", "de-DE", "Abbrechen");
+
+            CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
+            dict.Get("btn.cancel").Should().Be("Abbrechen");
+
+            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+            dict.Get("btn.cancel").Should().Be("Cancel");
+
+            dict.Get("btn.cancel", new CultureInfo("de-DE")).Should().Be("Abbrechen");
+            dict.Get("btn.cancel", "de-DE").Should().Be("Abbrechen");
+        }
+        finally
+        {
+            CultureInfo.CurrentUICulture = originalCulture;
+        }
+    }
+
+    [Test]
+    public void Get_WithoutDefaultCulture_PicksAnyTranslation()
+    {
+        var dict = new TranslationDictionary();
+        dict.AddTranslation("btn.ok", "de-DE", "OK (DE)");
+
+        dict.Get("btn.ok", new CultureInfo("ja-JP")).Should().Be("OK (DE)");
+        dict.GetText("btn.ok", "ja-JP").Should().Be("OK (DE)");
+    }
+
+    [Test]
     public void Format_WithSignature_FormatsCorrectly()
     {
         var dict = new TranslationDictionary();

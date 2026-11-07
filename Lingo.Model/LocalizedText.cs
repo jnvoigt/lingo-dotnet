@@ -81,7 +81,24 @@ public class LocalizedText : IDictionary<string, string>, IReadOnlyDictionary<st
     }
 
     /// <summary>
-    /// Gets the text for the specified culture code, falling back to parent culture and default culture ("") if necessary.
+    /// Gets the text based on the thread UI culture (CultureInfo.CurrentUICulture),
+    /// falling back through culture hierarchy, default culture (""), and any available translation.
+    /// </summary>
+    public string? Get() => GetText(CultureInfo.CurrentUICulture);
+
+    /// <summary>
+    /// Gets the text for the specified culture, falling back to thread UI culture if null.
+    /// </summary>
+    public string? Get(CultureInfo? culture) => GetText(culture ?? CultureInfo.CurrentUICulture);
+
+    /// <summary>
+    /// Gets the text for the specified culture code, falling back to thread UI culture if null or empty.
+    /// </summary>
+    public string? Get(string? cultureCode) =>
+        string.IsNullOrEmpty(cultureCode) ? Get() : GetText(cultureCode);
+
+    /// <summary>
+    /// Gets the text for the specified culture code, falling back to parent culture, default culture (""), and any available translation if necessary.
     /// </summary>
     public string? GetText(string? cultureCode = null)
     {
@@ -118,7 +135,8 @@ public class LocalizedText : IDictionary<string, string>, IReadOnlyDictionary<st
             return fallbackText;
         }
 
-        return null;
+        // 4. Fallback to any available translation
+        return _translations.Count > 0 ? _translations.Values.FirstOrDefault() : null;
     }
 
     /// <summary>

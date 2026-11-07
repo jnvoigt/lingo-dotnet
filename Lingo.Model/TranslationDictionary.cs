@@ -31,6 +31,18 @@ public class TranslationDictionary : ITranslationDictionary, IEquatable<Translat
         }
     }
 
+    public string? Get(string key, CultureInfo? culture = null)
+    {
+        if (string.IsNullOrEmpty(key)) return null;
+        return _entries.TryGetValue(key, out var localized) ? localized.Get(culture) : null;
+    }
+
+    public string? Get(string key, string? cultureCode)
+    {
+        if (string.IsNullOrEmpty(key)) return null;
+        return _entries.TryGetValue(key, out var localized) ? localized.Get(cultureCode) : null;
+    }
+
     public string? GetText(string key, CultureInfo? culture = null)
     {
         if (string.IsNullOrEmpty(key)) return null;

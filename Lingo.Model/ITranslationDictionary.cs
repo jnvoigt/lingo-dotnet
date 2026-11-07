@@ -6,6 +6,16 @@ namespace Lingo.Model;
 public interface ITranslationDictionary : IDictionary<string, LocalizedText>, IReadOnlyDictionary<string, LocalizedText>
 {
     /// <summary>
+    /// Gets the localized text for a key based on the current thread UI culture (or specified culture), or null if key is not found.
+    /// </summary>
+    string? Get(string key, CultureInfo? culture = null);
+
+    /// <summary>
+    /// Gets the localized text for a key based on the specified culture code (or current thread UI culture if null), or null if key is not found.
+    /// </summary>
+    string? Get(string key, string? cultureCode);
+
+    /// <summary>
     /// Gets the localized text for a key in the specified culture, or null if key is not found.
     /// </summary>
     string? GetText(string key, CultureInfo? culture = null);

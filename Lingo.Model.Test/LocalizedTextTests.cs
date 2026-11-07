@@ -92,6 +92,63 @@ public class LocalizedTextTests
     }
 
     [Test]
+    public void GetText_WithoutDefaultCulture_PicksAnyAvailableTranslationWhenNoMatch()
+    {
+        var text = new LocalizedText
+        {
+            ["de-DE"] = "Hallo Welt"
+        };
+
+        // Specific non-matching culture string
+        text.GetText("ja-JP").Should().Be("Hallo Welt");
+        text.GetText("fr-FR").Should().Be("Hallo Welt");
+
+        // Specific non-matching CultureInfo
+        text.GetText(new CultureInfo("it-IT")).Should().Be("Hallo Welt");
+        text.GetText(CultureInfo.InvariantCulture).Should().Be("Hallo Welt");
+
+        // Default culture requested directly
+        text.GetText("").Should().Be("Hallo Welt");
+        text.GetText((string?)null).Should().Be("Hallo Welt");
+
+        // Get() with thread culture
+        text.Get().Should().Be("Hallo Welt");
+    }
+
+    [Test]
+    public void Get_ResolvesTextBasedOnThreadCurrentUICulture()
+    {
+        var originalCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            var text = new LocalizedText
+            {
+                ["en-US"] = "Hello",
+                ["de-DE"] = "Hallo",
+                ["fr-FR"] = "Bonjour"
+            };
+
+            CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
+            text.Get().Should().Be("Hallo");
+
+            CultureInfo.CurrentUICulture = new CultureInfo("fr-CA");
+            // Falls back to fr-FR or default/any
+            text.Get(new CultureInfo("fr-FR")).Should().Be("Bonjour");
+
+            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+            text.Get().Should().Be("Hello");
+
+            // Culture-parameterized Get overload
+            text.Get(new CultureInfo("de-DE")).Should().Be("Hallo");
+            text.Get("fr-FR").Should().Be("Bonjour");
+        }
+        finally
+        {
+            CultureInfo.CurrentUICulture = originalCulture;
+        }
+    }
+
+    [Test]
     public void GetTextOrDefault_ReturnsDefaultWhenMissing()
     {
         var text = new LocalizedText();
