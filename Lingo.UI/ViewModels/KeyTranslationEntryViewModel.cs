@@ -1,5 +1,6 @@
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Lingo.Core.Documents;
 using Lingo.Core.Models;
 
@@ -9,6 +10,7 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
 {
     private readonly ILingoDocument _document;
     private readonly string _keyId;
+    private bool _isLoading;
 
     [ObservableProperty]
     private string _languageCode = string.Empty;
@@ -29,9 +31,11 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
     private bool _isMissing;
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RevertChangesCommand))]
     private bool _isModified;
 
     public Action<string?>? OnSourceTextEdited { get; set; }
+    public Action? OnEntryModifiedChanged { get; set; }
 
     public KeyTranslationEntryViewModel(ILingoDocument document, string documentName, string keyId, string languageCode)
     {
@@ -48,32 +52,53 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
 
     public void LoadData()
     {
-        var unit = _document.GetUnit(_keyId);
-        if (unit == null)
+        _isLoading = true;
+        try
         {
-            IsMissing = true;
-            SourceText = string.Empty;
-            TargetText = string.Empty;
-            State = TranslationState.NeedsTranslation;
+            var unit = _document.GetUnit(_keyId);
+            if (unit == null)
+            {
+                IsMissing = true;
+                SourceText = string.Empty;
+                TargetText = string.Empty;
+                State = TranslationState.NeedsTranslation;
+            }
+            else
+            {
+                IsMissing = false;
+                SourceText = unit.Source;
+                TargetText = unit.Target ?? _document.GetValue(_keyId);
+                State = unit.State ?? TranslationState.None;
+            }
+            IsModified = false;
         }
-        else
+        finally
         {
-            IsMissing = false;
-            SourceText = unit.Source;
-            TargetText = unit.Target ?? _document.GetValue(_keyId);
-            State = unit.State ?? TranslationState.None;
+            _isLoading = false;
         }
-        IsModified = false;
+    }
+
+    [RelayCommand(CanExecute = nameof(IsModified))]
+    public void RevertChanges()
+    {
+        LoadData();
+    }
+
+    partial void OnIsModifiedChanged(bool value)
+    {
+        OnEntryModifiedChanged?.Invoke();
     }
 
     partial void OnSourceTextChanged(string? value)
     {
+        if (_isLoading) return;
         IsModified = true;
         OnSourceTextEdited?.Invoke(value);
     }
 
     partial void OnTargetTextChanged(string? value)
     {
+        if (_isLoading) return;
         IsModified = true;
     }
 

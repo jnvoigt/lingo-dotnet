@@ -32,7 +32,19 @@ public partial class KeyEditorViewModel : ViewModelBase
     private KeyTreeNodeViewModel? _selectedNode;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSelectedKey))]
+    [NotifyPropertyChangedFor(nameof(CanRevertKeyChanges))]
+    [NotifyCanExecuteChangedFor(nameof(RevertKeyChangesCommand))]
     private string? _selectedKeyFullPath;
+
+    public bool HasSelectedKey => !string.IsNullOrEmpty(SelectedKeyFullPath);
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanRevertKeyChanges))]
+    [NotifyCanExecuteChangedFor(nameof(RevertKeyChangesCommand))]
+    private bool _isKeyModified;
+
+    public bool CanRevertKeyChanges => HasSelectedKey && IsKeyModified;
 
     [ObservableProperty]
     private ObservableCollection<KeyTranslationEntryViewModel> _currentKeyTranslations = new();
@@ -69,6 +81,7 @@ public partial class KeyEditorViewModel : ViewModelBase
         CurrentKeyTranslations.Clear();
         SelectedNode = null;
         SelectedKeyFullPath = null;
+        UpdateKeyModifiedState();
         StatusText = "No translation files loaded. Open a file to begin.";
     }
 
@@ -190,7 +203,10 @@ public partial class KeyEditorViewModel : ViewModelBase
             if (entry.IsMissing && !string.IsNullOrEmpty(primarySource))
             {
                 entry.SourceText = primarySource;
+                entry.IsModified = false;
             }
+
+            entry.OnEntryModifiedChanged = UpdateKeyModifiedState;
 
             entry.OnSourceTextEdited = newSource =>
             {
@@ -214,6 +230,13 @@ public partial class KeyEditorViewModel : ViewModelBase
 
             CurrentKeyTranslations.Add(entry);
         }
+
+        UpdateKeyModifiedState();
+    }
+
+    public void UpdateKeyModifiedState()
+    {
+        IsKeyModified = CurrentKeyTranslations.Any(t => t.IsModified);
     }
 
     [RelayCommand]
@@ -273,6 +296,7 @@ public partial class KeyEditorViewModel : ViewModelBase
         {
             tr.LoadData();
         }
+        UpdateKeyModifiedState();
 
         StatusText = $"Synchronized '{SelectedKeyFullPath}' to {updated.Count} missing language files.";
     }
@@ -293,6 +317,15 @@ public partial class KeyEditorViewModel : ViewModelBase
         StatusText = $"Batch sync completed: {synced.Count} missing keys propagated.";
     }
 
+    [RelayCommand(CanExecute = nameof(CanRevertKeyChanges))]
+    public void RevertKeyChanges()
+    {
+        if (string.IsNullOrEmpty(SelectedKeyFullPath)) return;
+
+        LoadTranslationsForKey(SelectedKeyFullPath);
+        StatusText = $"Reverted changes for key '{SelectedKeyFullPath}'.";
+    }
+
     [RelayCommand]
     public void SaveAllTranslations()
     {
@@ -303,6 +336,7 @@ public partial class KeyEditorViewModel : ViewModelBase
                 tr.SaveChanges();
             }
         }
+        UpdateKeyModifiedState();
         StatusText = $"All translations saved for '{SelectedKeyFullPath}'.";
     }
 
