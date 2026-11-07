@@ -2,6 +2,7 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lingo.Core.Documents;
+using Lingo.Core.Files;
 using Lingo.Core.Models;
 
 namespace Lingo.UI.ViewModels;
@@ -19,6 +20,9 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
     private string _documentName = string.Empty;
 
     [ObservableProperty]
+    private string? _groupStub;
+
+    [ObservableProperty]
     private string? _sourceText;
 
     [ObservableProperty]
@@ -34,6 +38,7 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(RevertChangesCommand))]
     private bool _isModified;
 
+    public LoadedTranslationFile? File { get; set; }
     public Action<string?>? OnSourceTextEdited { get; set; }
     public Action? OnEntryModifiedChanged { get; set; }
 
@@ -45,6 +50,13 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
         _languageCode = languageCode;
 
         LoadData();
+    }
+
+    public KeyTranslationEntryViewModel(LoadedTranslationFile file, string keyId, string? groupStub = null)
+        : this(file.Document, file.FileName, keyId, file.LanguageLabel)
+    {
+        File = file;
+        GroupStub = groupStub;
     }
 
     public ILingoDocument Document => _document;
@@ -132,6 +144,10 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
             }
 
             _document.SetValue(_keyId, TargetText ?? string.Empty);
+        }
+        if (File != null)
+        {
+            File.IsModified = true;
         }
         IsModified = false;
     }

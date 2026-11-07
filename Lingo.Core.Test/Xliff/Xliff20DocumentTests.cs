@@ -109,4 +109,43 @@ public class Xliff20DocumentTests
         var unitIds = doc.GetAllUnits().Select(u => u.Id).ToList();
         unitIds.Should().ContainInOrder("a", "m", "z");
     }
+
+    [Test]
+    public void RemoveUnit_RemovesUnitFromDocument()
+    {
+        var factory = new XliffDocumentFactory();
+        var doc = factory.Create("xliff-2.0", new[]
+        {
+            new Unit { Id = "key1", Source = "Text 1" },
+            new Unit { Id = "key2", Source = "Text 2" }
+        });
+
+        doc.GetUnitIds().Should().Contain("key1");
+        var removed = doc.RemoveUnit("key1");
+
+        removed.Should().BeTrue();
+        doc.GetUnitIds().Should().NotContain("key1");
+        doc.GetUnit("key1").Should().BeNull();
+    }
+
+    [Test]
+    public void RenameUnit_ChangesUnitKey_PreservingSourceAndTargetTexts()
+    {
+        var factory = new XliffDocumentFactory();
+        var doc = factory.Create("xliff-2.0", new[]
+        {
+            new Unit { Id = "old.key", Source = "Source Text 20", Target = "Target Text 20" }
+        });
+
+        var renamed = doc.RenameUnit("old.key", "new.renamed.key20");
+
+        renamed.Should().BeTrue();
+        doc.GetUnitIds().Should().NotContain("old.key");
+        doc.GetUnitIds().Should().Contain("new.renamed.key20");
+
+        var newUnit = doc.GetUnit("new.renamed.key20");
+        newUnit.Should().NotBeNull();
+        newUnit!.Source.Should().Be("Source Text 20");
+        newUnit.Target.Should().Be("Target Text 20");
+    }
 }

@@ -1,27 +1,63 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Lingo.UI.ViewModels"
+        xmlns:files="using:Lingo.Core.Files"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="750"
         x:Class="Lingo.UI.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="{Binding Title}"
-        Width="1100" Height="750"
+        Width="1150" Height="800"
         WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto">
-        <!-- Menu / Top Toolbar -->
-        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,8" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <!-- Top Application Menu -->
+        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumColor}" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Open Translation Files..." Command="{Binding OpenFileCommand}" InputGesture="Ctrl+O" />
+                    <MenuItem Header="_Save All Files" Command="{Binding SaveAllFilesCommand}" InputGesture="Ctrl+S" IsEnabled="{Binding HasLoadedFiles}" />
+                    <MenuItem Header="Save _Current Key" Command="{Binding KeyEditor.SaveAllTranslationsCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                    <Separator />
+                    <MenuItem Header="_Close Files" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                    <Separator />
+                    <MenuItem Header="E_xit" Click="OnMenuExitClick" />
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="↩️ _Revert Key Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" InputGesture="Ctrl+Z" IsEnabled="{Binding KeyEditor.CanRevertKeyChanges}" />
+                    <Separator />
+                    <MenuItem Header="➕ _Add Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
+                    <MenuItem Header="✏️ _Rename Key..." Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" InputGesture="F2" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                    <MenuItem Header="📦 _Move Key to Group..." Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsEnabled="{Binding KeyEditor.CanMoveKey}" />
+                    <MenuItem Header="🗑️ _Delete Key" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" InputGesture="Delete" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                </MenuItem>
+                <MenuItem Header="_Translations">
+                    <MenuItem Header="⚡ _Sync Key Across Sibling Files" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.CanSyncSelectedKey}" />
+                    <MenuItem Header="🔄 Sync _All Missing Keys" Command="{Binding KeyEditor.SyncAllMissingKeysCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Header="All Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="All" />
+                    <MenuItem Header="⏳ Untranslated Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Untranslated" />
+                    <MenuItem Header="⚠️ Outdated Translations" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Outdated" />
+                    <MenuItem Header="❌ Missing Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Missing" />
+                    <Separator />
+                    <MenuItem Header="🔀 Switch View (Key Tree / File)" Command="{Binding ToggleViewModeCommand}" />
+                </MenuItem>
+            </Menu>
+        </Border>
+
+        <!-- Main Toolbar -->
+        <Border Grid.Row="1" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
             <DockPanel LastChildFill="False">
                 <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Left">
                     <TextBlock Text="🌐 Lingo Editor" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <Button Content="📂 Open Translation File..." Command="{Binding OpenFileCommand}" FontWeight="SemiBold" />
+                    <Button Content="📂 Open Translation Files..." Command="{Binding OpenFileCommand}" FontWeight="SemiBold" />
                     <Button Content="💾 Save All Files" Command="{Binding SaveAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
                     <Button Content="🔄 Sync All Missing Keys" Command="{Binding KeyEditor.SyncAllMissingKeysCommand}" IsEnabled="{Binding HasLoadedFiles}" />
                     <Button Content="✖ Close" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
@@ -33,9 +69,9 @@
             </DockPanel>
         </Border>
 
-        <!-- Search and Add Key Bar with Criteria Filters -->
-        <Border Grid.Row="1" Background="{DynamicResource SystemChromeLowColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
-            <Grid ColumnDefinitions="Auto,8,220,16,*,Auto">
+        <!-- Search, Filter, and Add Key Bar -->
+        <Border Grid.Row="2" Background="{DynamicResource SystemChromeLowColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="Auto,8,220,12,*,Auto">
                 <!-- Filter Mode Chips -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
                     <Button Content="All" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="All" FontSize="11" Padding="8,4" />
@@ -48,16 +84,28 @@
                 <TextBox Grid.Column="2" PlaceholderText="🔍 Search key/text..." Text="{Binding KeyEditor.SearchFilter}" VerticalAlignment="Center" />
 
                 <!-- Add New Key Inline -->
-                <Grid Grid.Column="4" ColumnDefinitions="*,8,*,8,Auto" VerticalAlignment="Center">
-                    <TextBox Grid.Column="0" PlaceholderText="New Key Path (e.g. A.B.Key)" Text="{Binding KeyEditor.NewKeyPath}" />
-                    <TextBox Grid.Column="2" PlaceholderText="Default Source Text" Text="{Binding KeyEditor.NewKeyDefaultSource}" />
-                    <Button Grid.Column="4" Content="➕ Add &amp; Sync Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
+                <Grid Grid.Column="4" ColumnDefinitions="Auto,*,6,*,6,Auto" VerticalAlignment="Center">
+                    <!-- Target Group selector (if multiple groups) -->
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding KeyEditor.LoadedGroups}" 
+                              SelectedItem="{Binding KeyEditor.SelectedGroup}"
+                              IsVisible="{Binding KeyEditor.LoadedGroups.Count}"
+                              Margin="0,0,6,0" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="files:LoadedTranslationGroup">
+                                <TextBlock Text="{Binding GroupStub, StringFormat='Group: {0}'}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <TextBox Grid.Column="1" PlaceholderText="New Key (e.g. app.save)" Text="{Binding KeyEditor.NewKeyPath}" />
+                    <TextBox Grid.Column="3" PlaceholderText="Default Source Text" Text="{Binding KeyEditor.NewKeyDefaultSource}" />
+                    <Button Grid.Column="5" Content="➕ Add Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
                 </Grid>
             </Grid>
         </Border>
 
         <!-- Main Workspace -->
-        <Grid Grid.Row="2" ColumnDefinitions="320,4,*">
+        <Grid Grid.Row="3" ColumnDefinitions="320,4,*">
             <!-- Left Pane: Hierarchical Key Tree View -->
             <Border Grid.Column="0" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,1,0" Background="{DynamicResource SystemChromeLowColor}">
                 <Grid RowDefinitions="Auto,*">
@@ -70,6 +118,22 @@
                               SelectedItem="{Binding KeyEditor.SelectedNode}"
                               SelectionMode="Single"
                               Margin="4">
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="✏️ Rename Key..." Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                                <MenuItem Header="📦 Move Key to Group..." Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsEnabled="{Binding KeyEditor.CanMoveKey}" />
+                                <MenuItem Header="🗑️ Delete Key" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                                <Separator />
+                                <MenuItem Header="⚡ Sync Sibling Files" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.CanSyncSelectedKey}" />
+                                <MenuItem Header="↩️ Revert Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" IsEnabled="{Binding KeyEditor.CanRevertKeyChanges}" />
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem" x:DataType="vm:KeyTreeNodeViewModel">
+                                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            </Style>
+                        </TreeView.Styles>
                         <TreeView.ItemTemplate>
                             <TreeDataTemplate ItemsSource="{Binding Children}" DataType="vm:KeyTreeNodeViewModel">
                                 <StackPanel Orientation="Horizontal" Spacing="6" Margin="2">
@@ -87,13 +151,16 @@
 
             <!-- Right Pane: Key-Centric Translation Workspace -->
             <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" Margin="12">
-                <!-- Header for Selected Key -->
+                <!-- Header for Selected Key with Actions -->
                 <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4" Padding="12,8" Margin="0,0,0,10">
                     <DockPanel LastChildFill="True">
-                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6">
                             <Button Content="↩️" ToolTip.Tip="Revert Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" />
-                            <Button Content="⚡ Sync This Key to Missing Languages" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
-                            <Button Content="💾 Save Translations" Command="{Binding KeyEditor.SaveAllTranslationsCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                            <Button Content="✏️ Rename..." ToolTip.Tip="Rename key in dialog" Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                            <Button Content="📦 Move..." ToolTip.Tip="Move key to another translation group" Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsVisible="{Binding KeyEditor.CanMoveKey}" />
+                            <Button Content="⚡ Sync Sibling Files" ToolTip.Tip="Synchronize key across sibling files" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.CanSyncSelectedKey}" />
+                            <Button Content="💾 Save" ToolTip.Tip="Save translations for key" Command="{Binding KeyEditor.SaveAllTranslationsCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                            <Button Content="🗑️ Delete" ToolTip.Tip="Delete key from files" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Spacing="2">
@@ -118,6 +185,9 @@
                                         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
                                             <TextBlock Text="{Binding LanguageCode}" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
                                             <TextBlock Text="{Binding DocumentName, StringFormat='({0})'}" Opacity="0.6" FontSize="11" VerticalAlignment="Center"/>
+                                            <Border IsVisible="{Binding GroupStub, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Background="#E0E7FF" CornerRadius="3" Padding="4,1">
+                                                <TextBlock Text="{Binding GroupStub, StringFormat='[{0}]'}" Foreground="#3730A3" FontSize="10" FontWeight="SemiBold"/>
+                                            </Border>
                                         </StackPanel>
 
                                         <!-- Status indicator / Missing badge -->
@@ -152,7 +222,7 @@
         </Grid>
 
         <!-- Status Bar -->
-        <Border Grid.Row="3" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,4" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,1,0,0">
+        <Border Grid.Row="4" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,4" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,1,0,0">
             <DockPanel LastChildFill="False">
                 <TextBlock DockPanel.Dock="Left" Text="{Binding KeyEditor.StatusText}" FontSize="11" Opacity="0.8"/>
                 <TextBlock DockPanel.Dock="Right" Text="{Binding StatusInfo}" FontSize="11" Opacity="0.8"/>

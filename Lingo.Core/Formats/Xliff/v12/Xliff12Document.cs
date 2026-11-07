@@ -275,6 +275,36 @@ public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         return ImportResult.Imported;
     }
 
+    public bool RemoveUnit(string unitId)
+    {
+        var removed = false;
+        foreach (var file in InternalXliff.File)
+        {
+            if (file.Body?.TransUnit != null)
+            {
+                var tu = file.Body.TransUnit.FirstOrDefault(u => u.Id == unitId);
+                if (tu != null)
+                {
+                    file.Body.TransUnit.Remove(tu);
+                    removed = true;
+                }
+            }
+        }
+        return removed;
+    }
+
+    public bool RenameUnit(string oldUnitId, string newUnitId)
+    {
+        var tu = FindTransUnit(oldUnitId);
+        if (tu == null)
+        {
+            return false;
+        }
+
+        tu.Id = newUnitId;
+        return true;
+    }
+
     public IEnumerable<string> RetainUnitIds(IEnumerable<string> ids)
     {
         var idSet = ids.ToHashSet();

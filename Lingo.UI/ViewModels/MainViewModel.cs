@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,20 +24,23 @@ public partial class MainViewModel : ViewModelBase
     private bool _isKeyTreeViewMode = true;
 
     [ObservableProperty]
-    private KeyEditorViewModel _keyEditor = new();
+    private KeyEditorViewModel _keyEditor;
 
     [ObservableProperty]
-    private string _statusInfo = "Ready. Open a translation file to begin.";
+    private string _statusInfo = "Ready. Open translation file(s) to begin.";
 
     [ObservableProperty]
-    private LoadedTranslationGroup? _loadedGroup;
+    private ObservableCollection<LoadedTranslationGroup> _loadedGroups = new();
+
+    public LoadedTranslationGroup? LoadedGroup => LoadedGroups.FirstOrDefault();
 
     [ObservableProperty]
     private bool _hasLoadedFiles;
 
-    public MainViewModel(IFileDialogService? fileDialogService = null)
+    public MainViewModel(IFileDialogService? fileDialogService = null, IDialogService? dialogService = null)
     {
         _fileDialogService = fileDialogService;
+        _keyEditor = new KeyEditorViewModel(dialogService);
         _keyEditor.Clear();
     }
 
@@ -55,51 +59,71 @@ public partial class MainViewModel : ViewModelBase
             return;
         }
 
-        var path = await _fileDialogService.OpenFileDialogAsync();
-        if (!string.IsNullOrEmpty(path))
+        var paths = await _fileDialogService.OpenFilesDialogAsync();
+        if (paths.Count > 0)
         {
-            LoadTranslationFile(path);
+            LoadTranslationFiles(paths);
         }
     }
 
     public void LoadTranslationFile(string path)
     {
-        var group = _fileLoader.LoadGroupFromPath(path);
-        if (group == null || group.Files.Count == 0)
+        LoadTranslationFiles(new[] { path });
+    }
+
+    public void LoadTranslationFiles(IEnumerable<string> paths)
+    {
+        var groups = _fileLoader.LoadGroups(paths);
+        if (groups.Count == 0)
         {
-            StatusInfo = $"Error: Unable to load translation file or find siblings from '{path}'.";
+            StatusInfo = "Error: Unable to load translation file(s) or find siblings.";
             return;
         }
 
-        LoadedGroup = group;
-        KeyEditor.LoadTranslationGroup(group);
+        LoadedGroups.Clear();
+        foreach (var grp in groups)
+        {
+            LoadedGroups.Add(grp);
+        }
+
+        KeyEditor.LoadTranslationGroups(groups);
         HasLoadedFiles = true;
 
-        Title = $"Lingo Localization Editor - {group.GroupStub} ({group.Files.Count} files)";
-        StatusInfo = $"Loaded '{group.GroupStub}' with {group.Files.Count} sibling file(s) from {group.DirectoryPath}";
+        var totalFiles = LoadedGroups.Sum(g => g.Files.Count);
+        if (LoadedGroups.Count == 1)
+        {
+            var grp = LoadedGroups[0];
+            Title = $"Lingo Localization Editor - {grp.GroupStub} ({grp.Files.Count} files)";
+            StatusInfo = $"Loaded '{grp.GroupStub}' with {grp.Files.Count} sibling file(s) from {grp.DirectoryPath}";
+        }
+        else
+        {
+            Title = $"Lingo Localization Editor - {LoadedGroups.Count} translation groups ({totalFiles} files)";
+            StatusInfo = $"Loaded {LoadedGroups.Count} translation group(s) with {totalFiles} total files.";
+        }
     }
 
     [RelayCommand]
     public void SaveAllFiles()
     {
-        if (LoadedGroup == null)
+        if (LoadedGroups.Count == 0)
         {
             StatusInfo = "No files loaded to save.";
             return;
         }
 
         KeyEditor.SaveAllTranslations();
-        _fileLoader.SaveGroup(LoadedGroup);
-        StatusInfo = $"Saved {LoadedGroup.Files.Count} translation files to disk.";
+        var savedCount = _fileLoader.SaveModifiedFiles(LoadedGroups);
+        StatusInfo = $"Saved {savedCount} modified translation file(s) to disk.";
     }
 
     [RelayCommand]
     public void CloseFiles()
     {
         KeyEditor.Clear();
-        LoadedGroup = null;
+        LoadedGroups.Clear();
         HasLoadedFiles = false;
         Title = "Lingo Localization Editor";
-        StatusInfo = "Ready. Open a translation file to begin.";
+        StatusInfo = "Ready. Open translation file(s) to begin.";
     }
 }

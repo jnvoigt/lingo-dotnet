@@ -70,8 +70,8 @@ public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSource
             {
                 Id = unit.Id,
                 Source = unit.Source,
-                Target = unit.Target, // In sync, usually target is empty for new units or copied if needed
-                State = unit.State
+                Target = unit.Target,
+                State = unit.State ?? (string.IsNullOrEmpty(unit.Target) ? TranslationState.NeedsTranslation : TranslationState.Translated)
             };
             return SyncResult.NewUnitCreated;
         }
@@ -79,6 +79,7 @@ public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSource
         if (existing.Source != unit.Source)
         {
             existing.Source = unit.Source;
+            existing.State = TranslationState.NeedsAdaptation;
             return SyncResult.SourceValueHasChanged;
         }
 
@@ -111,6 +112,21 @@ public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSource
         existing.Source = unit.Source;
         existing.Target = unit.Target;
         return ImportResult.Imported;
+    }
+
+    public bool RemoveUnit(string unitId) => _units.Remove(unitId);
+
+    public bool RenameUnit(string oldUnitId, string newUnitId)
+    {
+        if (!_units.TryGetValue(oldUnitId, out var unit))
+        {
+            return false;
+        }
+
+        _units.Remove(oldUnitId);
+        unit.Id = newUnitId;
+        _units[newUnitId] = unit;
+        return true;
     }
 
     public IEnumerable<string> RetainUnitIds(IEnumerable<string> ids)

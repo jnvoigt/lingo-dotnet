@@ -49,4 +49,22 @@ public partial class KeyTreeNodeViewModel : ViewModelBase
     public string Icon => IsLeaf ? "🏷️" : "📁";
 
     public string DisplayText => IsLeaf ? $"{Name}" : $"{Name} ({Children.Count})";
+
+    public void ExpandAll()
+    {
+        IsExpanded = true;
+        foreach (var child in Children)
+        {
+            child.ExpandAll();
+        }
+    }
+
+    public void CollapseAll()
+    {
+        IsExpanded = false;
+        foreach (var child in Children)
+        {
+            child.CollapseAll();
+        }
+    }
 }

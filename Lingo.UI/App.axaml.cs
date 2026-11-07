@@ -20,7 +20,8 @@ public partial class App : Application
         {
             var mainWindow = new MainWindow();
             var fileDialogService = new AvaloniaFileDialogService(() => desktop.MainWindow ?? mainWindow);
-            mainWindow.DataContext = new MainViewModel(fileDialogService);
+            var dialogService = new AvaloniaDialogService(() => desktop.MainWindow ?? mainWindow);
+            mainWindow.DataContext = new MainViewModel(fileDialogService, dialogService);
             desktop.MainWindow = mainWindow;
         }
 

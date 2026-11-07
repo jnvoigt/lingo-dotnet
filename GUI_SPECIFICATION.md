@@ -82,9 +82,12 @@ To provide maximum productivity for developers and translators who think in term
 - **Missing Key Detection & Format-Aware Synchronization:**
   - When a key exists in one language file but is missing in others (or when a user introduces a new key via the UI):
     - Missing keys are highlighted with a prominent visual warning indicator (`⚠️ Missing in this file`).
-    - **Single-Key Sync:** One-click synchronization (`Sync This Key to Missing Languages`) creates the missing unit in target files with appropriate format-specific defaults (`TranslationState.NeedsTranslation`, copying source text or empty target according to format rules).
-    - **Batch Project Sync:** Global sync command (`Sync All Missing Keys`) iterates across all loaded documents, detects all key discrepancies, and synchronizes them bidirectionally or from source to target.
-    - **New Key Scaffolding:** Adding a new key immediately updates the hierarchical tree and scaffolds translation entries across all active languages.
+    - **Source-Anchored Synchronization & Orphan Deletion:** The master source document serves as the single source of truth. Synchronizing a key that is missing in the source file results in the immediate deletion of that orphaned key from all sibling target files. Synchronizing keys present in the source file scaffolds them into missing target files with format-specific defaults (`TranslationState.NeedsTranslation`).
+    - **Source Value Change Synchronization:** When the source value in the source document differs from the source value recorded in a target sibling document, synchronization updates the target document's source text and adjusts the translation state to `needs-adaptation` (`TranslationState.NeedsAdaptation`), matching the CLI sync engine behavior.
+    - **Dynamic Sync Button Enablement:** The single-key sync button (`⚡ Sync Sibling Files`) is dynamically enabled whenever discrepancies exist between source and target files (missing key in target, orphaned key in target, or differing source text values). When all sibling files are in sync, the sync button is disabled.
+    - **Single-Key Sync:** One-click synchronization (`Sync This Key across Sibling Files`) synchronizes the key against the master source file, propagating additions, updating source values with state adjustments, or pruning orphans.
+    - **Batch Project Sync:** Global sync command (`Sync All Missing Keys`) iterates across all loaded documents, propagates missing source keys to target files, updates changed source values with state adjustments, and purges orphaned target keys not found in the source file.
+    - **New Key Scaffolding:** Adding a new key immediately updates the source document, syncs the hierarchical tree, and scaffolds translation entries across all active languages.
 
 ---
 

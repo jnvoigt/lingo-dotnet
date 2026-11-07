@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
@@ -16,16 +18,27 @@ public class AvaloniaFileDialogService : IFileDialogService
 
     public async Task<string?> OpenFileDialogAsync()
     {
+        var files = await OpenFilesDialogAsync(allowMultiple: false);
+        return files.Count > 0 ? files[0] : null;
+    }
+
+    public Task<IReadOnlyList<string>> OpenFilesDialogAsync()
+    {
+        return OpenFilesDialogAsync(allowMultiple: true);
+    }
+
+    private async Task<IReadOnlyList<string>> OpenFilesDialogAsync(bool allowMultiple)
+    {
         var window = _windowProvider();
-        if (window == null) return null;
+        if (window == null) return Array.Empty<string>();
 
         var storageProvider = TopLevel.GetTopLevel(window)?.StorageProvider;
-        if (storageProvider == null) return null;
+        if (storageProvider == null) return Array.Empty<string>();
 
         var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = "Open Translation File",
-            AllowMultiple = false,
+            Title = allowMultiple ? "Open Translation Files" : "Open Translation File",
+            AllowMultiple = allowMultiple,
             FileTypeFilter = new[]
             {
                 new FilePickerFileType("Translation Files (*.xlf, *.xliff, *.xml)")
@@ -39,6 +52,6 @@ public class AvaloniaFileDialogService : IFileDialogService
             }
         });
 
-        return files.Count > 0 ? files[0].Path.LocalPath : null;
+        return files.Select(f => f.Path.LocalPath).ToList();
     }
 }

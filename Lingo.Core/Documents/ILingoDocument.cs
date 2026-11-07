@@ -14,6 +14,8 @@ public interface ILingoDocument
     SyncResult SyncUnit(Unit unit);
     MergeResult MergeUnit(Unit unit);
     ImportResult ImportUnit(Unit unit);
+    bool RemoveUnit(string unitId);
+    bool RenameUnit(string oldUnitId, string newUnitId);
     /// <summary>
     /// Retains only the given unit ids.
     /// </summary>

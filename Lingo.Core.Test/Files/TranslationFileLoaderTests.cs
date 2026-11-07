@@ -258,4 +258,65 @@ public class TranslationFileLoaderTests
             file.Document.GetUnit(unitId)?.Source.Should().Be(updatedSource);
         }
     }
+
+    [Test]
+    public void LoadGroups_WithMultipleDistinctFilePaths_LoadsAllDistinctGroups()
+    {
+        var data12Path = GetSyncTestFilePath("data12.xlf");
+        var data20Path = GetSyncTestFilePath("data20.xlf");
+        var loader = new TranslationFileLoader();
+
+        var groups = loader.LoadGroups(new[] { data12Path, data20Path });
+
+        groups.Should().HaveCount(2);
+        groups.Select(g => g.GroupStub).Should().Contain("data12");
+        groups.Select(g => g.GroupStub).Should().Contain("data20");
+    }
+
+    [Test]
+    public void SaveModifiedFiles_OnlySavesFilesMarkedAsModified()
+    {
+        using var tempDir = new TestDirectory();
+        var file1 = tempDir.CreateFile("file1.xlf");
+        var file2 = tempDir.CreateFile("file2.xlf");
+
+        const string initialXml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file source-language="en" datatype="plaintext" original="f.txt">
+                    <body>
+                        <trans-unit id="k1">
+                            <source>Initial</source>
+                        </trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """;
+
+        File.WriteAllText(file1.FullName, initialXml);
+        File.WriteAllText(file2.FullName, initialXml);
+
+        var loader = new TranslationFileLoader();
+        var groups = loader.LoadGroups(new[] { file1.FullName, file2.FullName });
+        groups.Should().HaveCount(2);
+
+        var group1 = groups.First(g => g.GroupStub == "file1");
+        var group2 = groups.First(g => g.GroupStub == "file2");
+
+        // Only modify group1
+        group1.Files[0].Document.SetValue("k1", "Modified in Group 1");
+        group1.Files[0].IsModified = true;
+
+        var savedCount = loader.SaveModifiedFiles(groups);
+
+        savedCount.Should().Be(1);
+        group1.Files[0].IsModified.Should().BeFalse();
+
+        // Verify disk contents
+        var reloaded1 = loader.LoadGroupFromPath(file1.FullName);
+        var reloaded2 = loader.LoadGroupFromPath(file2.FullName);
+
+        reloaded1!.Files[0].Document.GetValue("k1").Should().Be("Modified in Group 1");
+        reloaded2!.Files[0].Document.GetValue("k1").Should().Be("Initial"); // unchanged initial value
+    }
 }

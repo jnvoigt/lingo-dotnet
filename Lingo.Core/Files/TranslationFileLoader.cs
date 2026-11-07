@@ -18,6 +18,34 @@ public class TranslationFileLoader
         return LoadGroup(fileInfo);
     }
 
+    public IReadOnlyList<LoadedTranslationGroup> LoadGroups(IEnumerable<string> paths, LingoFormat? expectedFormat = null)
+    {
+        var groups = new List<LoadedTranslationGroup>();
+        var seenKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var path in paths)
+        {
+            var fileInfo = LingoFileInfo.FromPath(path, expectedFormat);
+            if (fileInfo == null || !fileInfo.File.Exists)
+            {
+                continue;
+            }
+
+            var dir = fileInfo.File.DirectoryName ?? string.Empty;
+            var groupKey = $"{dir}::{fileInfo.Stub}::{fileInfo.Format}";
+            if (seenKeys.Add(groupKey))
+            {
+                var grp = LoadGroup(fileInfo);
+                if (grp != null)
+                {
+                    groups.Add(grp);
+                }
+            }
+        }
+
+        return groups;
+    }
+
     public LoadedTranslationGroup? LoadGroup(LingoFileInfo fileInfo)
     {
         if (!fileInfo.File.Exists || fileInfo.Format == null)
@@ -98,6 +126,23 @@ public class TranslationFileLoader
         {
             SaveFile(file);
         }
+    }
+
+    public int SaveModifiedFiles(IEnumerable<LoadedTranslationGroup> groups)
+    {
+        var savedCount = 0;
+        foreach (var group in groups)
+        {
+            foreach (var file in group.Files)
+            {
+                if (file.IsModified)
+                {
+                    SaveFile(file);
+                    savedCount++;
+                }
+            }
+        }
+        return savedCount;
     }
 
     private static (string LanguageLabel, bool IsSource) DetermineLanguageAndRole(LingoFileInfo fileInfo, ILingoDocument document)
