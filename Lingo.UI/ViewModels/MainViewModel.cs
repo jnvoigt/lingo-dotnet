@@ -21,9 +21,6 @@ public partial class MainViewModel : ViewModelBase
     private string _title = "Lingo Localization Editor";
 
     [ObservableProperty]
-    private bool _isKeyTreeViewMode = true;
-
-    [ObservableProperty]
     private KeyEditorViewModel _keyEditor;
 
     [ObservableProperty]
@@ -42,12 +39,6 @@ public partial class MainViewModel : ViewModelBase
         _fileDialogService = fileDialogService;
         _keyEditor = new KeyEditorViewModel(dialogService);
         _keyEditor.Clear();
-    }
-
-    [RelayCommand]
-    public void ToggleViewMode()
-    {
-        IsKeyTreeViewMode = !IsKeyTreeViewMode;
     }
 
     [RelayCommand]
@@ -115,6 +106,58 @@ public partial class MainViewModel : ViewModelBase
         KeyEditor.SaveAllTranslations();
         var savedCount = _fileLoader.SaveModifiedFiles(LoadedGroups);
         StatusInfo = $"Saved {savedCount} modified translation file(s) to disk.";
+    }
+
+    [RelayCommand]
+    public void ReloadAllFiles()
+    {
+        if (LoadedGroups.Count == 0)
+        {
+            StatusInfo = "No files loaded to reload.";
+            return;
+        }
+
+        var filePaths = LoadedGroups
+            .SelectMany(g => g.Files)
+            .Select(f => f.FilePath)
+            .Distinct()
+            .ToList();
+
+        LoadTranslationFiles(filePaths);
+        StatusInfo = $"Reloaded {LoadedGroups.Count} translation group(s) from disk.";
+    }
+
+    [RelayCommand]
+    public void ReloadGroup(LoadedTranslationGroup? group)
+    {
+        if (group == null) return;
+
+        var groupPaths = group.Files.Select(f => f.FilePath).ToList();
+        var reloadedGroups = _fileLoader.LoadGroups(groupPaths);
+        var reloadedGroup = reloadedGroups.FirstOrDefault();
+        if (reloadedGroup == null)
+        {
+            StatusInfo = $"Error: Unable to reload group '{group.GroupStub}' from disk.";
+            return;
+        }
+
+        var idx = LoadedGroups.IndexOf(group);
+        if (idx >= 0)
+        {
+            LoadedGroups[idx] = reloadedGroup;
+        }
+        else
+        {
+            var match = LoadedGroups.FirstOrDefault(g => g.GroupStub == group.GroupStub && g.DirectoryPath == group.DirectoryPath);
+            if (match != null)
+            {
+                var matchIdx = LoadedGroups.IndexOf(match);
+                LoadedGroups[matchIdx] = reloadedGroup;
+            }
+        }
+
+        KeyEditor.LoadTranslationGroups(LoadedGroups);
+        StatusInfo = $"Reloaded translation group '{reloadedGroup.GroupStub}' from disk.";
     }
 
     [RelayCommand]

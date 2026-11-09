@@ -106,6 +106,63 @@ public class MainViewModelTests
         mainVm.HasLoadedFiles.Should().BeFalse();
     }
 
+    [Test]
+    public async Task ReloadAllFiles_ReloadsChangesFromDisk()
+    {
+        using var tempDir = new TestDirectory();
+        var g1Source = tempDir.CreateFile("g1.xlf");
+
+        const string g1SourceXml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file source-language="en" datatype="plaintext" original="g1.txt">
+                    <body>
+                        <trans-unit id="g1.key1">
+                            <source>Original Source</source>
+                        </trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """;
+
+        File.WriteAllText(g1Source.FullName, g1SourceXml);
+
+        var dialogMock = new MockFileDialogService
+        {
+            FilesToReturn = new List<string> { g1Source.FullName }
+        };
+
+        var mainVm = new MainViewModel(dialogMock);
+        await mainVm.OpenFileCommand.ExecuteAsync(null);
+
+        mainVm.HasLoadedFiles.Should().BeTrue();
+        mainVm.KeyEditor.SelectKeyByPath("g1.key1");
+        mainVm.KeyEditor.CurrentKeyTranslations.First().SourceText.Should().Be("Original Source");
+
+        // Simulate external disk change
+        const string g1UpdatedXml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+                <file source-language="en" datatype="plaintext" original="g1.txt">
+                    <body>
+                        <trans-unit id="g1.key1">
+                            <source>Updated Source from Disk</source>
+                        </trans-unit>
+                    </body>
+                </file>
+            </xliff>
+            """;
+
+        File.WriteAllText(g1Source.FullName, g1UpdatedXml);
+
+        // Act: Reload from disk
+        mainVm.ReloadAllFilesCommand.Execute(null);
+
+        // Assert: Refreshed from disk
+        mainVm.KeyEditor.SelectKeyByPath("g1.key1");
+        mainVm.KeyEditor.CurrentKeyTranslations.First().SourceText.Should().Be("Updated Source from Disk");
+    }
+
     private class StubDialogService : IDialogService
     {
         public Task<string?> ShowRenameKeyDialogAsync(string currentKey) => Task.FromResult<string?>(null);
@@ -113,5 +170,9 @@ public class MainViewModelTests
             string currentKey,
             IReadOnlyList<Lingo.Core.Files.LoadedTranslationGroup> availableGroups,
             Lingo.Core.Files.LoadedTranslationGroup? currentGroup) => Task.FromResult<Lingo.Core.Files.LoadedTranslationGroup?>(null);
+
+        public Task<AddKeyDialogResult?> ShowAddKeyDialogAsync(
+            IReadOnlyList<Lingo.Core.Files.LoadedTranslationGroup> availableGroups,
+            Lingo.Core.Files.LoadedTranslationGroup? defaultGroup) => Task.FromResult<AddKeyDialogResult?>(null);
     }
 }

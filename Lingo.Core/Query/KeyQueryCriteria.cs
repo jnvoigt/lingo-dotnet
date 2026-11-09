@@ -32,6 +32,12 @@ public class KeyQueryCriteria
         TargetLanguage = targetLanguage
     };
 
+    public static KeyQueryCriteria NeedsReview(string? targetLanguage = null) => new()
+    {
+        FilterMode = KeyFilterMode.NeedsReviewOnly,
+        TargetLanguage = targetLanguage
+    };
+
     public static KeyQueryCriteria MissingInLocale(string targetLanguage) => new()
     {
         FilterMode = KeyFilterMode.MissingOnly,

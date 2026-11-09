@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Lingo.Core.Test.Infrastructure;
 
-public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSourceValue
+public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSourceValue, IHasTranslationState
 {
     private readonly Dictionary<string, Unit> _units = new();
 
@@ -38,15 +38,31 @@ public class InMemoryLingoDocument : ILingoDocument, IHasCultureInfo, IHasSource
 
     public string? GetValue(string unitId) => GetUnit(unitId)?.Target;
 
+    public TranslationState GetTargetState(string unitId) => GetUnit(unitId)?.State ?? TranslationState.None;
+
+    public void SetTargetState(string unitId, TranslationState state)
+    {
+        if (_units.TryGetValue(unitId, out var unit))
+        {
+            unit.State = state;
+        }
+    }
+
     public void SetValue(string unitId, string value)
     {
         if (_units.TryGetValue(unitId, out var unit))
         {
             unit.Target = value;
+            unit.State = string.IsNullOrEmpty(value) ? TranslationState.NeedsTranslation : TranslationState.NeedsReview;
         }
         else
         {
-            _units[unitId] = new Unit { Id = unitId, Target = value };
+            _units[unitId] = new Unit
+            {
+                Id = unitId,
+                Target = value,
+                State = string.IsNullOrEmpty(value) ? TranslationState.NeedsTranslation : TranslationState.NeedsReview
+            };
         }
     }
 

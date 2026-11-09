@@ -24,6 +24,7 @@
                     <MenuItem Header="_Open Translation Files..." Command="{Binding OpenFileCommand}" InputGesture="Ctrl+O" />
                     <MenuItem Header="_Save All Files" Command="{Binding SaveAllFilesCommand}" InputGesture="Ctrl+S" IsEnabled="{Binding HasLoadedFiles}" />
                     <MenuItem Header="Save _Current Key" Command="{Binding KeyEditor.SaveAllTranslationsCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                    <MenuItem Header="_Reload Files from Disk" Command="{Binding ReloadAllFilesCommand}" InputGesture="Ctrl+R" IsEnabled="{Binding HasLoadedFiles}" />
                     <Separator />
                     <MenuItem Header="_Close Files" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
                     <Separator />
@@ -32,7 +33,7 @@
                 <MenuItem Header="_Edit">
                     <MenuItem Header="↩️ _Revert Key Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" InputGesture="Ctrl+Z" IsEnabled="{Binding KeyEditor.CanRevertKeyChanges}" />
                     <Separator />
-                    <MenuItem Header="➕ _Add Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
+                    <MenuItem Header="➕ _Add Key..." Command="{Binding KeyEditor.OpenAddKeyDialogCommand}" InputGesture="Ctrl+N" IsEnabled="{Binding HasLoadedFiles}" />
                     <MenuItem Header="✏️ _Rename Key..." Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" InputGesture="F2" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
                     <MenuItem Header="📦 _Move Key to Group..." Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsEnabled="{Binding KeyEditor.CanMoveKey}" />
                     <MenuItem Header="🗑️ _Delete Key" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" InputGesture="Delete" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
@@ -45,105 +46,163 @@
                     <MenuItem Header="All Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="All" />
                     <MenuItem Header="⏳ Untranslated Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Untranslated" />
                     <MenuItem Header="⚠️ Outdated Translations" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Outdated" />
+                    <MenuItem Header="🔍 Needs Review" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="NeedsReview" />
                     <MenuItem Header="❌ Missing Keys" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Missing" />
-                    <Separator />
-                    <MenuItem Header="🔀 Switch View (Key Tree / File)" Command="{Binding ToggleViewModeCommand}" />
                 </MenuItem>
             </Menu>
         </Border>
 
-        <!-- Main Toolbar -->
-        <Border Grid.Row="1" Background="{DynamicResource SystemChromeMediumColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
-            <DockPanel LastChildFill="False">
-                <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Left">
-                    <TextBlock Text="🌐 Lingo Editor" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <Button Content="📂 Open Translation Files..." Command="{Binding OpenFileCommand}" FontWeight="SemiBold" />
-                    <Button Content="💾 Save All Files" Command="{Binding SaveAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
-                    <Button Content="🔄 Sync All Missing Keys" Command="{Binding KeyEditor.SyncAllMissingKeysCommand}" IsEnabled="{Binding HasLoadedFiles}" />
-                    <Button Content="✖ Close" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Right">
-                    <Button Content="🔀 Switch View (Key Tree / File)" Command="{Binding ToggleViewModeCommand}" />
-                </StackPanel>
-            </DockPanel>
+        <!-- Main Toolbar (Icon-Only Compact Toolbar) -->
+        <Border Grid.Row="1" Background="{DynamicResource SystemChromeMediumColor}" Padding="8,4" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <TextBlock Text="🌐 Lingo" FontWeight="Bold" FontSize="13" VerticalAlignment="Center" Margin="2,0,8,0"/>
+                <Button Content="📂" ToolTip.Tip="Open Translation Files... (Ctrl+O)" Command="{Binding OpenFileCommand}" Padding="8,5" />
+                <Button Content="💾" ToolTip.Tip="Save All Files (Ctrl+S)" Command="{Binding SaveAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" Padding="8,5" />
+                <Button Content="🔄" ToolTip.Tip="Reload Files from Disk (Ctrl+R)" Command="{Binding ReloadAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" Padding="8,5" />
+                <Button Content="⚡" ToolTip.Tip="Sync All Missing Keys" Command="{Binding KeyEditor.SyncAllMissingKeysCommand}" IsEnabled="{Binding HasLoadedFiles}" Padding="8,5" />
+                <Button Content="➕" ToolTip.Tip="Add New Translation Key... (Ctrl+N)" Command="{Binding KeyEditor.OpenAddKeyDialogCommand}" IsEnabled="{Binding HasLoadedFiles}" Padding="8,5" />
+                <Button Content="✖" ToolTip.Tip="Close Files" Command="{Binding CloseFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" Padding="8,5" />
+            </StackPanel>
         </Border>
 
-        <!-- Search, Filter, and Add Key Bar -->
+        <!-- Search and Filter Bar -->
         <Border Grid.Row="2" Background="{DynamicResource SystemChromeLowColor}" Padding="10,6" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,0,1">
-            <Grid ColumnDefinitions="Auto,8,220,12,*,Auto">
+            <Grid ColumnDefinitions="Auto,12,*,10,Auto">
                 <!-- Filter Mode Chips -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
                     <Button Content="All" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="All" FontSize="11" Padding="8,4" />
                     <Button Content="⏳ Untranslated" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Untranslated" FontSize="11" Padding="8,4" />
                     <Button Content="⚠️ Outdated" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Outdated" FontSize="11" Padding="8,4" />
+                    <Button Content="🔍 Needs Review" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="NeedsReview" FontSize="11" Padding="8,4" />
                     <Button Content="❌ Missing" Command="{Binding KeyEditor.SetFilterCommand}" CommandParameter="Missing" FontSize="11" Padding="8,4" />
                 </StackPanel>
 
                 <!-- Search Key -->
                 <TextBox Grid.Column="2" PlaceholderText="🔍 Search key/text..." Text="{Binding KeyEditor.SearchFilter}" VerticalAlignment="Center" />
 
-                <!-- Add New Key Inline -->
-                <Grid Grid.Column="4" ColumnDefinitions="Auto,*,6,*,6,Auto" VerticalAlignment="Center">
-                    <!-- Target Group selector (if multiple groups) -->
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding KeyEditor.LoadedGroups}" 
-                              SelectedItem="{Binding KeyEditor.SelectedGroup}"
-                              IsVisible="{Binding KeyEditor.LoadedGroups.Count}"
-                              Margin="0,0,6,0" VerticalAlignment="Center">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="files:LoadedTranslationGroup">
-                                <TextBlock Text="{Binding GroupStub, StringFormat='Group: {0}'}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-
-                    <TextBox Grid.Column="1" PlaceholderText="New Key (e.g. app.save)" Text="{Binding KeyEditor.NewKeyPath}" />
-                    <TextBox Grid.Column="3" PlaceholderText="Default Source Text" Text="{Binding KeyEditor.NewKeyDefaultSource}" />
-                    <Button Grid.Column="5" Content="➕ Add Key" Command="{Binding KeyEditor.AddNewKeyCommand}" />
-                </Grid>
+                <!-- Add Key Button Triggering Dialog -->
+                <Button Grid.Column="4" Content="➕ Add Key..." Command="{Binding KeyEditor.OpenAddKeyDialogCommand}" IsEnabled="{Binding HasLoadedFiles}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="11" Padding="10,5" />
             </Grid>
         </Border>
 
         <!-- Main Workspace -->
-        <Grid Grid.Row="3" ColumnDefinitions="320,4,*">
-            <!-- Left Pane: Hierarchical Key Tree View -->
+        <Grid Grid.Row="3" ColumnDefinitions="340,4,*">
+            <!-- Left Pane: Tabbed Key Tree and Open Files Views -->
             <Border Grid.Column="0" BorderBrush="{DynamicResource SystemChromeHighColor}" BorderThickness="0,0,1,0" Background="{DynamicResource SystemChromeLowColor}">
-                <Grid RowDefinitions="Auto,*">
-                    <Border Grid.Row="0" Padding="10,6" Background="{DynamicResource SystemChromeMediumColor}">
-                        <TextBlock Text="📁 Translation Key Hierarchy" FontWeight="SemiBold" FontSize="12"/>
-                    </Border>
+                <TabControl TabStripPlacement="Top" Margin="0" Padding="0">
+                    <!-- Tab 1: Translation Key Hierarchy Tree -->
+                    <TabItem Header="📁 Key Tree" FontSize="12">
+                        <Grid RowDefinitions="Auto,*">
+                            <Border Grid.Row="0" Padding="10,6" Background="{DynamicResource SystemChromeMediumColor}">
+                                <TextBlock Text="📁 Translation Key Hierarchy" FontWeight="SemiBold" FontSize="12"/>
+                            </Border>
 
-                    <TreeView Grid.Row="1" 
-                              ItemsSource="{Binding KeyEditor.RootNodes}" 
-                              SelectedItem="{Binding KeyEditor.SelectedNode}"
-                              SelectionMode="Single"
-                              Margin="4">
-                        <TreeView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="✏️ Rename Key..." Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
-                                <MenuItem Header="📦 Move Key to Group..." Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsEnabled="{Binding KeyEditor.CanMoveKey}" />
-                                <MenuItem Header="🗑️ Delete Key" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
-                                <Separator />
-                                <MenuItem Header="⚡ Sync Sibling Files" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.CanSyncSelectedKey}" />
-                                <MenuItem Header="↩️ Revert Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" IsEnabled="{Binding KeyEditor.CanRevertKeyChanges}" />
-                            </ContextMenu>
-                        </TreeView.ContextMenu>
-                        <TreeView.Styles>
-                            <Style Selector="TreeViewItem" x:DataType="vm:KeyTreeNodeViewModel">
-                                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                            </Style>
-                        </TreeView.Styles>
-                        <TreeView.ItemTemplate>
-                            <TreeDataTemplate ItemsSource="{Binding Children}" DataType="vm:KeyTreeNodeViewModel">
-                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="2">
-                                    <TextBlock Text="{Binding Icon}" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </TreeDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                </Grid>
+                            <TreeView Grid.Row="1" 
+                                      ItemsSource="{Binding KeyEditor.RootNodes}" 
+                                      SelectedItem="{Binding KeyEditor.SelectedNode}"
+                                      SelectionMode="Single"
+                                      Margin="4">
+                                <TreeView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="➕ Add Key..." Command="{Binding KeyEditor.OpenAddKeyDialogCommand}" IsEnabled="{Binding HasLoadedFiles}" />
+                                        <MenuItem Header="✏️ Rename Key..." Command="{Binding KeyEditor.OpenRenameKeyDialogCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                                        <MenuItem Header="📦 Move Key to Group..." Command="{Binding KeyEditor.OpenMoveKeyDialogCommand}" IsEnabled="{Binding KeyEditor.CanMoveKey}" />
+                                        <MenuItem Header="🗑️ Delete Key" Command="{Binding KeyEditor.DeleteSelectedKeyCommand}" IsEnabled="{Binding KeyEditor.HasSelectedKey}" />
+                                        <Separator />
+                                        <MenuItem Header="⚡ Sync Sibling Files" Command="{Binding KeyEditor.SyncSelectedKeyAcrossLanguagesCommand}" IsEnabled="{Binding KeyEditor.CanSyncSelectedKey}" />
+                                        <MenuItem Header="↩️ Revert Changes" Command="{Binding KeyEditor.RevertKeyChangesCommand}" IsEnabled="{Binding KeyEditor.CanRevertKeyChanges}" />
+                                    </ContextMenu>
+                                </TreeView.ContextMenu>
+                                <TreeView.Styles>
+                                    <Style Selector="TreeViewItem" x:DataType="vm:KeyTreeNodeViewModel">
+                                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                    </Style>
+                                </TreeView.Styles>
+                                <TreeView.ItemTemplate>
+                                    <TreeDataTemplate ItemsSource="{Binding Children}" DataType="vm:KeyTreeNodeViewModel">
+                                        <StackPanel Orientation="Horizontal" Spacing="6" Margin="2">
+                                            <TextBlock Text="{Binding Icon}" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </TreeDataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
+                        </Grid>
+                    </TabItem>
+
+                    <!-- Tab 2: Open Files Grouping and Reloading View -->
+                    <TabItem Header="📑 Open Files" FontSize="12">
+                        <Grid RowDefinitions="Auto,*">
+                            <Border Grid.Row="0" Padding="10,6" Background="{DynamicResource SystemChromeMediumColor}">
+                                <DockPanel LastChildFill="False">
+                                    <TextBlock DockPanel.Dock="Left" Text="Open Sibling Groups" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center"/>
+                                    <Button DockPanel.Dock="Right" Content="🔄 Reload All" ToolTip.Tip="Reload all files from disk" Command="{Binding ReloadAllFilesCommand}" IsEnabled="{Binding HasLoadedFiles}" FontSize="11" Padding="6,2"/>
+                                </DockPanel>
+                            </Border>
+
+                            <ScrollViewer Grid.Row="1" Padding="6">
+                                <ItemsControl ItemsSource="{Binding LoadedGroups}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="files:LoadedTranslationGroup">
+                                            <Border Margin="0,0,0,8" Padding="8" CornerRadius="4" 
+                                                    Background="{DynamicResource SystemChromeLowColor}"
+                                                    BorderBrush="{DynamicResource SystemChromeHighColor}" 
+                                                    BorderThickness="1">
+                                                <StackPanel Spacing="6">
+                                                    <!-- Group Header -->
+                                                    <DockPanel LastChildFill="True">
+                                                        <Button DockPanel.Dock="Right" Content="🔄 Reload" 
+                                                                Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).ReloadGroupCommand}" 
+                                                                CommandParameter="{Binding}"
+                                                                ToolTip.Tip="Reload this group from disk"
+                                                                FontSize="11" Padding="6,2" />
+                                                        <StackPanel Orientation="Vertical" Spacing="2">
+                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                <TextBlock Text="📁" VerticalAlignment="Center" />
+                                                                <TextBlock Text="{Binding GroupStub}" FontWeight="Bold" FontSize="12" VerticalAlignment="Center" />
+                                                                <Border Background="#E0E7FF" CornerRadius="3" Padding="4,1">
+                                                                    <TextBlock Text="{Binding Format, StringFormat='[{0}]'}" Foreground="#3730A3" FontSize="10" FontWeight="SemiBold"/>
+                                                                </Border>
+                                                            </StackPanel>
+                                                            <TextBlock Text="{Binding DirectoryPath}" FontSize="10" Opacity="0.6" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding DirectoryPath}" />
+                                                        </StackPanel>
+                                                    </DockPanel>
+
+                                                    <!-- Files list in this Group -->
+                                                    <ItemsControl ItemsSource="{Binding Files}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate DataType="files:LoadedTranslationFile">
+                                                                <Border Padding="6,4" Margin="0,2" CornerRadius="3" Background="{DynamicResource SystemChromeMediumColor}">
+                                                                    <DockPanel LastChildFill="True">
+                                                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="4">
+                                                                            <Border IsVisible="{Binding IsModified}" Background="#FFF3CD" CornerRadius="2" Padding="4,1">
+                                                                                <TextBlock Text="● Modified" Foreground="#856404" FontSize="9" FontWeight="Bold"/>
+                                                                            </Border>
+                                                                            <Border IsVisible="{Binding !IsModified}" Background="#D4EDDA" CornerRadius="2" Padding="4,1">
+                                                                                <TextBlock Text="Clean" Foreground="#155724" FontSize="9"/>
+                                                                            </Border>
+                                                                        </StackPanel>
+
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                                                            <TextBlock Text="📄" FontSize="11" VerticalAlignment="Center"/>
+                                                                            <TextBlock Text="{Binding LanguageLabel}" FontWeight="SemiBold" FontSize="11" VerticalAlignment="Center"/>
+                                                                            <TextBlock Text="{Binding FileName, StringFormat='- {0}'}" FontSize="11" Opacity="0.7" VerticalAlignment="Center" ToolTip.Tip="{Binding FilePath}"/>
+                                                                        </StackPanel>
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </Border>
 
             <!-- Grid Splitter -->
@@ -198,6 +257,7 @@
                                             <Border IsVisible="{Binding !IsMissing}" Background="#D4EDDA" CornerRadius="3" Padding="6,2">
                                                 <TextBlock Text="{Binding State, StringFormat='State: {0}'}" Foreground="#155724" FontSize="11"/>
                                             </Border>
+                                            <Button Content="✅" ToolTip.Tip="Mark as Validated (removes state)" Command="{Binding MarkAsValidatedCommand}" IsVisible="{Binding !IsMissing}" FontSize="11" Padding="6,2" />
                                             <Button Content="↩️" ToolTip.Tip="Revert Changes" Command="{Binding RevertChangesCommand}" FontSize="11" Padding="6,2" />
                                         </StackPanel>
 

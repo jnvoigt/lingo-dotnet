@@ -63,6 +63,30 @@ public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         return tu?.Target != null ? MapState(tu.Target.State) : TranslationState.None;
     }
 
+    public void SetTargetState(string unitId, TranslationState state)
+    {
+        var tu = FindTransUnit(unitId);
+        if (tu == null)
+        {
+            return;
+        }
+
+        if (tu.Target == null)
+        {
+            tu.Target = new Target();
+        }
+
+        tu.Target.State = state switch
+        {
+            TranslationState.NeedsTranslation => "needs-translation",
+            TranslationState.NeedsAdaptation => "needs-adaptation",
+            TranslationState.NeedsReview => "needs-review-translation",
+            TranslationState.Translated => "translated",
+            TranslationState.None => null,
+            _ => null
+        };
+    }
+
     object IXliffDocument.InternalXliff => InternalXliff;
     public Type XliffType => typeof(V12.Xliff);
 
@@ -141,7 +165,7 @@ public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         tu.Target.Bx.Clear();
         tu.Target.Ex.Clear();
 
-        tu.Target.State = "translated";
+        tu.Target.State = string.IsNullOrEmpty(value) ? "needs-translation" : "needs-review-translation";
     }
 
     public void SortByKey()
@@ -351,8 +375,9 @@ public class Xliff12Document : IXliffDocument, IHasSourceValue, IHasTranslationS
 
         return state.ToLowerInvariant() switch
         {
-            "needs-translation" => TranslationState.NeedsTranslation,
+            "needs-translation" or "new" => TranslationState.NeedsTranslation,
             "needs-adaptation" => TranslationState.NeedsAdaptation,
+            "needs-review-translation" or "needs-review-adaptation" or "needs-review-l10n" or "needs-review" => TranslationState.NeedsReview,
             "translated" => TranslationState.Translated,
             "final" => TranslationState.Translated,
             "signed-off" => TranslationState.Translated,

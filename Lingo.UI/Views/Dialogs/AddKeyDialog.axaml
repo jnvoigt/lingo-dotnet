@@ -1,0 +1,42 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:files="using:Lingo.Core.Files"
+        x:Class="Lingo.UI.Views.Dialogs.AddKeyDialog"
+        Title="Add New Translation Key"
+        Width="480" Height="290"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+    <Grid RowDefinitions="*,Auto" Margin="20">
+        <StackPanel Grid.Row="0" Spacing="10">
+            <TextBlock Text="Add New Translation Key" FontWeight="Bold" FontSize="14" />
+            
+            <StackPanel Spacing="3">
+                <TextBlock Text="Key Path:" FontSize="11" FontWeight="SemiBold" />
+                <TextBox x:Name="KeyPathTextBox" PlaceholderText="e.g. app.save or buttons.cancel" />
+            </StackPanel>
+
+            <StackPanel Spacing="3">
+                <TextBlock Text="Default Source Text:" FontSize="11" FontWeight="SemiBold" />
+                <TextBox x:Name="SourceTextBox" PlaceholderText="e.g. Save" />
+            </StackPanel>
+
+            <StackPanel x:Name="GroupSelectionPanel" Spacing="3">
+                <TextBlock Text="Target Translation Group:" FontSize="11" FontWeight="SemiBold" />
+                <ComboBox x:Name="TargetGroupComboBox" HorizontalAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="files:LoadedTranslationGroup">
+                            <TextBlock Text="{Binding GroupStub, StringFormat='Group: {0}'}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <TextBlock x:Name="ErrorText" Foreground="#DC3545" FontSize="11" IsVisible="False" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,15,0,0">
+            <Button Content="Cancel" Click="OnCancelClick" IsCancel="True" />
+            <Button Content="Add Key" Click="OnAddClick" IsDefault="True" FontWeight="SemiBold" />
+        </StackPanel>
+    </Grid>
+</Window>

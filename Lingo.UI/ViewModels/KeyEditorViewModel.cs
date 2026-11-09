@@ -196,6 +196,7 @@ public partial class KeyEditorViewModel : ViewModelBase
         {
             KeyFilterMode.UntranslatedOnly => "Untranslated",
             KeyFilterMode.OutdatedOnly => "Outdated",
+            KeyFilterMode.NeedsReviewOnly => "Needs Review",
             KeyFilterMode.MissingOnly => "Missing",
             KeyFilterMode.TranslatedOnly => "Translated",
             _ => "All"
@@ -221,6 +222,7 @@ public partial class KeyEditorViewModel : ViewModelBase
         {
             "Untranslated" => KeyFilterMode.UntranslatedOnly,
             "Outdated" => KeyFilterMode.OutdatedOnly,
+            "NeedsReview" or "Review" => KeyFilterMode.NeedsReviewOnly,
             "Missing" => KeyFilterMode.MissingOnly,
             "Translated" => KeyFilterMode.TranslatedOnly,
             _ => KeyFilterMode.All
@@ -229,11 +231,8 @@ public partial class KeyEditorViewModel : ViewModelBase
 
     partial void OnSelectedNodeChanged(KeyTreeNodeViewModel? value)
     {
-        CurrentKeyTranslations.Clear();
         if (value == null)
         {
-            SelectedKeyFullPath = null;
-            RenameKeyNewName = string.Empty;
             return;
         }
 
@@ -248,7 +247,7 @@ public partial class KeyEditorViewModel : ViewModelBase
 
     private bool _isUpdatingSourceText;
 
-    private void LoadTranslationsForKey(string key)
+    private void LoadTranslationsForKey(string key, ISet<ILingoDocument>? modifiedDocuments = null)
     {
         CurrentKeyTranslations.Clear();
 
@@ -278,6 +277,11 @@ public partial class KeyEditorViewModel : ViewModelBase
                     {
                         entry.SourceText = primarySource;
                         entry.IsModified = false;
+                    }
+
+                    if (modifiedDocuments != null && modifiedDocuments.Contains(file.Document))
+                    {
+                        entry.IsModified = true;
                     }
 
                     entry.OnEntryModifiedChanged = UpdateKeyModifiedState;
@@ -321,13 +325,20 @@ public partial class KeyEditorViewModel : ViewModelBase
                 }
             }
 
+            var isFirst = true;
             foreach (var (doc, name, lang) in _documents)
             {
-                var entry = new KeyTranslationEntryViewModel(doc, name, key, lang);
+                var entry = new KeyTranslationEntryViewModel(doc, name, key, lang, isFirst);
+                isFirst = false;
                 if (entry.IsMissing && !string.IsNullOrEmpty(primarySource))
                 {
                     entry.SourceText = primarySource;
                     entry.IsModified = false;
+                }
+
+                if (modifiedDocuments != null && modifiedDocuments.Contains(doc))
+                {
+                    entry.IsModified = true;
                 }
 
                 entry.OnEntryModifiedChanged = UpdateKeyModifiedState;
@@ -373,6 +384,9 @@ public partial class KeyEditorViewModel : ViewModelBase
             return;
         }
 
+        var editorSourceText = CurrentKeyTranslations.FirstOrDefault(t => t.File?.IsSource == true)?.SourceText
+                               ?? CurrentKeyTranslations.FirstOrDefault()?.SourceText;
+
         if (LoadedGroups.Count > 0)
         {
             var matchingGroup = LoadedGroups.FirstOrDefault(g => g.Files.Any(f => f.Document.GetUnit(SelectedKeyFullPath) != null))
@@ -381,13 +395,45 @@ public partial class KeyEditorViewModel : ViewModelBase
             var sourceDoc = matchingGroup.SourceFile?.Document;
             var targetDocs = matchingGroup.Files.Where(f => f != matchingGroup.SourceFile).Select(f => f.Document).ToList();
 
-            CanSyncSelectedKey = _keySynchronizer.HasKeyDifferencesInSiblingGroup(SelectedKeyFullPath, sourceDoc, targetDocs);
+            var hasDiff = _keySynchronizer.HasKeyDifferencesInSiblingGroup(SelectedKeyFullPath, sourceDoc, targetDocs);
+
+            if (!hasDiff && editorSourceText != null && targetDocs.Count > 0)
+            {
+                var trimmedEditorSource = editorSourceText.Trim();
+                if (targetDocs.Any(t => (t.GetUnit(SelectedKeyFullPath)?.Source?.Trim() ?? "") != trimmedEditorSource))
+                {
+                    hasDiff = true;
+                }
+            }
+
+            if (!hasDiff && CurrentKeyTranslations.Any(t => t.IsMissing))
+            {
+                hasDiff = true;
+            }
+
+            CanSyncSelectedKey = hasDiff;
         }
         else if (_documents.Count > 0)
         {
             var sourceDoc = _documents.FirstOrDefault().Document;
             var targetDocs = _documents.Skip(1).Select(d => d.Document).ToList();
-            CanSyncSelectedKey = _keySynchronizer.HasKeyDifferencesInSiblingGroup(SelectedKeyFullPath, sourceDoc, targetDocs);
+            var hasDiff = _keySynchronizer.HasKeyDifferencesInSiblingGroup(SelectedKeyFullPath, sourceDoc, targetDocs);
+
+            if (!hasDiff && editorSourceText != null && targetDocs.Count > 0)
+            {
+                var trimmedEditorSource = editorSourceText.Trim();
+                if (targetDocs.Any(t => (t.GetUnit(SelectedKeyFullPath)?.Source?.Trim() ?? "") != trimmedEditorSource))
+                {
+                    hasDiff = true;
+                }
+            }
+
+            if (!hasDiff && CurrentKeyTranslations.Any(t => t.IsMissing))
+            {
+                hasDiff = true;
+            }
+
+            CanSyncSelectedKey = hasDiff;
         }
         else
         {
@@ -396,38 +442,63 @@ public partial class KeyEditorViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    public async Task OpenAddKeyDialogAsync()
+    {
+        if (_dialogService != null)
+        {
+            var result = await _dialogService.ShowAddKeyDialogAsync(LoadedGroups.ToList(), SelectedGroup);
+            if (result != null && !string.IsNullOrWhiteSpace(result.KeyPath))
+            {
+                AddNewKeyWithDetails(result.KeyPath, result.DefaultSourceText, result.TargetGroup);
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(NewKeyPath))
+        {
+            AddNewKey();
+        }
+    }
+
+    [RelayCommand]
     public void AddNewKey()
     {
-        if (string.IsNullOrWhiteSpace(NewKeyPath))
+        AddNewKeyWithDetails(NewKeyPath, NewKeyDefaultSource, SelectedGroup);
+    }
+
+    public void AddNewKeyWithDetails(string keyPath, string defaultSourceText, LoadedTranslationGroup? targetGroup = null)
+    {
+        if (string.IsNullOrWhiteSpace(keyPath))
         {
             StatusText = "Error: Key path cannot be empty.";
             return;
         }
 
-        var key = NewKeyPath.Trim();
-        var sourceText = string.IsNullOrWhiteSpace(NewKeyDefaultSource) ? key : NewKeyDefaultSource.Trim();
+        var key = keyPath.Trim();
+        var sourceText = string.IsNullOrWhiteSpace(defaultSourceText) ? key : defaultSourceText.Trim();
+        ISet<ILingoDocument>? modifiedDocs = null;
 
         if (LoadedGroups.Count > 0)
         {
-            var targetGroup = SelectedGroup ?? LoadedGroups.First();
-            var sourceDoc = targetGroup.SourceFile?.Document;
-            var targetDocs = targetGroup.Files.Where(f => f != targetGroup.SourceFile).Select(f => f.Document).ToList();
+            var grp = targetGroup ?? SelectedGroup ?? LoadedGroups.First();
+            var sourceDoc = grp.SourceFile?.Document;
+            var targetDocs = grp.Files.Where(f => f != grp.SourceFile).Select(f => f.Document).ToList();
 
             var updated = _keySynchronizer.AddKeyToSiblingGroup(key, sourceText, sourceDoc, targetDocs);
-            foreach (var f in targetGroup.Files)
+            modifiedDocs = new HashSet<ILingoDocument>(updated);
+            foreach (var f in grp.Files)
             {
                 if (updated.Contains(f.Document))
                 {
                     f.IsModified = true;
                 }
             }
-            StatusText = $"Key '{key}' added to group '{targetGroup.GroupStub}' across {targetGroup.Files.Count} files.";
+            StatusText = $"Key '{key}' added to group '{grp.GroupStub}' across {grp.Files.Count} files.";
         }
         else if (_documents.Count > 0)
         {
             var sourceDoc = _documents[0].Document;
             var targetDocs = _documents.Skip(1).Select(d => d.Document).ToList();
             var updated = _keySynchronizer.AddKeyToSiblingGroup(key, sourceText, sourceDoc, targetDocs);
+            modifiedDocs = new HashSet<ILingoDocument>(updated);
             StatusText = $"Key '{key}' added and synchronized across {_documents.Count} languages.";
         }
 
@@ -435,7 +506,7 @@ public partial class KeyEditorViewModel : ViewModelBase
         NewKeyDefaultSource = string.Empty;
 
         RebuildHierarchy();
-        SelectKeyByPath(key);
+        SelectKeyByPath(key, modifiedDocs);
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedKey))]
@@ -651,6 +722,13 @@ public partial class KeyEditorViewModel : ViewModelBase
         if (string.IsNullOrEmpty(SelectedKeyFullPath)) return;
 
         var keyToSync = SelectedKeyFullPath;
+
+        // Commit any in-flight unsaved edits for this key prior to synchronization
+        if (IsKeyModified)
+        {
+            SaveAllTranslations();
+        }
+
         if (LoadedGroups.Count > 0)
         {
             var matchingGroup = LoadedGroups.FirstOrDefault(g => g.Files.Any(f => f.Document.GetUnit(keyToSync) != null))
@@ -660,16 +738,16 @@ public partial class KeyEditorViewModel : ViewModelBase
             var targetDocs = matchingGroup.Files.Where(f => f != matchingGroup.SourceFile).Select(f => f.Document).ToList();
 
             var updated = _keySynchronizer.SyncKeyInSiblingGroup(keyToSync, sourceDoc, targetDocs);
+            var updatedDocsSet = new HashSet<ILingoDocument>(updated);
             foreach (var doc in updated)
             {
                 var file = matchingGroup.Files.FirstOrDefault(f => f.Document == doc);
                 if (file != null) file.IsModified = true;
             }
 
-            RebuildHierarchy();
-            var node = FindNodeByPath(RootNodes, keyToSync);
-            if (node == null)
+            if (sourceDoc != null && sourceDoc.GetUnit(keyToSync) == null)
             {
+                RebuildHierarchy();
                 SelectedKeyFullPath = null;
                 SelectedNode = null;
                 CurrentKeyTranslations.Clear();
@@ -678,11 +756,8 @@ public partial class KeyEditorViewModel : ViewModelBase
             }
             else
             {
-                foreach (var tr in CurrentKeyTranslations)
-                {
-                    tr.LoadData();
-                }
-                UpdateKeyModifiedState();
+                RebuildHierarchy();
+                SelectKeyByPath(keyToSync, updatedDocsSet);
                 StatusText = $"Synchronized '{keyToSync}' across {matchingGroup.GroupStub} siblings ({updated.Count} files updated).";
             }
         }
@@ -691,11 +766,11 @@ public partial class KeyEditorViewModel : ViewModelBase
             var sourceDoc = _documents.FirstOrDefault().Document;
             var targetDocs = _documents.Skip(1).Select(d => d.Document).ToList();
             var updated = _keySynchronizer.SyncKeyInSiblingGroup(keyToSync, sourceDoc, targetDocs);
+            var updatedDocsSet = new HashSet<ILingoDocument>(updated);
 
-            RebuildHierarchy();
-            var node = FindNodeByPath(RootNodes, keyToSync);
-            if (node == null)
+            if (sourceDoc != null && sourceDoc.GetUnit(keyToSync) == null)
             {
+                RebuildHierarchy();
                 SelectedKeyFullPath = null;
                 SelectedNode = null;
                 CurrentKeyTranslations.Clear();
@@ -704,11 +779,8 @@ public partial class KeyEditorViewModel : ViewModelBase
             }
             else
             {
-                foreach (var tr in CurrentKeyTranslations)
-                {
-                    tr.LoadData();
-                }
-                UpdateKeyModifiedState();
+                RebuildHierarchy();
+                SelectKeyByPath(keyToSync, updatedDocsSet);
                 StatusText = $"Synchronized '{keyToSync}' to {updated.Count} missing language files.";
             }
         }
@@ -717,6 +789,14 @@ public partial class KeyEditorViewModel : ViewModelBase
     [RelayCommand]
     public void SyncAllMissingKeys()
     {
+        if (IsKeyModified)
+        {
+            SaveAllTranslations();
+        }
+
+        var previousKey = SelectedKeyFullPath;
+        var modifiedDocs = new HashSet<ILingoDocument>();
+
         if (LoadedGroups.Count > 0)
         {
             var totalCount = 0;
@@ -730,6 +810,7 @@ public partial class KeyEditorViewModel : ViewModelBase
                 {
                     foreach (var doc in list)
                     {
+                        modifiedDocs.Add(doc);
                         var file = grp.Files.FirstOrDefault(f => f.Document == doc);
                         if (file != null) file.IsModified = true;
                     }
@@ -738,20 +819,9 @@ public partial class KeyEditorViewModel : ViewModelBase
             }
 
             RebuildHierarchy();
-            if (SelectedKeyFullPath != null)
+            if (previousKey != null)
             {
-                var node = FindNodeByPath(RootNodes, SelectedKeyFullPath);
-                if (node == null)
-                {
-                    SelectedKeyFullPath = null;
-                    SelectedNode = null;
-                    CurrentKeyTranslations.Clear();
-                    UpdateKeyModifiedState();
-                }
-                else
-                {
-                    LoadTranslationsForKey(SelectedKeyFullPath);
-                }
+                SelectKeyByPath(previousKey, modifiedDocs);
             }
 
             StatusText = $"Batch sync completed: {totalCount} key operations synchronized in sibling groups.";
@@ -762,21 +832,18 @@ public partial class KeyEditorViewModel : ViewModelBase
             var targetDocs = _documents.Skip(1).Select(d => d.Document).ToList();
             var synced = _keySynchronizer.SyncMissingKeysInSiblingGroup(sourceDoc, targetDocs);
 
-            RebuildHierarchy();
-            if (SelectedKeyFullPath != null)
+            foreach (var list in synced.Values)
             {
-                var node = FindNodeByPath(RootNodes, SelectedKeyFullPath);
-                if (node == null)
+                foreach (var doc in list)
                 {
-                    SelectedKeyFullPath = null;
-                    SelectedNode = null;
-                    CurrentKeyTranslations.Clear();
-                    UpdateKeyModifiedState();
+                    modifiedDocs.Add(doc);
                 }
-                else
-                {
-                    LoadTranslationsForKey(SelectedKeyFullPath);
-                }
+            }
+
+            RebuildHierarchy();
+            if (previousKey != null)
+            {
+                SelectKeyByPath(previousKey, modifiedDocs);
             }
 
             StatusText = $"Batch sync completed: {synced.Count} key operations synchronized.";
@@ -806,13 +873,20 @@ public partial class KeyEditorViewModel : ViewModelBase
         StatusText = $"All translations saved for '{SelectedKeyFullPath}'.";
     }
 
-    public void SelectKeyByPath(string path)
+    public void SelectKeyByPath(string path, ISet<ILingoDocument>? modifiedDocuments = null)
     {
+        SelectedKeyFullPath = path;
+        RenameKeyNewName = path;
+
         var found = FindNodeByPath(RootNodes, path);
         if (found != null)
         {
+            found.EnsureVisible();
+            found.IsSelected = true;
             SelectedNode = found;
         }
+
+        LoadTranslationsForKey(path, modifiedDocuments);
     }
 
     private KeyTreeNodeViewModel? FindNodeByPath(IEnumerable<KeyTreeNodeViewModel> nodes, string path)

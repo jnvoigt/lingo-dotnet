@@ -34,6 +34,7 @@ public enum TranslationState
     None,
     NeedsTranslation,
     NeedsAdaptation,
+    NeedsReview,
     Translated
 }
 

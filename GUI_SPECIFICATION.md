@@ -113,8 +113,17 @@ For bulk table-oriented tasks, the editor supports a full-table grid view alongs
     - *Missing Across Locales*
     - *Errors / Validation Warnings*
 - **State & Workflow Management:**
-  - Direct modification of translation state (`IHasTranslationState`).
-  - Status batch operations (e.g., "Mark all filtered units as Translated").
+  - Translation state model (`TranslationState`):
+    - `None` (`Validated`): The translation has been reviewed and validated; no pending state attribute is persisted in XLIFF.
+    - `NeedsTranslation`: The key lacks a translated value.
+    - `NeedsAdaptation`: The source text was changed upstream and requires re-translation / adaptation.
+    - `NeedsReview`: The translation was modified or added and requires review/validation.
+    - `Translated`: Legacy/transitional state indicating a translation exists.
+  - Automatic State Transitions:
+    - Editing a translation's target text automatically switches its state to `NeedsReview` (`TranslationState.NeedsReview`).
+    - Marking a translation as validated (`Mark as Validated` / `✅`) transitions the state to `None`, removing the state attribute upon save.
+  - Direct modification of translation state via `IHasTranslationState`.
+  - Status batch operations (e.g., "Mark all filtered units as Translated" or "Mark as Validated").
 
 ---
 
@@ -164,24 +173,24 @@ To maximize agent productivity and eliminate the massive token waste and XML cor
 
 ## 4. UI/UX Layout Specification
 
-### 4.1 Key-Centric Tree View (Primary Mode)
+### 4.1 Key-Centric Workspace & Tabbed Navigation (Primary Mode)
 
 ```
 +---------------------------------------------------------------------------------------------------------+
-| Menu Bar (File, Edit, Sync, View, Tools, MCP Server, Help)                                              |
+| Menu Bar (File, Edit, Translations, View)                                                                |
 +---------------------------------------------------------------------------------------------------------+
-| Toolbar: [📂 Open Project] [💾 Save (2 dirty)] [🔄 Sync All Missing Keys]            [🔀 Switch View]    |
+| Toolbar: [📂] [💾] [🔄] [⚡] [➕] [✖]                                                                    |
 +---------------------------------------------------------------------------------------------------------+
-| [All] [⏳ Untranslated] [⚠️ Outdated] [❌ Missing] | [🔍 Filter: Search key/text...] | [➕ Add & Sync Key]|
+| [All] [⏳ Untranslated] [⚠️ Outdated] [🔍 Needs Review] [❌ Missing] | [🔍 Search key/text...] | [➕ Add Key...]|
 +---------------------------+-----------------------------------------------------------------------------+
-| Translation Key Hierarchy | Key Translation Workspace: A.B.Key                                          |
-|                           | [⚡ Sync This Key to Missing Languages]  [💾 Save Translations]              |
+| [📁 Key Tree] [📑 Files]   | Key Translation Workspace: A.B.Key                                          |
+|                           | [↩️] [✏️ Rename...] [📦 Move...] [⚡ Sync Sibling Files] [💾 Save] [🗑️ Delete]|
 | 📁 A (3 keys)             +-----------------------------------------------------------------------------+
 |  ├── 📁 B                 | 🌐 en-US (Source) (App.en-US.xlf)               [State: Translated]         |
 |  │    └── 🏷️ Key          | Source:      Save File                                                      |
 |  ├── 📁 C                 | Translation: Save File                                                      |
 |  │    └── 🏷️ Key2         +-----------------------------------------------------------------------------+
-|  └── 📁 Settings          | 🌐 de-DE (App.de-DE.xlf *)                      [State: Translated] ● Dirty |
+|  └── 📁 Settings          | 🌐 de-DE (App.de-DE.xlf)                        [State: NeedsReview]        |
 |       └── 🏷️ Theme        | Source:      Save File                                                      |
 | 📁 General (2 keys)       | Translation: [Datei speichern                                             ] |
 |  ├── 🏷️ Ok                +-----------------------------------------------------------------------------+
@@ -189,7 +198,7 @@ To maximize agent productivity and eliminate the massive token waste and XML cor
 |                           | Source:      Save File                                                      |
 |                           | Translation: [Enregistrer le fichier                                      ] |
 +---------------------------+-----------------------------------------------------------------------------+
-| Status: Filter: Untranslated | 3 languages loaded | 2 dirty files | ⚡ MCP Server: Listening (stdio)    |
+| Status: Filter: All | 3 languages loaded | 2 dirty files                                                 |
 +---------------------------------------------------------------------------------------------------------+
 ```
 

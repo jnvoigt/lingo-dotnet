@@ -42,4 +42,33 @@ public class Xliff12StateTests
         var units = (doc as ILingoDocument)!.GetAllUnits().ToList();
         units.First(u => u.Id == "u5").State.Should().Be(TranslationState.NeedsAdaptation);
     }
+
+    [Test]
+    public void SetValue_And_SetTargetState_ShouldManageNeedsReviewAndValidation()
+    {
+        var content = GetResourceContent("state12.xlf");
+        var factory = new XliffDocumentFactory();
+        var doc = factory.Create(content);
+        var stateDoc = doc as IHasTranslationState;
+        stateDoc.Should().NotBeNull();
+
+        // 1. Updating value sets state to NeedsReview
+        doc.SetValue("u2", "Updated Target 2");
+        stateDoc!.GetTargetState("u2").Should().Be(TranslationState.NeedsReview);
+
+        var unit = doc.GetUnit("u2");
+        unit!.State.Should().Be(TranslationState.NeedsReview);
+
+        // 2. Marking as validated sets state to None (state attribute removed)
+        stateDoc.SetTargetState("u2", TranslationState.None);
+        stateDoc.GetTargetState("u2").Should().Be(TranslationState.None);
+        doc.GetUnit("u2")!.State.Should().Be(TranslationState.None);
+
+        var writer = new XliffDocumentWriter();
+        using var outputStream = new MemoryStream();
+        writer.Write(outputStream, (IXliffDocument)doc);
+        outputStream.Position = 0;
+        var xml = new StreamReader(outputStream).ReadToEnd();
+        xml.Should().Contain("<target>Updated Target 2</target>");
+    }
 }

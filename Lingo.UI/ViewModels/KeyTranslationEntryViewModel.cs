@@ -38,22 +38,24 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(RevertChangesCommand))]
     private bool _isModified;
 
+    public bool IsSource { get; set; } = true;
     public LoadedTranslationFile? File { get; set; }
     public Action<string?>? OnSourceTextEdited { get; set; }
     public Action? OnEntryModifiedChanged { get; set; }
 
-    public KeyTranslationEntryViewModel(ILingoDocument document, string documentName, string keyId, string languageCode)
+    public KeyTranslationEntryViewModel(ILingoDocument document, string documentName, string keyId, string languageCode, bool isSource = true)
     {
         _document = document;
         _documentName = documentName;
         _keyId = keyId;
         _languageCode = languageCode;
+        IsSource = isSource;
 
         LoadData();
     }
 
     public KeyTranslationEntryViewModel(LoadedTranslationFile file, string keyId, string? groupStub = null)
-        : this(file.Document, file.FileName, keyId, file.LanguageLabel)
+        : this(file.Document, file.FileName, keyId, file.LanguageLabel, file.IsSource)
     {
         File = file;
         GroupStub = groupStub;
@@ -96,6 +98,13 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
         LoadData();
     }
 
+    [RelayCommand]
+    public void MarkAsValidated()
+    {
+        State = TranslationState.None;
+        IsModified = true;
+    }
+
     partial void OnIsModifiedChanged(bool value)
     {
         OnEntryModifiedChanged?.Invoke();
@@ -112,6 +121,14 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
     {
         if (_isLoading) return;
         IsModified = true;
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            State = TranslationState.NeedsTranslation;
+        }
+        else
+        {
+            State = TranslationState.NeedsReview;
+        }
     }
 
     public void SaveChanges()
@@ -123,27 +140,36 @@ public partial class KeyTranslationEntryViewModel : ViewModelBase
                 Id = _keyId,
                 Source = SourceText,
                 Target = TargetText,
-                State = string.IsNullOrEmpty(TargetText) ? TranslationState.NeedsTranslation : TranslationState.Translated
+                State = State
             });
             IsMissing = false;
         }
         else
         {
-            if (_document is IHasSourceValue sourceDoc && SourceText != null)
+            // Only update master Source in document if this file represents the source language.
+            // Target documents obtain updated source text exclusively via synchronization, which triggers state adaptation.
+            if (IsSource)
             {
-                sourceDoc.SetSourceValue(_keyId, SourceText);
-            }
-            else
-            {
-                var unit = _document.GetUnit(_keyId);
-                if (unit != null && unit.Source != SourceText && SourceText != null)
+                if (_document is IHasSourceValue sourceDoc && SourceText != null)
                 {
-                    unit.Source = SourceText;
-                    _document.SyncUnit(unit);
+                    sourceDoc.SetSourceValue(_keyId, SourceText);
+                }
+                else
+                {
+                    var unit = _document.GetUnit(_keyId);
+                    if (unit != null && unit.Source != SourceText && SourceText != null)
+                    {
+                        unit.Source = SourceText;
+                        _document.SyncUnit(unit);
+                    }
                 }
             }
 
             _document.SetValue(_keyId, TargetText ?? string.Empty);
+            if (_document is IHasTranslationState stateDoc)
+            {
+                stateDoc.SetTargetState(_keyId, State);
+            }
         }
         if (File != null)
         {

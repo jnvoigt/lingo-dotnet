@@ -68,6 +68,25 @@ public class KeyQueryServiceTests
     }
 
     [Test]
+    public void Query_NeedsReview_FindsUnitsRequiringReview()
+    {
+        // Arrange
+        var docDe = new InMemoryLingoDocument { FilePath = "/workspace/App.de-DE.xlf" };
+        docDe.AddUnit(new Unit { Id = "App.Welcome", Source = "Welcome back!", Target = "Willkommen!", State = TranslationState.NeedsReview });
+        docDe.AddUnit(new Unit { Id = "App.Save", Source = "Save", Target = "Speichern", State = TranslationState.Translated });
+        docDe.AddUnit(new Unit { Id = "App.Cancel", Source = "Cancel", Target = null, State = TranslationState.NeedsTranslation });
+
+        var service = new KeyQueryService();
+
+        // Act
+        var result = service.Query(docDe, KeyQueryCriteria.NeedsReview());
+
+        // Assert
+        result.TotalDistinctKeys.Should().Be(1);
+        result.MatchingKeys.Should().Contain("App.Welcome");
+    }
+
+    [Test]
     public void Query_WithKeyPattern_FiltersCorrectly()
     {
         // Arrange

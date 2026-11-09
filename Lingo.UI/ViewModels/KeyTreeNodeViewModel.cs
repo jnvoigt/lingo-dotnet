@@ -59,6 +59,16 @@ public partial class KeyTreeNodeViewModel : ViewModelBase
         }
     }
 
+    public void EnsureVisible()
+    {
+        var current = Parent;
+        while (current != null)
+        {
+            current.IsExpanded = true;
+            current = current.Parent;
+        }
+    }
+
     public void CollapseAll()
     {
         IsExpanded = false;

@@ -36,4 +36,15 @@ public class AvaloniaDialogService : IDialogService
         var dialog = new MoveKeyDialog(currentKey, availableGroups, currentGroup);
         return await dialog.ShowDialog<LoadedTranslationGroup?>(owner);
     }
+
+    public async Task<AddKeyDialogResult?> ShowAddKeyDialogAsync(
+        IReadOnlyList<LoadedTranslationGroup> availableGroups,
+        LoadedTranslationGroup? defaultGroup)
+    {
+        var owner = _windowProvider();
+        if (owner == null) return null;
+
+        var dialog = new AddKeyDialog(availableGroups, defaultGroup);
+        return await dialog.ShowDialog<AddKeyDialogResult?>(owner);
+    }
 }

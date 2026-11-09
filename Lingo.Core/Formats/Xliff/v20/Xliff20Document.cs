@@ -69,7 +69,53 @@ public class Xliff20Document : IXliffDocument, IHasSourceValue, IHasTranslationS
             return TranslationState.NeedsAdaptation;
         }
 
+        if (segment.SubState == "x-needs-review" || segment.SubState == "needs-review")
+        {
+            return TranslationState.NeedsReview;
+        }
+
         return MapState(segment.State);
+    }
+
+    public void SetTargetState(string unitId, TranslationState state)
+    {
+        var unit = FindUnit(unitId);
+        if (unit == null)
+        {
+            return;
+        }
+
+        var segment = unit.Segment.FirstOrDefault();
+        if (segment == null)
+        {
+            segment = new Segment();
+            unit.Segment.Add(segment);
+        }
+
+        switch (state)
+        {
+            case TranslationState.NeedsTranslation:
+                segment.State = StateType.Initial;
+                segment.SubState = null;
+                break;
+            case TranslationState.NeedsAdaptation:
+                segment.State = StateType.Translated;
+                segment.SubState = "x-needs-adaptation";
+                break;
+            case TranslationState.NeedsReview:
+                segment.State = StateType.Translated;
+                segment.SubState = "x-needs-review";
+                break;
+            case TranslationState.Translated:
+                segment.State = StateType.Translated;
+                segment.SubState = null;
+                break;
+            case TranslationState.None:
+            default:
+                segment.State = StateType.Final;
+                segment.SubState = null;
+                break;
+        }
     }
 
     object IXliffDocument.InternalXliff => InternalXliff;
@@ -146,7 +192,16 @@ public class Xliff20Document : IXliffDocument, IHasSourceValue, IHasTranslationS
         }
 
         segment.Target.Text = new[] { value };
-        segment.State = StateType.Translated;
+        if (string.IsNullOrEmpty(value))
+        {
+            segment.State = StateType.Initial;
+            segment.SubState = null;
+        }
+        else
+        {
+            segment.State = StateType.Translated;
+            segment.SubState = "x-needs-review";
+        }
     }
 
     public void SortByKey()
@@ -339,7 +394,7 @@ public class Xliff20Document : IXliffDocument, IHasSourceValue, IHasTranslationS
             StateType.Initial => TranslationState.NeedsTranslation,
             StateType.Translated => TranslationState.Translated,
             StateType.Reviewed => TranslationState.Translated,
-            StateType.Final => TranslationState.Translated,
+            StateType.Final => TranslationState.None,
             _ => TranslationState.None
         };
     }

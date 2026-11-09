@@ -104,6 +104,7 @@ public class KeyQueryService
                     bool isUntranslated = unit.State == TranslationState.NeedsTranslation ||
                                           (criteria.IncludeEmptyTargets && string.IsNullOrWhiteSpace(unit.Target));
                     bool isOutdated = unit.State == TranslationState.NeedsAdaptation;
+                    bool isNeedsReview = unit.State == TranslationState.NeedsReview;
 
                     if (isUntranslated) reasons |= KeyQueryMatchReason.Untranslated;
                     if (isOutdated) reasons |= KeyQueryMatchReason.Outdated;
@@ -129,6 +130,7 @@ public class KeyQueryService
                         KeyFilterMode.All => true,
                         KeyFilterMode.UntranslatedOnly => isUntranslated,
                         KeyFilterMode.OutdatedOnly => isOutdated,
+                        KeyFilterMode.NeedsReviewOnly => isNeedsReview,
                         KeyFilterMode.TranslatedOnly => unit.State == TranslationState.Translated && !string.IsNullOrWhiteSpace(unit.Target),
                         KeyFilterMode.Custom => (!criteria.RequiredState.HasValue || unit.State == criteria.RequiredState.Value),
                         _ => false

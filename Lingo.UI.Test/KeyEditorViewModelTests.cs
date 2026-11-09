@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using AwesomeAssertions;
 using Lingo.Core.Documents;
 using Lingo.Core.Models;
 using Lingo.Core.Test.Infrastructure;
+using Lingo.UI.Services;
 using Lingo.UI.ViewModels;
 
 namespace Lingo.UI.Test;
@@ -482,10 +484,535 @@ public class KeyEditorViewModelTests
         viewModel.CanSyncSelectedKey.Should().BeFalse();
     }
 
+    [Test]
+    public void SyncSelectedKey_PreservesSelection_AndRecognizesChangedSourceValue()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "dialog.confirm", Source = "Are you sure?", Target = "Are you sure?" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "dialog.confirm", Source = "Old Question?", Target = "Sind Sie sicher?", State = TranslationState.Translated });
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        viewModel.SelectKeyByPath("dialog.confirm");
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("dialog.confirm");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+
+        // Target file initially not modified
+        deFile.IsModified.Should().BeFalse();
+
+        // Act: Sync the key
+        viewModel.SyncSelectedKeyAcrossLanguagesCommand.Execute(null);
+
+        // Selection must be preserved!
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedKeyFullPath.Should().Be("dialog.confirm");
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("dialog.confirm");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+        viewModel.CurrentKeyTranslations.Should().HaveCount(2);
+
+        // Target file must be marked modified and state updated to NeedsAdaptation
+        deFile.IsModified.Should().BeTrue();
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.SourceText.Should().Be("Are you sure?");
+        deEntry.TargetText.Should().Be("Sind Sie sicher?");
+        deEntry.State.Should().Be(TranslationState.NeedsAdaptation);
+    }
+
+    [Test]
+    public void SyncSelectedKey_WhenEditedInUI_CommitsAndPropagatesChangesToTargets()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "app.header", Source = "Header V1", Target = "Header V1" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "app.header", Source = "Header V1", Target = "Kopfzeile", State = TranslationState.Translated });
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        viewModel.SelectKeyByPath("app.header");
+        viewModel.CanSyncSelectedKey.Should().BeFalse();
+
+        // Mutate source text in the UI card
+        var enEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "en-US");
+        enEntry.SourceText = "Header V2 Updated";
+
+        // Sync button must immediately recognize the edit
+        viewModel.CanSyncSelectedKey.Should().BeTrue();
+        viewModel.SyncSelectedKeyAcrossLanguagesCommand.CanExecute(null).Should().BeTrue();
+
+        // Act: Sync the key
+        viewModel.SyncSelectedKeyAcrossLanguagesCommand.Execute(null);
+
+        // Verification: Selection preserved
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("app.header");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+
+        // Both files marked modified
+        sourceFile.IsModified.Should().BeTrue();
+        deFile.IsModified.Should().BeTrue();
+
+        // Target document received the updated source and state
+        var deUnit = deDoc.GetUnit("app.header");
+        deUnit!.Source.Should().Be("Header V2 Updated");
+        deUnit.State.Should().Be(TranslationState.NeedsAdaptation);
+
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.SourceText.Should().Be("Header V2 Updated");
+        deEntry.State.Should().Be(TranslationState.NeedsAdaptation);
+    }
+
+    [Test]
+    public void SyncAllMissingKeys_PreservesSelectedKey_AndUpdatesAllFiles()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "key.one", Source = "One", Target = "One" });
+        sourceDoc.AddUnit(new Unit { Id = "key.two", Source = "Two", Target = "Two" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "key.one", Source = "One", Target = "Eins", State = TranslationState.Translated });
+        // key.two is missing in deDoc
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile>
+            {
+                new() { Document = sourceDoc, FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!, LanguageLabel = "en-US", IsSource = true },
+                deFile
+            }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        viewModel.SelectKeyByPath("key.two");
+        viewModel.HasSelectedKey.Should().BeTrue();
+
+        // Act: Sync all missing keys
+        viewModel.SyncAllMissingKeysCommand.Execute(null);
+
+        // Selected key remains selected
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedKeyFullPath.Should().Be("key.two");
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("key.two");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+
+        // Target file updated and marked modified
+        deDoc.GetUnitIds().Should().Contain("key.two");
+        deFile.IsModified.Should().BeTrue();
+
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.IsMissing.Should().BeFalse();
+        deEntry.SourceText.Should().Be("Two");
+        deEntry.State.Should().Be(TranslationState.NeedsTranslation);
+    }
+
+    [Test]
+    public void SyncSelectedKey_WhenTargetKeyMissing_PreservesSelection_AndRecognizesCreatedKeyAsChanged()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "dialog.greeting", Source = "Welcome!", Target = "Welcome!" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        // dialog.greeting is missing in deDoc
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        viewModel.SelectKeyByPath("dialog.greeting");
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.CanSyncSelectedKey.Should().BeTrue();
+
+        // Act: Sync the key
+        viewModel.SyncSelectedKeyAcrossLanguagesCommand.Execute(null);
+
+        // Verification: Key remains selected
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedKeyFullPath.Should().Be("dialog.greeting");
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("dialog.greeting");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+        viewModel.CurrentKeyTranslations.Should().HaveCount(2);
+
+        // Target document received the unit
+        deDoc.GetUnit("dialog.greeting").Should().NotBeNull();
+        deFile.IsModified.Should().BeTrue();
+
+        // Newly created target entry is recognized as changed in UI
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.IsMissing.Should().BeFalse();
+        deEntry.IsModified.Should().BeTrue();
+        viewModel.IsKeyModified.Should().BeTrue();
+        viewModel.CanRevertKeyChanges.Should().BeTrue();
+    }
+
+    [Test]
+    public void SyncSelectedKey_InMissingFilterMode_PreservesSelectedKey_AndRecognizesChange()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "item.name", Source = "Name", Target = "Name" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        // item.name is missing in deDoc
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        // Set to Missing Only filter mode
+        viewModel.SetFilter("Missing");
+        viewModel.SelectKeyByPath("item.name");
+        viewModel.HasSelectedKey.Should().BeTrue();
+
+        // Act: Sync the missing key
+        viewModel.SyncSelectedKeyAcrossLanguagesCommand.Execute(null);
+
+        // Verification: Key remains selected and translations remain loaded
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedKeyFullPath.Should().Be("item.name");
+        viewModel.CurrentKeyTranslations.Should().HaveCount(2);
+
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.IsMissing.Should().BeFalse();
+        deEntry.IsModified.Should().BeTrue();
+        viewModel.IsKeyModified.Should().BeTrue();
+    }
+
+    [Test]
+    public void AddNewKey_SelectsNewKey_AndMarksEntriesAsModified()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        viewModel.NewKeyPath = "app.newFeature";
+        viewModel.NewKeyDefaultSource = "Brand New Feature";
+
+        // Act: Add new key
+        viewModel.AddNewKeyCommand.Execute(null);
+
+        // Verification: New key is selected in tree and editor
+        viewModel.HasSelectedKey.Should().BeTrue();
+        viewModel.SelectedKeyFullPath.Should().Be("app.newFeature");
+        viewModel.SelectedNode.Should().NotBeNull();
+        viewModel.SelectedNode!.FullPath.Should().Be("app.newFeature");
+        viewModel.SelectedNode.IsSelected.Should().BeTrue();
+
+        // Files and entries are recognized as modified
+        sourceFile.IsModified.Should().BeTrue();
+        deFile.IsModified.Should().BeTrue();
+        viewModel.IsKeyModified.Should().BeTrue();
+        viewModel.CurrentKeyTranslations.Should().HaveCount(2);
+        viewModel.CurrentKeyTranslations.All(t => t.IsModified).Should().BeTrue();
+    }
+
+    [Test]
+    public void EditingTargetText_ChangesStateToNeedsReview()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hello" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hallo", State = TranslationState.Translated });
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+        viewModel.SelectKeyByPath("msg.hello");
+
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.State.Should().Be(TranslationState.Translated);
+        deEntry.IsModified.Should().BeFalse();
+
+        // Act: Edit target text
+        deEntry.TargetText = "Guten Tag";
+
+        // Assert: State transitioned to NeedsReview and marked modified
+        deEntry.State.Should().Be(TranslationState.NeedsReview);
+        deEntry.IsModified.Should().BeTrue();
+        viewModel.IsKeyModified.Should().BeTrue();
+
+        // Save translations
+        viewModel.SaveAllTranslationsCommand.Execute(null);
+        deDoc.GetUnit("msg.hello")!.Target.Should().Be("Guten Tag");
+        deDoc.GetUnit("msg.hello")!.State.Should().Be(TranslationState.NeedsReview);
+    }
+
+    [Test]
+    public void MarkAsValidated_RemovesTranslationState_AndPersistsOnSave()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hello" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hallo", State = TranslationState.NeedsReview });
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var viewModel = new KeyEditorViewModel();
+        viewModel.LoadTranslationGroups(new[] { group });
+        viewModel.SelectKeyByPath("msg.hello");
+
+        var deEntry = viewModel.CurrentKeyTranslations.First(t => t.LanguageCode == "de-DE");
+        deEntry.State.Should().Be(TranslationState.NeedsReview);
+
+        // Act: Mark as validated
+        deEntry.MarkAsValidatedCommand.Execute(null);
+
+        // Assert: State is None and marked modified
+        deEntry.State.Should().Be(TranslationState.None);
+        deEntry.IsModified.Should().BeTrue();
+
+        // Save
+        viewModel.SaveAllTranslationsCommand.Execute(null);
+        deDoc.GetUnit("msg.hello")!.State.Should().Be(TranslationState.None);
+    }
+
+    [Test]
+    public async Task OpenAddKeyDialogCommand_InvokesDialogService_AndAddsKeyToSelectedGroup()
+    {
+        var sourceDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US") };
+        sourceDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hello" });
+
+        var deDoc = new InMemoryLingoDocument { SourceCulture = new CultureInfo("en-US"), TargetCulture = new CultureInfo("de-DE") };
+        deDoc.AddUnit(new Unit { Id = "msg.hello", Source = "Hello", Target = "Hallo" });
+
+        var sourceFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = sourceDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "en-US",
+            IsSource = true
+        };
+
+        var deFile = new Lingo.Core.Files.LoadedTranslationFile
+        {
+            Document = deDoc,
+            FileInfo = Lingo.Core.Files.LingoFileInfo.FromFile(new FileInfo("/test/group/data.de-DE.xlf"), Lingo.Core.Formats.LingoFormat.Xliff)!,
+            LanguageLabel = "de-DE",
+            IsSource = false
+        };
+
+        var group = new Lingo.Core.Files.LoadedTranslationGroup
+        {
+            GroupStub = "test_grp",
+            DirectoryPath = "/test/group",
+            Format = Lingo.Core.Formats.LingoFormat.Xliff,
+            Files = new List<Lingo.Core.Files.LoadedTranslationFile> { sourceFile, deFile }
+        };
+
+        var stubDialog = new StubDialogService
+        {
+            AddKeyResult = new AddKeyDialogResult("app.settings.theme", "Choose Theme", group)
+        };
+
+        var viewModel = new KeyEditorViewModel(stubDialog);
+        viewModel.LoadTranslationGroups(new[] { group });
+
+        // Act: Open Add Key Dialog and execute
+        await viewModel.OpenAddKeyDialogCommand.ExecuteAsync(null);
+
+        // Assert: Key created across source and target documents
+        sourceDoc.GetUnit("app.settings.theme").Should().NotBeNull();
+        sourceDoc.GetUnit("app.settings.theme")!.Source.Should().Be("Choose Theme");
+        deDoc.GetUnit("app.settings.theme").Should().NotBeNull();
+
+        viewModel.SelectedKeyFullPath.Should().Be("app.settings.theme");
+        viewModel.CurrentKeyTranslations.Should().HaveCount(2);
+        viewModel.IsKeyModified.Should().BeTrue();
+    }
+
     private class StubDialogService : Lingo.UI.Services.IDialogService
     {
         public string? RenameResult { get; set; }
         public Lingo.Core.Files.LoadedTranslationGroup? MoveResult { get; set; }
+        public AddKeyDialogResult? AddKeyResult { get; set; }
 
         public System.Threading.Tasks.Task<string?> ShowRenameKeyDialogAsync(string currentKey)
         {
@@ -498,6 +1025,13 @@ public class KeyEditorViewModelTests
             Lingo.Core.Files.LoadedTranslationGroup? currentGroup)
         {
             return System.Threading.Tasks.Task.FromResult(MoveResult);
+        }
+
+        public System.Threading.Tasks.Task<AddKeyDialogResult?> ShowAddKeyDialogAsync(
+            IReadOnlyList<Lingo.Core.Files.LoadedTranslationGroup> availableGroups,
+            Lingo.Core.Files.LoadedTranslationGroup? defaultGroup)
+        {
+            return System.Threading.Tasks.Task.FromResult(AddKeyResult);
         }
     }
 }
